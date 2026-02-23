@@ -15,12 +15,6 @@ east <- east %>% slice_sample(n = nrow(east) - 55)
 # Combine the datasets
 west_east <- rbind(west, east)
 
-# Example: highlight "Track A" and "Track B"
-highlight_tracks <- c('California Love - Original Version', 'Still D.R.E.')
-
-west_east$highlight <- ifelse(west_east$Track.Name %in% highlight_tracks, "yes", "no")
-
-
 # Save combined CSV
 write.csv(west_east, "~/Documents/GitHub/comp_music/west_east.csv", row.names = FALSE)
 
