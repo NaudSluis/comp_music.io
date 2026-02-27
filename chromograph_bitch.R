@@ -1,9 +1,9 @@
 library(tidyverse)
 library(compmus)
 
-hypnotize <- read_csv("~/Documents/GitHub/comp_music/hypnotize_chroma.csv")
+hyponotize <- read_csv("~/Documents/GitHub/comp_music/bitch_please_w_chromagram.csv")
 
-hypnotize |>
+hyponotize |>
   compmus_wrangle_chroma() |> 
   mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |>
   compmus_gather_chroma() |> 
@@ -19,4 +19,3 @@ hypnotize |>
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
- # coord_cartesian(xlim = c(0, 30))  # zoom to 30-second window

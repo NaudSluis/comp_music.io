@@ -1,9 +1,9 @@
 library(tidyverse)
 library(compmus)
 
-wood <- read_csv("Downloads/wood.csv")
+hyponotize <- read_csv("~/Documents/GitHub/comp_music/hypnotize.csv")
 
-wood |>
+hyponotize |>
   compmus_wrangle_chroma() |> 
   mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |>
   compmus_gather_chroma() |> 
