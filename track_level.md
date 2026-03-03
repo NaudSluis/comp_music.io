@@ -1,5 +1,5 @@
 layout: page
-title: "https://NaudSluis.github.io"
-permalink: /comp_music.io/track_level
+title: "Track level features"
+permalink: https://NaudSluis.github.io/comp_music.io/
 
 ### Some content
