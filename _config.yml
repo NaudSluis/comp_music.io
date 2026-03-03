@@ -1,3 +1,7 @@
-title: EastCoast vs WestCoast
-description: Welcome to my GitHub page.
-theme: jekyll-theme-minimal
+title: Naud Sluis
+description: My Music Portfolio
+remote_theme: jekyll/minima
+
+# Important for Project Pages (your repo name)
+baseurl: "/comp_music.io" 
+url: "https://NaudSluis.github.io"

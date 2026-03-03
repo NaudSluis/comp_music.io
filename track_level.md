@@ -1,5 +1,7 @@
+---
 layout: page
-title: "Track level features"
+title: Music Tracks
 permalink: /track_level/
+---
 
 ### Some content

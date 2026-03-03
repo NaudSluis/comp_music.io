@@ -1,3 +1,9 @@
+---
+layout: home
+title: Home
+---
+Welcome to my site!
+
 ### Homework week 9
 
 #### Introduction
