@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Music Tracks
+title: Track-level Information
 permalink: /track_level/
 ---
 
