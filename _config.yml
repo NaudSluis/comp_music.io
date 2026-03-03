@@ -8,6 +8,5 @@ url: "https://NaudSluis.github.io"
 
 # Only these pages will show up in the top-right menu
 header_pages:
-  - index.md
+  - README.md
   - homework.md
-  - about.md

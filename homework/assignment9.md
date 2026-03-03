@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Assignment week 9"
+permalink: /homework/assignment9
 parent: Homework
+nav_exclude: true
 ---
 {% include homework_nav.html %}
 ### Homework week 9
