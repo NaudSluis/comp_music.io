@@ -3,7 +3,7 @@ layout: page
 title: "Assignment week 9"
 parent: Homework
 ---
-
+{% include homework_nav.html %}
 ### Homework week 9
 
 #### Introduction

@@ -5,3 +5,9 @@ remote_theme: jekyll/minima
 # Important for Project Pages (your repo name)
 baseurl: "/comp_music.io" 
 url: "https://NaudSluis.github.io"
+
+# Only these pages will show up in the top-right menu
+header_pages:
+  - index.md
+  - homework.md
+  - about.md

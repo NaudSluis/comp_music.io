@@ -3,7 +3,7 @@ layout: page
 title: Homework
 permalink: /homework/
 ---
-
+{% include homework_nav.html %}
 ## All Assignments
 
 <ul>
