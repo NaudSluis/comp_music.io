@@ -1,23 +1,86 @@
 [
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Naud Sluis",
+    "objectID": "portfolio/chapter1.html",
+    "href": "portfolio/chapter1.html",
+    "title": "Chapter 1: The Setup",
     "section": "",
-    "text": "Homework week 9\n\nIntroduction\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made visualisations for the song ‘Bitch please’ by Snoop Dogg and Xzibit. I chose this song as it is statistically the most west-coast, meaning its audio profile sits closest to the overall average of all West Coast tracks (Only considering spotifies features).\n\n\nChromagram\n\n\n\nBitch Please chromagram\n\n\nIn this chromagram, you can see that the song is mostly in the keys B and F#, with G being high in the beginning of the song, but becoming less prominant later. This repetitiveness of pitches (i.e. the B and F#) can be explained by the fact that most rap songs have a looped sample, which repeat throughout the whole song\n\n\nSelfSM timbre features\n\n\n\nBitch Please SSM\n\n\nIn this self-similarity matrix, you can see that the song features a highly dense, checkerboard-like pattern across the entire track, with consistent horizontal and vertical stripes indicating regular, repeating intervals of high similarity. This intense repetitiveness in the song’s timbre can be explained by the fact that most rap songs, particularly from this era of West Coast hip-hop, are built on a continuous, looped instrumental beat, meaning the underlying drum textures, basslines, and instrumentation repeat almost entirely unchanged throughout the whole song."
+    "text": "Some content here…",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 1: The Setup"
+    ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Naud Sluis",
+    "objectID": "portfolio/index.html",
+    "href": "portfolio/index.html",
+    "title": "Portfolio Overview",
     "section": "",
-    "text": "Welcome to my site!"
+    "text": "Welcome to my portfolio. Here is a breakdown of my computational music projects.",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview"
+    ]
+  },
+  {
+    "objectID": "homework/assignment2.html",
+    "href": "homework/assignment2.html",
+    "title": "Assignment 2: Synthesis",
+    "section": "",
+    "text": "My second assignment…",
+    "crumbs": [
+      "Homework",
+      "Homework Assignments",
+      "Assignment 2: Synthesis"
+    ]
   },
   {
     "objectID": "track_level.html",
     "href": "track_level.html",
-    "title": "Naud Sluis",
+    "title": "NAUD SLUIS",
     "section": "",
     "text": "Some content"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NAUD SLUIS",
+    "section": "",
+    "text": "Welcome to my site!"
+  },
+  {
+    "objectID": "homework/index.html",
+    "href": "homework/index.html",
+    "title": "Homework Assignments",
+    "section": "",
+    "text": "This section contains all my weekly coursework and assignments.",
+    "crumbs": [
+      "Homework",
+      "Homework Assignments"
+    ]
+  },
+  {
+    "objectID": "homework/assignment1.html",
+    "href": "homework/assignment1.html",
+    "title": "Assignment 1: Track Leveling",
+    "section": "",
+    "text": "My first assignment…\n\n\nHomework week 9\n\nIntroduction\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made visualisations for the song ‘Bitch please’ by Snoop Dogg and Xzibit. I chose this song as it is statistically the most west-coast, meaning its audio profile sits closest to the overall average of all West Coast tracks (Only considering spotifies features).\n\n\nChromagram\n\n\n\nBitch Please chromagram\n\n\nIn this chromagram, you can see that the song is mostly in the keys B and F#, with G being high in the beginning of the song, but becoming less prominant later. This repetitiveness of pitches (i.e. the B and F#) can be explained by the fact that most rap songs have a looped sample, which repeat throughout the whole song\n\n\nSelfSM timbre features\n\n\n\nBitch Please SSM\n\n\nIn this self-similarity matrix, you can see that the song features a highly dense, checkerboard-like pattern across the entire track, with consistent horizontal and vertical stripes indicating regular, repeating intervals of high similarity. This intense repetitiveness in the song’s timbre can be explained by the fact that most rap songs, particularly from this era of West Coast hip-hop, are built on a continuous, looped instrumental beat, meaning the underlying drum textures, basslines, and instrumentation repeat almost entirely unchanged throughout the whole song.",
+    "crumbs": [
+      "Homework",
+      "Homework Assignments",
+      "Assignment 1: Track Leveling"
+    ]
+  },
+  {
+    "objectID": "portfolio/chapter2.html",
+    "href": "portfolio/chapter2.html",
+    "title": "Chapter 2: The Next",
+    "section": "",
+    "text": "Some content here…",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 2: The Next"
+    ]
   }
 ]
