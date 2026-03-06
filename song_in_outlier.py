@@ -3,27 +3,27 @@ import numpy as np
 import pandas as pd
 
 # Read data
-X = pd.read_csv('west_east.csv')
+X = pd.read_csv('balanced_hiphop_corpus.csv')
 
 # Keep a copy of identifiers so we can report which songs are which
-id_cols = ["Track.URI", "Track.Name", "Artist.Name.s.", "Album.Name", "region"]
+id_cols = ["Track URI", "Track Name", "Artist_Name", "Album Name", "region"]
 meta = X[id_cols].copy()
 
 # Separate out region (what you use to split east / west)
 region = X["region"].copy()
 
-# Columns you *don't* want to scale (non-numeric / labels)
+# Columns you *don't* want to scale (non-numeric / labels / metadata)
 cols_to_drop = [
-    "Track.URI","Track.Name","Album.Name","Artist.Name.s.",
-    "Release.Date","Duration..ms.", "Popularity","Explicit",
-    "Added.By","Added.At","Genres","Record.Label",
-    "region","highlight"
+    "Track URI", "Track Name", "Album Name", "Artist_Name",
+    "Release Date", "Duration (ms)", "Popularity", "Explicit",
+    "Added By", "Added At", "Genres", "Record Label",
+    "region"
 ]
 
 # Drop these as *columns* (axis=1 or columns=...)
 X_num = X.drop(columns=cols_to_drop)
 
-# Scale only numeric features
+# Scale only numeric features (Danceability, Energy, Tempo, etc.)
 scaler = StandardScaler()
 X_scaled_array = scaler.fit_transform(X_num)
 
