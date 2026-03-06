@@ -3,19 +3,37 @@ project:
   output-dir: docs
 
 website:
-  title: "Naud Sluis"
+  title: "NAUD SLUIS"
   site-url: "https://NaudSluis.github.io/comp_music.io"
   
-  # This builds your navigation bar automatically!
+  # The Top Navigation Bar
   navbar:
+    background: dark
     left:
       - href: index.md
         text: Home
-      - href: homework.md
+      - href: portfolio/index.md
+        text: Portfolio
+      - href: homework/index.md
         text: Homework
-      
+
+  # The Contextual Sidebars
+  sidebar:
+    # Sidebar for the Portfolio section
+    - id: portfolio
+      style: "docked"
+      contents:
+        - auto: "portfolio/" # Automatically grabs all files in this folder
+    
+    # Sidebar for the Homework section
+    - id: homework
+      style: "docked"
+      contents:
+        - auto: "homework/" # Automatically grabs all files in this folder
+
 format:
   html:
-    theme: cosmo # A clean, professional built-in theme
-    css: styles.css
+    theme: 
+      - darkly      # A built-in dark theme for a good foundation
+      - custom.scss # Your custom 90s hip-hop styling
     toc: true

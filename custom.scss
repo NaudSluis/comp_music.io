@@ -1,0 +1,51 @@
+/*-- scss:defaults --*/
+// 1. Color Palette (Deep Black, Crisp White, Boombox Silver, and Gold)
+$body-bg: #0a0a0a; 
+$body-color: #f4f4f4;
+$primary: #ffc700; // Classic Hip-Hop Gold
+
+// 2. Typography (Bold, Heavy Headers like a vinyl record sleeve)
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headings-font-family: "Impact", "Arial Black", sans-serif;
+$headings-font-weight: 900;
+$headings-color: #ffffff;
+
+// 3. Navbar Styling
+$navbar-bg: #000000;
+$navbar-fg: #ffc700;
+
+/*-- scss:rules --*/
+// 4. Custom Layout Rules for that "Blocky" professional feel
+.navbar {
+  border-bottom: 5px solid #ffc700; // Heavy gold underline
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar {
+  border-right: 2px solid #333333; // Subtle separation for sidebars
+  background-color: #111111;
+}
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+// Make links pop with gold and bold text
+a {
+  color: #ffc700;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+// Give a "Parental Advisory" blocky feel to code blocks/quotes
+.sourceCode {
+  border: 2px solid #ffffff;
+  border-radius: 0;
+}
