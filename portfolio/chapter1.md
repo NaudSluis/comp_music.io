@@ -1,5 +1,5 @@
 ---
-title: "Chapter 1: The Setup"
+title: "Chapter 1: Track Level"
 order: 2
 ---
 

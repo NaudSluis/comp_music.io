@@ -1,5 +1,5 @@
 ---
-title: "Chapter 2: The Next"
+title: "Chapter 2"
 order: 2
 ---
 

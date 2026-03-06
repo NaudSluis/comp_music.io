@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "NAUD SLUIS"
+  title: "Naud Sluis"
   site-url: "https://NaudSluis.github.io/comp_music.io"
   
   # The Top Navigation Bar

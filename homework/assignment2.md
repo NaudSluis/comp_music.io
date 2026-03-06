@@ -1,6 +1,6 @@
 ---
-title: "Assignment 2: Synthesis"
+title: "Week 10"
 order: 3
 ---
 
-### My second assignment...
+### Homework week 10
