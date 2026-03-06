@@ -91,3 +91,55 @@ library(compmus)
            subtitle = paste0("Normalization with ", normalization_method, " method"))
     ggsave(output_file)
   }
+
+# This function genrates a grid of histograms with all different features of the spotify API against there count for both west and east region from the csv west_east_cleaned.csv.
+# These features are: "Artist.Name.s.","Release.Date","Duration..ms.","Popularity","Genres","Record.Label","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time.Signature"
+  library(patchwork) # This package is magic for combining multiple plots
+  
+  gen_histogram_grid <- function(csv, output_file) {
+    # 1. Read data and get total song count for the title
+    data <- read_csv(csv)
+    total_songs <- nrow(data)
+    
+    numeric_features <- c(
+      "Duration..ms.", "Popularity", "Danceability", "Energy", "Key", 
+      "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
+      "Liveness", "Valence", "Tempo", "Time.Signature"
+    )
+    
+    # 2. Wrangle data
+    data_long <- data |>
+      select(region, all_of(numeric_features)) |>
+      pivot_longer(cols = -region, names_to = "feature", values_to = "value") |>
+      mutate(value = as.numeric(value)) |>
+      drop_na(value, region)
+    
+    # 3. Helper function to create a grid for a specific region
+    create_region_grid <- function(region_name, bar_color) {
+      ggplot(data_long |> filter(region == region_name), aes(x = value)) +
+        geom_histogram(bins = 30, fill = bar_color, color = "black") +
+        facet_wrap(~ feature, scales = "free", ncol = 4) +
+        theme_minimal() +
+        labs(
+          subtitle = paste(str_to_title(region_name), "Coast Region"),
+          x = "Feature Value", 
+          y = "Count"
+        )
+    }
+    
+    # 4. Generate the two separate grids
+    grid_east <- create_region_grid("east", "#1f78b4")
+    grid_west <- create_region_grid("west", "#ff7f00")
+    
+    # 5. Combine grids using patchwork (the '/' stacks them vertically)
+    # We also add the main title with the song count here
+    combined_plot <- (grid_east / grid_west) +
+      plot_annotation(
+        title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
+        theme = theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5))
+      )
+    
+    # 6. Save the plot (Height increased to accommodate two full grids)
+    ggsave(output_file, plot = combined_plot, width = 20, height = 24)
+  }
+   gen_histogram_grid("Documents/GitHub/comp_music/west_east_cleaned.csv", "Documents/GitHub/comp_music/visualisations/spotify_region_comparison.pdf")

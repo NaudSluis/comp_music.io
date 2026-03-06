@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Naud Sluis"
+  site-url: "https://NaudSluis.github.io/comp_music.io"
+  
+  # This builds your navigation bar automatically!
+  navbar:
+    left:
+      - href: index.md
+        text: Home
+      - href: homework.md
+        text: Homework
+      
+format:
+  html:
+    theme: cosmo # A clean, professional built-in theme
+    css: styles.css
+    toc: true
