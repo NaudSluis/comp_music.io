@@ -32,15 +32,15 @@ body {
   letter-spacing: 3px;
 }
 
-// Make the nav items bounce slightly when hovered
-.navbar-nav .nav-link {
-  font-weight: 900;
-  transition: all 0.2s ease-in-out;
-}
-.navbar-nav .nav-link:hover {
-  color: $primary !important;
-  transform: scale(1.05); 
-}
+// // Make the nav items bounce slightly when hovered
+// .navbar-nav .nav-link {
+//   font-weight: 900;
+//   transition: all 0.2s ease-in-out;
+// }
+// .navbar-nav .nav-link:hover {
+//   color: $primary !important;
+//   transform: scale(1.05); 
+// }
 
 // 6. The "Hardware" Sidebar
 .sidebar {
@@ -106,11 +106,7 @@ a:hover {
 // 11. Gritty Music Video Images
 // Makes all your images look like a gritty, high-contrast 90s music video, but they turn color when you hover over them!
 img {
-  filter: grayscale(100%) contrast(120%);
+  filter: grayscale(0%) contrast(120%);
   transition: filter 0.4s ease, border-color 0.4s ease;
   border: 4px solid #333; // Dark border by default
-}
-img:hover {
-  filter: grayscale(0%) contrast(100%);
-  border-color: $primary; // Border turns gold when hovered
 }
