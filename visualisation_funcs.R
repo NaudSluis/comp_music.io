@@ -292,7 +292,7 @@ get_chordagram_plot <- function(csv, title) {
     scale_fill_viridis_c(guide = "none") +
     theme_minimal() +
     labs(x = "Time (s)", y = "", title = title)
-  
+    
   return(plot)
 }
 

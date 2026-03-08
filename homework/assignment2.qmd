@@ -1,0 +1,17 @@
+---
+title: "Week 10"
+order: 3
+---
+
+```{r setup}
+source("../visualisation_funcs.R")
+```
+### Homework week 10
+
+In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song 'Give me the Loot' by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify's features). 
+
+```{r, fig.width=10, fig.height=3}
+get_chordagram_plot("../data_sv/chromagram_gmtl.csv", "Chordagram of Give Me The Loot by The Notorius B.I.G")
+```
+
+This is a chordagram of Give me the Loot by The Notorius B.I.G. In the chrodagram, you can see that the overall color is greenish, and that there are a lot of soft horizontal blue lines. The fact that the overall color is greenish and, for example, not bright yellow in most parts, tells us that the sound of this song is very rich. When listening to the song, there is a soft background sample overlayed with harder drums and ofcourse Biggies prominent voice. Together with that, there are a lot of sounds going in and out of the song: alarm like souds, record scratches and other voices. In the graph, you can also see a lot of vertical lines. Oftentimes in the song, you hear the samples and drums stop, only keeping Biggies voice. These stops correspond to the vertical lines, as there is a sudden stop of a lot of chords.
