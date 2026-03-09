@@ -1,0 +1,6 @@
+---
+title: "Chapter 6: Temporal features"
+order: 6
+---
+
+Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total

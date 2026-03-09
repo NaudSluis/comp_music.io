@@ -1,0 +1,6 @@
+---
+title: "Chapter 8: Contribution"
+order: 8
+---
+
+Clustering songs unsupervised, and try supervised. Data enhancing, feature importance

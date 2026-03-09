@@ -1,0 +1,8 @@
+---
+title: "Chapter 2: Exploratoring the features"
+order: 2
+---
+
+### Some content here...
+
+Histograms of both sides on all features, conclusions from that or what to dive deeper in 

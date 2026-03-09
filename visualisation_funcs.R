@@ -96,52 +96,145 @@ library(compmus)
 # These features are: "Artist.Name.s.","Release.Date","Duration..ms.","Popularity","Genres","Record.Label","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time.Signature"
 
   
-  gen_histogram_grid <- function(csv, output_file) {
-    # 1. Read data and get total song count for the title
-    data <- read_csv(csv)
-    total_songs <- nrow(data)
-    
-    numeric_features <- c(
-      "Duration..ms.", "Popularity", "Danceability", "Energy", "Key", 
-      "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
-      "Liveness", "Valence", "Tempo", "Time.Signature"
+gen_density_grid <- function(csv, output_file) {
+  # 1. Read data and get total song count for the title
+  data <- read_csv(csv)
+  total_songs <- nrow(data)
+  
+  numeric_features <- c(
+    "Duration (ms)", "Popularity", "Danceability", "Energy", "Key", 
+    "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
+    "Liveness", "Valence", "Tempo", "Time Signature"
+  )
+  
+  # 2. Wrangle data
+  data_long <- data |>
+    select(region, all_of(numeric_features)) |>
+    pivot_longer(cols = -region, names_to = "feature", values_to = "value") |>
+    mutate(value = as.numeric(value)) |>
+    drop_na(value, region)
+  
+  # 3. Create a single overlaid grid
+  combined_plot <- ggplot(data_long, aes(x = value, fill = region)) +
+    geom_density(alpha = 0.5) + # Alpha controls transparency so you can see the overlap
+    facet_wrap(~ feature, scales = "free", ncol = 4) +
+    scale_fill_manual(
+      values = c("east" = "#1f78b4", "west" = "#ff7f00"),
+      labels = c("east" = "East Coast", "west" = "West Coast") # Cleans up the legend
+    ) +
+    theme_minimal() +
+    labs(
+      title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
+      x = "Feature Value", 
+      y = "Density",
+      fill = "Region" # Titles the legend
+    ) +
+    theme(
+      plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+      legend.position = "top", # Puts the legend at the top so it doesn't squash the graphs
+      legend.text = element_text(size = 14),
+      legend.title = element_text(size = 16, face = "bold")
     )
-    
-    # 2. Wrangle data
-    data_long <- data |>
-      select(region, all_of(numeric_features)) |>
-      pivot_longer(cols = -region, names_to = "feature", values_to = "value") |>
-      mutate(value = as.numeric(value)) |>
-      drop_na(value, region)
-    
-    # 3. Helper function to create a grid for a specific region
-    create_region_grid <- function(region_name, bar_color) {
-      ggplot(data_long |> filter(region == region_name), aes(x = value)) +
-        geom_histogram(bins = 30, fill = bar_color, color = "black") +
-        facet_wrap(~ feature, scales = "free", ncol = 4) +
-        theme_minimal() +
-        labs(
-          subtitle = paste(str_to_title(region_name), "Coast Region"),
-          x = "Feature Value", 
-          y = "Count"
-        )
-    }
-    
-    # 4. Generate the two separate grids
-    grid_east <- create_region_grid("east", "#1f78b4")
-    grid_west <- create_region_grid("west", "#ff7f00")
-    
-    # 5. Combine grids using patchwork (the '/' stacks them vertically)
-    # We also add the main title with the song count here
-    combined_plot <- (grid_east / grid_west) +
-      plot_annotation(
-        title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
-        theme = theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5))
-      )
-    
-    # 6. Save the plot (Height increased to accommodate two full grids)
-    ggsave(output_file, plot = combined_plot, width = 20, height = 24)
-  }
+  
+  # 4. Save the plot (Height adjusted to 12 since it's only one grid now)
+  ggsave(output_file, plot = combined_plot, width = 20, height = 12)
+}
+
+gen_freqpoly_grid <- function(csv, output_file) {
+  # 1. Read data and get total song count for the title
+  data <- read_csv(csv)
+  total_songs <- nrow(data)
+  
+  numeric_features <- c(
+    "Duration (ms)", "Popularity", "Danceability", "Energy", "Key", 
+    "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
+    "Liveness", "Valence", "Tempo", "Time Signature"
+  )
+  
+  # 2. Wrangle data
+  data_long <- data |>
+    select(region, all_of(numeric_features)) |>
+    pivot_longer(cols = -region, names_to = "feature", values_to = "value") |>
+    mutate(value = as.numeric(value)) |>
+    drop_na(value, region)
+  
+  # 3. Create a single overlaid grid with frequency polygons
+  combined_plot <- ggplot(data_long, aes(x = value, color = region)) +
+    geom_freqpoly(bins = 30, linewidth = 1) + # bins=30 is the default, linewidth makes it pop
+    facet_wrap(~ feature, scales = "free", ncol = 4) +
+    scale_color_manual(
+      values = c("east" = "#1f78b4", "west" = "#ff7f00"),
+      labels = c("east" = "East Coast", "west" = "West Coast")
+    ) +
+    theme_minimal() +
+    labs(
+      title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
+      x = "Feature Value", 
+      y = "Count", # The y-axis now shows raw song counts!
+      color = "Region" # Updated from 'fill' to 'color'
+    ) +
+    theme(
+      plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+      legend.position = "top", 
+      legend.text = element_text(size = 14),
+      legend.title = element_text(size = 16, face = "bold"),
+      strip.text = element_text(size = 12, face = "bold") # Makes the facet labels clearer
+    )
+  
+  # 4. Save the plot
+  ggsave(output_file, plot = combined_plot, width = 20, height = 12)
+}
+
+gen_overlaid_histogram_grid <- function(csv, output_file) {
+  # 1. Read data and get total song count for the title
+  data <- read_csv(csv)
+  total_songs <- nrow(data)
+  
+  numeric_features <- c(
+    "Duration (ms)", "Popularity", "Danceability", "Energy", "Key", 
+    "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
+    "Liveness", "Valence", "Tempo", "Time Signature"
+  )
+  
+  # 2. Wrangle data
+  data_long <- data |>
+    select(region, all_of(numeric_features)) |>
+    pivot_longer(cols = -region, names_to = "feature", values_to = "value") |>
+    mutate(value = as.numeric(value)) |>
+    drop_na(value, region)
+  
+  # 3. Create a single overlaid grid with histograms
+  combined_plot <- ggplot(data_long, aes(x = value, fill = region)) +
+    geom_histogram(
+      position = "identity", # Crucial: forces bars to overlap instead of stacking
+      alpha = 0.5,           # 50% transparency to see the overlap
+      bins = 30,             # Adjust this to make bars wider/narrower
+      color = "white",       # Adds a clean, thin white border around each bar
+      linewidth = 0.2
+    ) +
+    facet_wrap(~ feature, scales = "free", ncol = 4) +
+    scale_fill_manual(
+      values = c("east" = "#1f78b4", "west" = "#ff7f00"),
+      labels = c("east" = "East Coast", "west" = "West Coast")
+    ) +
+    theme_minimal() +
+    labs(
+      title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
+      x = "Feature Value", 
+      y = "Count", 
+      fill = "Region"        # Switched back from 'color' to 'fill'
+    ) +
+    theme(
+      plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+      legend.position = "top", 
+      legend.text = element_text(size = 14),
+      legend.title = element_text(size = 16, face = "bold"),
+      strip.text = element_text(size = 12, face = "bold") 
+    )
+  
+  # 4. Save the plot
+  ggsave(output_file, plot = combined_plot, width = 20, height = 12)
+}
 
   circshift <- function(v, n) {
     if (n == 0) v else c(tail(v, n), head(v, -n))
