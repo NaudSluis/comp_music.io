@@ -408,3 +408,49 @@ gen_patch_chordagram <- function() {
   # 4. Save the final grid
   ggsave("coast_comparison_chordagrams.png", final_plot, width = 12, height = 8)
 }
+
+
+gen_tempogram <- function(method, csv, title, subtitle) {
+  data <- read_csv(csv)
+  
+  if (method == "atc"){
+    # Assign the plot to a variable 'p'
+    p <- data |> 
+      pivot_longer(-TIME, names_to = "tempo") |> 
+      mutate(tempo = as.numeric(tempo)) |> 
+      ggplot(aes(x = TIME, y = tempo, fill = value)) +
+      geom_raster() +
+      scale_y_continuous(transform = c("reciprocal", "reverse"), breaks = seq(50, 350, 100)) +    
+      scale_fill_viridis_c(guide = "none") +
+      labs(x = "Time (s)", y = "Tempo (BPM)", title = title, subtitle = subtitle) +
+      theme_classic()
+      
+    return(p) # Return the variable
+    
+  } else if (method == "dft"){
+    # Assign the plot to a variable 'p'
+    p <- data |> 
+      pivot_longer(-TIME, names_to = "tempo") |> 
+      mutate(tempo = as.numeric(tempo)) |> 
+      ggplot(aes(x = TIME, y = tempo, fill = value)) +
+      geom_raster() +
+      scale_fill_viridis_c(guide = "none") +
+      labs(x = "Time (s)", y = "Tempo (BPM)", title = title, subtitle = subtitle) +
+      theme_classic()
+      
+    return(p) # Return the variable
+  }
+}
+
+gen_tempogram_grid <- function(song, title) {
+  atc_plot <- gen_tempogram("atc", paste0("../data_sv/tempogram_atc_", song, ".csv"), paste0("ATC Tempogram"), "")
+  dft_plot <- gen_tempogram("dft", paste0("../data_sv/tempogram_dft_", song, ".csv"), paste0("DFT Tempogram"), "")
+  
+  grid_plot <- (atc_plot | dft_plot)
+  
+  # 3. Add a main title to the whole graphic
+  final_plot <- grid_plot + 
+    plot_annotation(title = title)
+  
+  return(final_plot)
+}

@@ -13,7 +13,7 @@ In the West Coast (W.C.) playlist, some popular East Coast (E.C.) artist appeard
 
 To make analysis about track level information, two tracks per coast were selected. These songs needed to be representative for the range of music of every coast. To select these without randomly choosing two, one is the most respresentative for that coast and the other is a track distinctive for its coast, far from the other coast and not an outlier in its own coast. The latter was chosen so that the most distinctive track from a coast is not a general outlier (i.e. the most distinctive song for a coast could be a song that does not represent either coasts). First, all numerical features except "Popularity" (as this measure is changing) from the Spotify API were normalised. Second, the centroid (i.e. the mean over all features) of the data was calculated. To select the most representative song, the euclidean distance from each song to the centroid was calculated, and the song with the smallest distance was selected. To select the most distinctive song, the euclidean distance from each song to the other coast's centroid was calculated. From that, the distance to its own coast's centroid was subtracted. The song that was the furthest from the other coast's centroid, while being close to its own coast's centroid was selected. The songs that were selected are:
 
-<table>
+<table style="width:100%; border-collapse: collapse;" border="1">
   <thead>
     <tr>
       <th colspan="2" style="text-align: center;">East Coast</th>
@@ -28,10 +28,10 @@ To make analysis about track level information, two tracks per coast were select
   </thead>
   <tbody>
     <tr>
-      <td>[Data A]</td>
-      <td>[Data B]</td>
-      <td>[Data C]</td>
-      <td>[Data D]</td>
+      <td>Give me the Loot by The Notorious B.I.G.</td>
+      <td>C.R.E.A.M.(Cash Rules Everything Around Me) by Wu-Tang Clan</td>
+      <td>Bitch Please by Snoop Dogg and Xzibit</td>
+      <td>Without me by Eminem</td>
     </tr>
   </tbody>
 </table>
