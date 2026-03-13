@@ -6,6 +6,7 @@
     "section": "",
     "text": "Corpus selection and preperation ook nog over samen doen en region toevoegen\nThe corpus for this analysis is a combination of two playlists from spotify: “West Side Classics” and “East Coast Classics”. These playlists were chosen, because they were very popular on spotify, with 141.754 and 40.882 likes respectivally. As there is no golden standard for what songs are considered “West Coast” or “East Coast”, this method of popularity was used, which is similair to methods used by Boros (2025) and Gilbers et al. (2019).\nIn the West Coast (W.C.) playlist, some popular East Coast (E.C.) artist appeard. To mitigate this problem, artist that were in both datasets were noted and placed in their corresponding Coast. The artist ‘Outkast’ also appeared in both datasets and was removed as Outkast originated from Atlanta (not W.C. nor E.C.). Moreover, “West Side Classics” contained 84 songs, while “East Coast Classics” contained 177 after the previous step of moving around songs. As this is a difference of more that half of the songs, the E.C. set was downsampled to the W.C. set, both now containing 84 songs.\n\n\nTrack selection\nTo make analysis about track level information, two tracks per coast were selected. These songs needed to be representative for the range of music of every coast. To select these without randomly choosing two, one is the most respresentative for that coast and the other is a track distinctive for its coast, far from the other coast and not an outlier in its own coast. The latter was chosen so that the most distinctive track from a coast is not a general outlier (i.e. the most distinctive song for a coast could be a song that does not represent either coasts). First, all numerical features except “Popularity” (as this measure is changing) from the Spotify API were normalised. Second, the centroid (i.e. the mean over all features) of the data was calculated. To select the most representative song, the euclidean distance from each song to the centroid was calculated, and the song with the smallest distance was selected. To select the most distinctive song, the euclidean distance from each song to the other coast’s centroid was calculated. From that, the distance to its own coast’s centroid was subtracted. The song that was the furthest from the other coast’s centroid, while being close to its own coast’s centroid was selected. The songs that were selected are:\n\n\n\n\nEast Coast\n\n\nWest Coast\n\n\n\n\nRepresentative\n\n\nDistinct\n\n\nRepresentative\n\n\nDistinct\n\n\n\n\n\n\nGive me the Loot by The Notorious B.I.G.\n\n\nC.R.E.A.M.(Cash Rules Everything Around Me) by Wu-Tang Clan\n\n\nBitch Please by Snoop Dogg and Xzibit\n\n\nWithout me by Eminem",
     "crumbs": [
+      "Portfolio",
       "Portfolio Overview",
       "Chapter 1: The Corpus"
     ]
@@ -97,7 +98,7 @@
     "href": "portfolio/chapter6.html",
     "title": "Chapter 6: Temporal features",
     "section": "",
-    "text": "Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total",
+    "text": "Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total\n\nListen to Give me the Loot by The Notorius B.I.G.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListen to C.R.E.A.M by Wu-Tang Clan\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListen to Bitch Please by Snoop Dogg & Xzibit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListen to Without Me by Eminem",
     "crumbs": [
       "Portfolio Overview",
       "Chapter 6: Temporal features"
@@ -154,7 +155,6 @@
     "section": "",
     "text": "Homework week 10\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features).\n\nListen to Give me the Loot by The Notorius B.I.G.",
     "crumbs": [
-      "Homework",
       "Homework Assignments",
       "Week 11"
     ]

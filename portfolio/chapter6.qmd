@@ -4,3 +4,60 @@ order: 6
 ---
 
 Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total
+
+```{r setup}
+#| echo: false
+#| warning: false
+#| message: false
+source("../visualisation_funcs.R")
+```
+
+#### Listen to Give me the Loot by The Notorius B.I.G.
+<audio controls style="width: 100%;">
+  <source src="gmtl.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+gen_tempogram_grid("gmtl", "Tempogram of Give Me The Loot by The Notorius B.I.G")
+```
+
+#### Listen to C.R.E.A.M by Wu-Tang Clan
+<audio controls style="width: 100%;">
+  <source src="cream.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+gen_tempogram_grid("cream", "Tempogram of C.R.E.A.M by Wu-Tang Clan")
+```
+
+#### Listen to Bitch Please by Snoop Dogg & Xzibit
+<audio controls style="width: 100%;">
+  <source src="bp.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+gen_tempogram_grid("bp", "Tempogram of Bitch Please by Snoop Dogg & Xzibit")
+```
+
+#### Listen to Without Me by Eminem
+<audio controls style="width: 100%;">
+  <source src="wm.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+gen_tempogram_grid("wm", "Tempogram of Without Me by Eminem")
+```
+
+

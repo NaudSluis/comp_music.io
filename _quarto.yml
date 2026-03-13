@@ -10,11 +10,11 @@ website:
   navbar:
     background: dark
     left:
-      - href: index.md
+      - href: index.qmd
         text: Home
-      - href: portfolio/index.md
+      - href: portfolio/index.qmd
         text: Portfolio
-      - href: homework/index.md
+      - href: homework/index.qmd
         text: Homework
 
   # The Contextual Sidebars
@@ -33,6 +33,7 @@ website:
 
 format:
   html:
+    lightbox: true
     theme: 
       - darkly      # A built-in dark theme for a good foundation
       - custom.scss # Your custom 90s hip-hop styling

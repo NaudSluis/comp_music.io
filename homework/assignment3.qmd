@@ -9,9 +9,9 @@ order: 4
 #| message: false
 source("../visualisation_funcs.R")
 ```
-### Homework week 10
+### Homework week 11
 
-In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song 'Give me the Loot' by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify's features). 
+In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song 'Give me the Loot' by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify's features) (See [here](naudsluis.) for more information). 
 
 
 #### Listen to Give me the Loot by The Notorius B.I.G.
@@ -19,10 +19,11 @@ In the late 1990s and early 2000s, American hip-hop was marked by a West Coast v
   <source src="gmtl.m4a" type="audio/mp4">
 </audio>
 
-```{r, fig.width=7, fig.height=4}
+```{r, fig.width=11, fig.height=6}
 #| echo: false
 #| warning: false
 #| message: false
 gen_tempogram_grid("gmtl", "Tempogram of Give Me The Loot by The Notorius B.I.G")
 ```
 
+In this graph, you see both the tempogram of Give Me The Loot made with Autocorrelation (ATC) and with the Discrete Fourier Transform. In both graphs, the lines are straight, indicating a steady rythm throughout the song. The tempo is around 90 BPM, which is a typical tempo for hip-hop/rap. In the ATC tempogram, the brightest line is prominent at around 45 BPM. In the DFT tempogram, the lines show at 90 BPM and multiples of that. Taking both the 45 BPM of the ATC and the 90 BPM of the DFT graph, we can conclude that the rythm of the song lies at around 90 BPM (45 BPM is half beat). Moreover, what stands out is that the tempo is prominent in the first 50 seconds, after which is fades out. If you listen closely in the song, the voice of Biggie get more prominent, resulting in a less prominent beat, explaining this fading out phenomenon. Around the 100 seconds mark, there is a section where no tempo seems present. As you can hear in the song,the drums and samples are off around this time resulting in this gap in the tempo.
