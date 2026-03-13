@@ -11,12 +11,12 @@ source("../visualisation_funcs.R")
 ```
 ### Homework week 11
 
-In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song 'Give me the Loot' by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify's features) (See [here](naudsluis.) for more information). 
+In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song 'Give me the Loot' by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify's features) (See [here](../portfolio/chapter1.qmd) for more information). 
 
 
 #### Listen to Give me the Loot by The Notorius B.I.G.
 <audio controls style="width: 100%;">
-  <source src="gmtl.m4a" type="audio/mp4">
+  <source src="../gmtl.m4a" type="audio/mp4">
 </audio>
 
 ```{r, fig.width=11, fig.height=6}

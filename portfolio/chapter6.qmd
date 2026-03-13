@@ -14,7 +14,7 @@ source("../visualisation_funcs.R")
 
 #### Listen to Give me the Loot by The Notorius B.I.G.
 <audio controls style="width: 100%;">
-  <source src="gmtl.m4a" type="audio/mp4">
+  <source src="../gmtl.m4a" type="audio/mp4">
 </audio>
 
 ```{r, fig.width=11, fig.height=6}
@@ -26,7 +26,7 @@ gen_tempogram_grid("gmtl", "Tempogram of Give Me The Loot by The Notorius B.I.G"
 
 #### Listen to C.R.E.A.M by Wu-Tang Clan
 <audio controls style="width: 100%;">
-  <source src="cream.m4a" type="audio/mp4">
+  <source src="../cream.m4a" type="audio/mp4">
 </audio>
 
 ```{r, fig.width=11, fig.height=6}
@@ -38,7 +38,7 @@ gen_tempogram_grid("cream", "Tempogram of C.R.E.A.M by Wu-Tang Clan")
 
 #### Listen to Bitch Please by Snoop Dogg & Xzibit
 <audio controls style="width: 100%;">
-  <source src="bp.m4a" type="audio/mp4">
+  <source src="../bp.m4a" type="audio/mp4">
 </audio>
 
 ```{r, fig.width=11, fig.height=6}
@@ -50,7 +50,7 @@ gen_tempogram_grid("bp", "Tempogram of Bitch Please by Snoop Dogg & Xzibit")
 
 #### Listen to Without Me by Eminem
 <audio controls style="width: 100%;">
-  <source src="wm.m4a" type="audio/mp4">
+  <source src="../wm.m4a" type="audio/mp4">
 </audio>
 
 ```{r, fig.width=11, fig.height=6}

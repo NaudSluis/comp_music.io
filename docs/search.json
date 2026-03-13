@@ -59,14 +59,15 @@
     ]
   },
   {
-    "objectID": "homework/assignment2.html",
-    "href": "homework/assignment2.html",
-    "title": "Week 10",
+    "objectID": "homework/assignment3.html",
+    "href": "homework/assignment3.html",
+    "title": "Week 11",
     "section": "",
-    "text": "Homework week 10\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features). #### Listen to the song   \n\n\n\n\n\n\n\n\n\nThis is a chordagram of Give me the Loot by The Notorius B.I.G. In the chrodagram, you can see that the overall color is greenish, and that there are a lot of soft horizontal blue lines. The fact that the overall color is greenish and, for example, not bright yellow in most parts, tells us that the sound of this song is very rich. When listening to the song, there is a soft background sample overlayed with harder drums and ofcourse Biggies prominent voice. Together with that, there are a lot of sounds going in and out of the song: alarm like souds, record scratches and other voices. In the graph, you can also see a lot of vertical lines. Oftentimes in the song, you hear the samples and drums stop, only keeping Biggies voice. These stops correspond to the vertical lines, as there is a sudden stop of a lot of chords.",
+    "text": "Homework week 11\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features) (See here for more information).\n\nListen to Give me the Loot by The Notorius B.I.G.\n\n\n\n\n\n\n\n\n\n\n\n\nIn this graph, you see both the tempogram of Give Me The Loot made with Autocorrelation (ATC) and with the Discrete Fourier Transform. In both graphs, the lines are straight, indicating a steady rythm throughout the song. The tempo is around 90 BPM, which is a typical tempo for hip-hop/rap. In the ATC tempogram, the brightest line is prominent at around 45 BPM. In the DFT tempogram, the lines show at 90 BPM and multiples of that. Taking both the 45 BPM of the ATC and the 90 BPM of the DFT graph, we can conclude that the rythm of the song lies at around 90 BPM (45 BPM is half beat). Moreover, what stands out is that the tempo is prominent in the first 50 seconds, after which is fades out. If you listen closely in the song, the voice of Biggie get more prominent, resulting in a less prominent beat, explaining this fading out phenomenon. Around the 100 seconds mark, there is a section where no tempo seems present. As you can hear in the song,the drums and samples are off around this time resulting in this gap in the tempo.",
     "crumbs": [
+      "Homework",
       "Homework Assignments",
-      "Week 10"
+      "Week 11"
     ]
   },
   {
@@ -76,6 +77,7 @@
     "section": "",
     "text": "This section contains all my weekly coursework and assignments.",
     "crumbs": [
+      "Homework",
       "Homework Assignments"
     ]
   },
@@ -94,25 +96,27 @@
     "text": "Some content"
   },
   {
-    "objectID": "homework/assignment3.html",
-    "href": "homework/assignment3.html",
-    "title": "Week 11",
-    "section": "",
-    "text": "Homework week 11\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features) (See here for more information).\n\nListen to Give me the Loot by The Notorius B.I.G.\n\n\n\n\n\n\n\n\n\n\n\n\nIn this graph, you see both the tempogram of Give Me The Loot made with Autocorrelation (ATC) and with the Discrete Fourier Transform. In both graphs, the lines are straight, indicating a steady rythm throughout the song. The tempo is around 90 BPM, which is a typical tempo for hip-hop/rap. In the ATC tempogram, the brightest line is prominent at around 45 BPM. In the DFT tempogram, the lines show at 90 BPM and multiples of that. Taking both the 45 BPM of the ATC and the 90 BPM of the DFT graph, we can conclude that the rythm of the song lies at around 90 BPM (45 BPM is half beat). Moreover, what stands out is that the tempo is prominent in the first 50 seconds, after which is fades out. If you listen closely in the song, the voice of Biggie get more prominent, resulting in a less prominent beat, explaining this fading out phenomenon. Around the 100 seconds mark, there is a section where no tempo seems present. As you can hear in the song,the drums and samples are off around this time resulting in this gap in the tempo.",
-    "crumbs": [
-      "Homework Assignments",
-      "Week 11"
-    ]
-  },
-  {
     "objectID": "homework/assignment1.html",
     "href": "homework/assignment1.html",
     "title": "Week 9",
     "section": "",
     "text": "Homework week 9\n\nIntroduction\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made visualisations for the song ‘Bitch please’ by Snoop Dogg and Xzibit. I chose this song as it is statistically the most west-coast, meaning its audio profile sits closest to the overall average of all West Coast tracks (Only considering spotifies features).\n\n\nChromagram\n\n\n\nBitch Please chromagram\n\n\nIn this chromagram, you can see that the song is mostly in the keys B and F#, with G being high in the beginning of the song, but becoming less prominant later. This repetitiveness of pitches (i.e. the B and F#) can be explained by the fact that most rap songs have a looped sample, which repeat throughout the whole song\n\n\nSelfSM timbre features\n\n\n\nBitch Please SSM\n\n\nIn this self-similarity matrix, you can see that the song features a highly dense, checkerboard-like pattern across the entire track, with consistent horizontal and vertical stripes indicating regular, repeating intervals of high similarity. This intense repetitiveness in the song’s timbre can be explained by the fact that most rap songs, particularly from this era of West Coast hip-hop, are built on a continuous, looped instrumental beat, meaning the underlying drum textures, basslines, and instrumentation repeat almost entirely unchanged throughout the whole song.",
     "crumbs": [
+      "Homework",
       "Homework Assignments",
       "Week 9"
+    ]
+  },
+  {
+    "objectID": "homework/assignment2.html",
+    "href": "homework/assignment2.html",
+    "title": "Week 10",
+    "section": "",
+    "text": "Homework week 10\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features). #### Listen to the song   \n\n\n\n\n\n\n\n\n\nThis is a chordagram of Give me the Loot by The Notorius B.I.G. In the chrodagram, you can see that the overall color is greenish, and that there are a lot of soft horizontal blue lines. The fact that the overall color is greenish and, for example, not bright yellow in most parts, tells us that the sound of this song is very rich. When listening to the song, there is a soft background sample overlayed with harder drums and ofcourse Biggies prominent voice. Together with that, there are a lot of sounds going in and out of the song: alarm like souds, record scratches and other voices. In the graph, you can also see a lot of vertical lines. Oftentimes in the song, you hear the samples and drums stop, only keeping Biggies voice. These stops correspond to the vertical lines, as there is a sudden stop of a lot of chords.",
+    "crumbs": [
+      "Homework",
+      "Homework Assignments",
+      "Week 10"
     ]
   },
   {
