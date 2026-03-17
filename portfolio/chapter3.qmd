@@ -28,24 +28,34 @@ source("../visualisation_funcs.R")
 #| message: false
 most_east <- gen_chromagram("../data_sv/chromagram_gmtl.csv", "chebyshev", "Give Me The Loot", "The Notorius B.I.G")
 most_west <- gen_chromagram("../data_sv/chromagram_bp.csv", "chebyshev", "Bitch Please", "Snoop Dogg & Xzibit")
-ssm_east <- gen_ssm_chroma("../data_sv/chromagram_gmtl.csv", "chebyshev", "Give Me The Loot", "The Notorius B.I.G")
-ssm_west <- gen_ssm_chroma("../data_sv/chromagram_bp.csv", "chebyshev", "Bitch Please", "Snoop Dogg & Xzibit")
 
-# 1. Combine the plots
-# Use | for horizontal and / for vertical
-grid_plot <- (most_east | most_west) / (ssm_east | ssm_west)
+grid_plot <- (most_east | most_west)
 
-# 2. Apply the layout and the universal scale
-final_plot <- grid_plot + 
+final_plot_cg <- grid_plot + 
   plot_layout(
-    heights = c(1, 2),    # Makes the chromagrams 1/5th of the total height
     guides = "collect"     # Forces a single legend for the whole patch
   ) + 
   plot_annotation(
     title = "Comparison of Chroma features for Most typical E.C. and W.C. track"
-  ) & 
-  scale_fill_viridis_c() # The '&' applies this to ALL subplots at once
-  final_plot
+  )&
+  scale_fill_viridis_c()
+  final_plot_cg
+
+ssm_east <- gen_ssm_chroma("../data_sv/chromagram_gmtl.csv", "euclidean", "Give Me The Loot", "The Notorius B.I.G")
+ssm_west <- gen_ssm_chroma("../data_sv/chromagram_bp.csv", "euclidean", "Bitch Please", "Snoop Dogg & Xzibit")
+
+
+grid_plot <- (ssm_east | ssm_west)
+
+final_plot_ssm <- grid_plot + 
+  plot_layout(
+    guides = "collect"     # Forces a single legend for the whole patch
+  ) + 
+  plot_annotation(
+    title = "Comparison of Chroma SSM for Most typical E.C. and W.C. track"
+  )&
+  scale_fill_viridis_c()
+  final_plot_ssm
 ```
 
 #### Listen to C.R.E.A.M and Without Me
@@ -61,25 +71,34 @@ final_plot <- grid_plot +
 #| echo: false
 #| warning: false
 #| message: false
-dist_east <- gen_chromagram("../data_sv/chromagram_cream.csv", "chebyshev", "C.R.E.A.M", "Wu-Tang Clan")
-dist_west <- gen_chromagram("../data_sv/chromagram_wm.csv", "chebyshev", "Without Me", "Eminem")
-ssm_east <- gen_ssm_chroma("../data_sv/chromagram_cream.csv", "chebyshev", "C.R.E.A.M", "Wu-Tang Clan")
-ssm_west <- gen_ssm_chroma("../data_sv/chromagram_wm.csv", "chebyshev", "Without Me", "Eminem")
-grid_plot <- (most_east + most_west) / (ssm_east + ssm_west)
+most_east <- gen_chromagram("../data_sv/chromagram_cream.csv", "chebyshev", "C.R.E.A.M", "Wu-Tang Clan")
+most_west <- gen_chromagram("../data_sv/chromagram_wm.csv", "chebyshev", "Without Me", "Eminem")
 
-# 1. Combine the plots
-# Use | for horizontal and / for vertical
-grid_plot <- (most_east | most_west) / (ssm_east | ssm_west)
+grid_plot <- (most_east | most_west)
 
-# 2. Apply the layout and the universal scale
-final_plot <- grid_plot + 
+final_plot_cg <- grid_plot + 
   plot_layout(
-    heights = c(1, 2),    # Makes the chromagrams 1/5th of the total height
     guides = "collect"     # Forces a single legend for the whole patch
   ) + 
   plot_annotation(
-    title = "Comparison of Chroma features for Most typical E.C. and W.C. track"
-  ) & 
-  scale_fill_viridis_c() # The '&' applies this to ALL subplots at once
-  final_plot
+    title = "Comparison of Chroma features for Most distinct E.C. and W.C. track"
+  )&
+  scale_fill_viridis_c()
+  final_plot_cg
+
+ssm_east <- gen_ssm_chroma("../data_sv/chromagram_cream.csv", "euclidean", "C.R.E.A.M", "Wu-Tang Clan")
+ssm_west <- gen_ssm_chroma("../data_sv/chromagram_wm.csv", "euclidean", "Without Me", "Eminem")
+
+
+grid_plot <- (ssm_east | ssm_west)
+
+final_plot_ssm <- grid_plot + 
+  plot_layout(
+    guides = "collect"     # Forces a single legend for the whole patch
+  ) + 
+  plot_annotation(
+    title = "Comparison of Chroma SSM for Most distinct E.C. and W.C. track"
+  ) &
+  scale_fill_viridis_c()
+  final_plot_ssm
 ```
