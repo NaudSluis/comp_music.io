@@ -33,41 +33,38 @@ library(compmus)
   }
 
 # This function generates a chromagram, based on a csv, a method, the title of the song, arist(s) and give the output file
-  gen_chromagram <- function(csv, normalization_method, output_file, title, artists) {
-    song <- read_csv(csv)
-    song |>
-      compmus_wrangle_chroma() |> 
-      mutate(pitches = map(pitches, compmus_normalise, normalization_method)) |>
-      compmus_gather_chroma() |> 
-      ggplot(
-        aes(
-          x = start + duration / 2,
-          y = pitch_class,
-          fill = value
-        )
-      ) +
-      geom_tile(aes(width = duration)) +
-      labs(
-        x = "Time (s)",
-        y = NULL,
-        fill = "Magnitude",
-        title = paste0("Chromagram of ", title, " by ", artists),
-        subtitle = paste0("Normalization with ", normalization_method, " method")
-      ) +
-      theme_minimal() +
-      theme(
-        plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)
-      ) +
-      scale_fill_viridis_c()
-    ggsave(output_file)
-  }
+gen_chromagram <- function(csv, normalization_method, title, artists) {
+  read_csv(csv) |>
+    compmus_wrangle_chroma() |> 
+    mutate(pitches = map(pitches, compmus_normalise, normalization_method)) |>
+    compmus_gather_chroma() |> 
+    ggplot(aes(x = start + duration / 2, y = pitch_class, fill = value)) +
+    geom_tile(aes(width = duration)) +
+    labs(
+      x = "Time (s)", y = NULL, fill = "Value",
+      title = title, subtitle = artists
+    ) +
+    theme_minimal()
+}
+
+gen_ssm_chroma <- function(csv, normalization_method, title, artists) {
+  read_csv(csv) |>
+    compmus_wrangle_chroma() |> 
+    filter(row_number() %% 50L == 0L) |> 
+    mutate(pitches = map(pitches, compmus_normalise, normalization_method)) |>
+    compmus_self_similarity(pitches, normalization_method) |> 
+    ggplot(aes(x = xstart + xduration / 2, y = ystart + yduration / 2, fill = d)) +
+    geom_tile(aes(width = 50 * xduration, height = 50 * yduration)) +
+    labs(x = "Time (s)", y = "Time (s)", fill = "Value") +
+    coord_fixed() + # This causes the "small" look; we'll fix it in layout
+    theme_classic()
+}
 
 # This function generates a Self Similarity Matrix (SSM) based on a csv, a method, 
 # the title of the song, arist(s) and give the output file for timbre features.
-  gen_ssm <- function(csv, normalization_method, output_file, title, artists) {
+  gen_ssm_timbre <- function(csv, normalization_method, title, artists) {
     song <- read_csv(csv)
-    song |>
+    plot <-song |>
       compmus_wrangle_timbre() |> 
       filter(row_number() %% 50L == 0L) |> 
       mutate(timbre = map(timbre, compmus_normalise, normalization_method)) |>
@@ -89,7 +86,7 @@ library(compmus)
       labs(x = "", y = "",
            title = paste0("SSM of ", title, " by ", artists),
            subtitle = paste0("Normalization with ", normalization_method, " method"))
-    ggsave(output_file)
+    return(plot)
   }
 
 # This function genrates a grid of histograms with all different features of the spotify API against there count for both west and east region from the csv west_east_cleaned.csv.

@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -216,8 +219,44 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total</p>
+<section id="listen-to-give-me-the-loot-and-bitch-plase" class="level4">
+<h4 class="anchored" data-anchor-id="listen-to-give-me-the-loot-and-bitch-plase">Listen to Give me the Loot and Bitch Plase</h4>
+<audio controls="" style="width: 100%;">
+<source src="../gmtl.m4a" type="audio/mp4">
+</audio>
+<audio controls="" style="width: 100%;">
+<source src="../bp.m4a" type="audio/mp4">
+</audio>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter3_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="listen-to-c.r.e.a.m-and-without-me" class="level4">
+<h4 class="anchored" data-anchor-id="listen-to-c.r.e.a.m-and-without-me">Listen to C.R.E.A.M and Without Me</h4>
+<audio controls="" style="width: 100%;">
+<source src="../cream.m4a" type="audio/mp4">
+</audio>
+<audio controls="" style="width: 100%;">
+<source src="../wm.m4a" type="audio/mp4">
+</audio>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter3_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -621,6 +660,38 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

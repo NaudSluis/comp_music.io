@@ -4,3 +4,82 @@ order: 3
 ---
 
 Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total
+
+
+```{r setup}
+#| echo: false
+#| warning: false
+#| message: false
+source("../visualisation_funcs.R")
+```
+
+#### Listen to Give me the Loot and Bitch Plase
+<audio controls style="width: 100%;">
+  <source src="../gmtl.m4a" type="audio/mp4">
+</audio>
+
+<audio controls style="width: 100%;">
+  <source src="../bp.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+most_east <- gen_chromagram("../data_sv/chromagram_gmtl.csv", "chebyshev", "Give Me The Loot", "The Notorius B.I.G")
+most_west <- gen_chromagram("../data_sv/chromagram_bp.csv", "chebyshev", "Bitch Please", "Snoop Dogg & Xzibit")
+ssm_east <- gen_ssm_chroma("../data_sv/chromagram_gmtl.csv", "chebyshev", "Give Me The Loot", "The Notorius B.I.G")
+ssm_west <- gen_ssm_chroma("../data_sv/chromagram_bp.csv", "chebyshev", "Bitch Please", "Snoop Dogg & Xzibit")
+
+# 1. Combine the plots
+# Use | for horizontal and / for vertical
+grid_plot <- (most_east | most_west) / (ssm_east | ssm_west)
+
+# 2. Apply the layout and the universal scale
+final_plot <- grid_plot + 
+  plot_layout(
+    heights = c(1, 2),    # Makes the chromagrams 1/5th of the total height
+    guides = "collect"     # Forces a single legend for the whole patch
+  ) + 
+  plot_annotation(
+    title = "Comparison of Chroma features for Most typical E.C. and W.C. track"
+  ) & 
+  scale_fill_viridis_c() # The '&' applies this to ALL subplots at once
+  final_plot
+```
+
+#### Listen to C.R.E.A.M and Without Me
+<audio controls style="width: 100%;">
+  <source src="../cream.m4a" type="audio/mp4">
+</audio>
+
+<audio controls style="width: 100%;">
+  <source src="../wm.m4a" type="audio/mp4">
+</audio>
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+dist_east <- gen_chromagram("../data_sv/chromagram_cream.csv", "chebyshev", "C.R.E.A.M", "Wu-Tang Clan")
+dist_west <- gen_chromagram("../data_sv/chromagram_wm.csv", "chebyshev", "Without Me", "Eminem")
+ssm_east <- gen_ssm_chroma("../data_sv/chromagram_cream.csv", "chebyshev", "C.R.E.A.M", "Wu-Tang Clan")
+ssm_west <- gen_ssm_chroma("../data_sv/chromagram_wm.csv", "chebyshev", "Without Me", "Eminem")
+grid_plot <- (most_east + most_west) / (ssm_east + ssm_west)
+
+# 1. Combine the plots
+# Use | for horizontal and / for vertical
+grid_plot <- (most_east | most_west) / (ssm_east | ssm_west)
+
+# 2. Apply the layout and the universal scale
+final_plot <- grid_plot + 
+  plot_layout(
+    heights = c(1, 2),    # Makes the chromagrams 1/5th of the total height
+    guides = "collect"     # Forces a single legend for the whole patch
+  ) + 
+  plot_annotation(
+    title = "Comparison of Chroma features for Most typical E.C. and W.C. track"
+  ) & 
+  scale_fill_viridis_c() # The '&' applies this to ALL subplots at once
+  final_plot
+```
