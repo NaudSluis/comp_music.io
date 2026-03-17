@@ -40,6 +40,18 @@ final_plot_cg <- grid_plot +
   )&
   scale_fill_viridis_c()
   final_plot_cg
+```
+
+The difference between these two songs is really striking. "Give Me The Loot" is packed with sounds happening all over the place, while "Bitch Please" is much more straightforward and stable.
+
+In GMTL, you hear a beat, a two voices, three or four samples and record scratches, all in 10 seconds! Eventhough this is an extreme window in the track, it illustrates the richness of the sound of this song. When listening to other parts of the song, you can hear a stable sample and Biggies voice. The sample form the basis of the song, hence the quite stable line at B-flat. Moreover, throughout the song, there are a lot of yellow spikes seen btween C-sharp and F-sharp. This is explainable by Biggies voice. It quite deep from itself (hence the lower notes) and has some spikes to higher notes, being the highest at the 150-180 seconds mark.
+
+On the other hand in BP, the song is more melodically stable. There is a beat and a sample that stays stable throughout the whole song. In the 2:00-2:10 window, you can hear two more samples that both fade in and out throughout the song, a long sliding synth and a synthesized triangle sound. These samples follow the same melodical pattern. The stair-like pattern you hear from these samples, cannot be seen in the chromagram. What you can see, is that were the sliding synth is prominent (120-140 seconds and from 180 untill the end of the song), the B and F-sharp pitches are more yellow, while the rest of the pitches get darker. 
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
 
 ssm_east <- gen_ssm_chroma("../data_sv/chromagram_gmtl.csv", "euclidean", "Give Me The Loot", "The Notorius B.I.G")
 ssm_west <- gen_ssm_chroma("../data_sv/chromagram_bp.csv", "euclidean", "Bitch Please", "Snoop Dogg & Xzibit")
@@ -57,6 +69,9 @@ final_plot_ssm <- grid_plot +
   scale_fill_viridis_c()
   final_plot_ssm
 ```
+
+When comparing the Self-Similarity matrices, both songs show similar base patterns of beats and samples, but with different intensities. GMTL displays more bright yellow lines indicating greater pitch variation, while BP shows less intense patterns, reflecting its more stable melodic structure.
+
 
 #### Listen to C.R.E.A.M and Without Me
 <audio controls style="width: 100%;">
@@ -85,7 +100,18 @@ final_plot_cg <- grid_plot +
   )&
   scale_fill_viridis_c()
   final_plot_cg
+```
 
+The difference between C.R.E.A.M (CREAM) and Without Me (WM) is a lot less aparent. The Pitches in CREAM remain very stable, being most prominent in F-sharp, A, and C-sharp. The melody throughout the whole track is essentially the same. Impurities in the pitch classes can be explained by the different voices as Wu-Tang Clan is a big rap group.
+
+WM is also quite a rich songs, but stays more stable in pitch class than GMTL we saw earlier. It's most intense in G and D, and also periodically in F. There is a melodical riff in the background (a oboe like sound) and goes down in steps periodically. This can not really be seen in the chromagram, which can be explained due to the fact that it is quite a background sample. Eminems voice, for example, is much more prominent.
+
+
+
+```{r, fig.width=11, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
 ssm_east <- gen_ssm_chroma("../data_sv/chromagram_cream.csv", "euclidean", "C.R.E.A.M", "Wu-Tang Clan")
 ssm_west <- gen_ssm_chroma("../data_sv/chromagram_wm.csv", "euclidean", "Without Me", "Eminem")
 
@@ -102,3 +128,6 @@ final_plot_ssm <- grid_plot +
   scale_fill_viridis_c()
   final_plot_ssm
 ```
+The difference in the SSM's is more clear. The SSM of CREAM has quite some repeating blocks, alternated with bright lines. This is, again, only explainable by the different voices heard.
+
+The SSM of WM quite bright allover. You can see some blocks, but they are all quite small. Eminem has a very prominent, acticulated voice, explaining the scale of differences.
