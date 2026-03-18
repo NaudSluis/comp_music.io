@@ -1,16 +1,3 @@
----
-title: "Chapter 8: Contribution"
-order: 8
----
-
-Clustering songs unsupervised, and try supervised. Data enhancing, feature importance
-
-```{r setup}
-#| echo: false
-#| warning: false
-#| message: false
-source("../vis_xgb.R")
-
 # Install packages if you don't have them
 # install.packages("xgboost")
 # install.packages("DiagrammeR")
@@ -35,4 +22,3 @@ xgb.plot.tree(
   plot_width = 1200,     
   plot_height = 800
 )
-```
