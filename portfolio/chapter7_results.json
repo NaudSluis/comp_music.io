@@ -1,0 +1,875 @@
+{
+  "kmeans": {
+    "silhouette": [0.1846],
+    "wcss": [2070.7467]
+  },
+  "knn": {
+    "best_k": {
+      "neighbors": [9],
+      ".config": ["pre0_mod05_post0"]
+    },
+    "metrics": [
+      {
+        "neighbors": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6794,
+        "n": 5,
+        "std_err": 0.0281,
+        ".config": "pre0_mod01_post0"
+      },
+      {
+        "neighbors": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6805,
+        "n": 5,
+        "std_err": 0.033,
+        ".config": "pre0_mod01_post0"
+      },
+      {
+        "neighbors": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6794,
+        "n": 5,
+        "std_err": 0.0281,
+        ".config": "pre0_mod02_post0"
+      },
+      {
+        "neighbors": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6805,
+        "n": 5,
+        "std_err": 0.033,
+        ".config": "pre0_mod02_post0"
+      },
+      {
+        "neighbors": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6853,
+        "n": 5,
+        "std_err": 0.03,
+        ".config": "pre0_mod03_post0"
+      },
+      {
+        "neighbors": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6859,
+        "n": 5,
+        "std_err": 0.0385,
+        ".config": "pre0_mod03_post0"
+      },
+      {
+        "neighbors": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6849,
+        "n": 5,
+        "std_err": 0.0306,
+        ".config": "pre0_mod04_post0"
+      },
+      {
+        "neighbors": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6918,
+        "n": 5,
+        "std_err": 0.0404,
+        ".config": "pre0_mod04_post0"
+      },
+      {
+        "neighbors": 9,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6904,
+        "n": 5,
+        "std_err": 0.0197,
+        ".config": "pre0_mod05_post0"
+      },
+      {
+        "neighbors": 9,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6968,
+        "n": 5,
+        "std_err": 0.0283,
+        ".config": "pre0_mod05_post0"
+      },
+      {
+        "neighbors": 11,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6787,
+        "n": 5,
+        "std_err": 0.0163,
+        ".config": "pre0_mod06_post0"
+      },
+      {
+        "neighbors": 11,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6828,
+        "n": 5,
+        "std_err": 0.0254,
+        ".config": "pre0_mod06_post0"
+      },
+      {
+        "neighbors": 13,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6665,
+        "n": 5,
+        "std_err": 0.0173,
+        ".config": "pre0_mod07_post0"
+      },
+      {
+        "neighbors": 13,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.671,
+        "n": 5,
+        "std_err": 0.0254,
+        ".config": "pre0_mod07_post0"
+      },
+      {
+        "neighbors": 15,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6426,
+        "n": 5,
+        "std_err": 0.0282,
+        ".config": "pre0_mod08_post0"
+      },
+      {
+        "neighbors": 15,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6365,
+        "n": 5,
+        "std_err": 0.0403,
+        ".config": "pre0_mod08_post0"
+      },
+      {
+        "neighbors": 17,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6544,
+        "n": 5,
+        "std_err": 0.0296,
+        ".config": "pre0_mod09_post0"
+      },
+      {
+        "neighbors": 17,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6498,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod09_post0"
+      },
+      {
+        "neighbors": 20,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6544,
+        "n": 5,
+        "std_err": 0.0296,
+        ".config": "pre0_mod10_post0"
+      },
+      {
+        "neighbors": 20,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6498,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod10_post0"
+      }
+    ]
+  },
+  "decision_tree": {
+    "best_params": {
+      "cost_complexity": [0.1],
+      "tree_depth": [3],
+      ".config": ["pre0_mod22_post0"]
+    },
+    "metrics": [
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.65,
+        "n": 5,
+        "std_err": 0.0288,
+        ".config": "pre0_mod01_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6012,
+        "n": 5,
+        "std_err": 0.0435,
+        ".config": "pre0_mod01_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.625,
+        "n": 5,
+        "std_err": 0.0495,
+        ".config": "pre0_mod02_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6225,
+        "n": 5,
+        "std_err": 0.0572,
+        ".config": "pre0_mod02_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod03_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod03_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod04_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod04_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 10,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod05_post0"
+      },
+      {
+        "cost_complexity": 1e-10,
+        "tree_depth": 10,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod05_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.65,
+        "n": 5,
+        "std_err": 0.0288,
+        ".config": "pre0_mod06_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6012,
+        "n": 5,
+        "std_err": 0.0435,
+        ".config": "pre0_mod06_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.625,
+        "n": 5,
+        "std_err": 0.0495,
+        ".config": "pre0_mod07_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6225,
+        "n": 5,
+        "std_err": 0.0572,
+        ".config": "pre0_mod07_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod08_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod08_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod09_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod09_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 10,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod10_post0"
+      },
+      {
+        "cost_complexity": 1.7783e-08,
+        "tree_depth": 10,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod10_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.65,
+        "n": 5,
+        "std_err": 0.0288,
+        ".config": "pre0_mod11_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6012,
+        "n": 5,
+        "std_err": 0.0435,
+        ".config": "pre0_mod11_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.625,
+        "n": 5,
+        "std_err": 0.0495,
+        ".config": "pre0_mod12_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6225,
+        "n": 5,
+        "std_err": 0.0572,
+        ".config": "pre0_mod12_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod13_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod13_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod14_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod14_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 10,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod15_post0"
+      },
+      {
+        "cost_complexity": 3.1623e-06,
+        "tree_depth": 10,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod15_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.65,
+        "n": 5,
+        "std_err": 0.0288,
+        ".config": "pre0_mod16_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6012,
+        "n": 5,
+        "std_err": 0.0435,
+        ".config": "pre0_mod16_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.625,
+        "n": 5,
+        "std_err": 0.0495,
+        ".config": "pre0_mod17_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6225,
+        "n": 5,
+        "std_err": 0.0572,
+        ".config": "pre0_mod17_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod18_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod18_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod19_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod19_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 10,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6007,
+        "n": 5,
+        "std_err": 0.0377,
+        ".config": "pre0_mod20_post0"
+      },
+      {
+        "cost_complexity": 0.0006,
+        "tree_depth": 10,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6294,
+        "n": 5,
+        "std_err": 0.0421,
+        ".config": "pre0_mod20_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 1,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.65,
+        "n": 5,
+        "std_err": 0.0288,
+        ".config": "pre0_mod21_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 1,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6012,
+        "n": 5,
+        "std_err": 0.0435,
+        ".config": "pre0_mod21_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 3,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6908,
+        "n": 5,
+        "std_err": 0.0383,
+        ".config": "pre0_mod22_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 3,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6836,
+        "n": 5,
+        "std_err": 0.0433,
+        ".config": "pre0_mod22_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 5,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6908,
+        "n": 5,
+        "std_err": 0.0383,
+        ".config": "pre0_mod23_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 5,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6836,
+        "n": 5,
+        "std_err": 0.0433,
+        ".config": "pre0_mod23_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 7,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6908,
+        "n": 5,
+        "std_err": 0.0383,
+        ".config": "pre0_mod24_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 7,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6836,
+        "n": 5,
+        "std_err": 0.0433,
+        ".config": "pre0_mod24_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 10,
+        ".metric": "accuracy",
+        ".estimator": "binary",
+        "mean": 0.6908,
+        "n": 5,
+        "std_err": 0.0383,
+        ".config": "pre0_mod25_post0"
+      },
+      {
+        "cost_complexity": 0.1,
+        "tree_depth": 10,
+        ".metric": "f_meas",
+        ".estimator": "binary",
+        "mean": 0.6836,
+        "n": 5,
+        "std_err": 0.0433,
+        ".config": "pre0_mod25_post0"
+      }
+    ]
+  },
+  "xgboost": {
+    "feature_importance": [
+      {
+        "feature": "speechiness",
+        "importance": 0.1174
+      },
+      {
+        "feature": "acousticness",
+        "importance": 0.1111
+      },
+      {
+        "feature": "key_6",
+        "importance": 0.0538
+      },
+      {
+        "feature": "danceability",
+        "importance": 0.0533
+      },
+      {
+        "feature": "key_8",
+        "importance": 0.0478
+      },
+      {
+        "feature": "mood_score",
+        "importance": 0.0462
+      },
+      {
+        "feature": "key_7",
+        "importance": 0.0461
+      },
+      {
+        "feature": "key_10",
+        "importance": 0.0446
+      },
+      {
+        "feature": "loudness",
+        "importance": 0.0446
+      },
+      {
+        "feature": "liveness",
+        "importance": 0.0441
+      },
+      {
+        "feature": "key_4",
+        "importance": 0.0422
+      },
+      {
+        "feature": "valence_energy",
+        "importance": 0.0421
+      },
+      {
+        "feature": "instrumentalness",
+        "importance": 0.0415
+      },
+      {
+        "feature": "key_9",
+        "importance": 0.0414
+      },
+      {
+        "feature": "energy_danceability",
+        "importance": 0.0399
+      },
+      {
+        "feature": "valence",
+        "importance": 0.0376
+      },
+      {
+        "feature": "key_11",
+        "importance": 0.0376
+      },
+      {
+        "feature": "mode_1",
+        "importance": 0.0342
+      },
+      {
+        "feature": "tempo",
+        "importance": 0.0319
+      },
+      {
+        "feature": "energy",
+        "importance": 0.0302
+      },
+      {
+        "feature": "key_1",
+        "importance": 0.0124
+      },
+      {
+        "feature": "key_5",
+        "importance": 0
+      },
+      {
+        "feature": "key_3",
+        "importance": 0
+      },
+      {
+        "feature": "key_2",
+        "importance": 0
+      },
+      {
+        "feature": "time signature_5",
+        "importance": 0
+      }
+    ],
+    "misclassified_songs": [
+      {
+        "track_name": "Hip Hop Hooray",
+        "artist_name": "Naughty By Nature",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "C.R.E.A.M. (Cash Rules Everything Around Me)",
+        "artist_name": "Wu-Tang Clan",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Where The Hood At",
+        "artist_name": "DMX",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Juicy - 2005 Remaster",
+        "artist_name": "The Notorious B.I.G.",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Dynamite!",
+        "artist_name": "The Roots;Rehani Sayed",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Made You Look (feat. Jadakiss & Ludacris) - Remix",
+        "artist_name": "Nas;Jadakiss;Ludacris",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Put Your Hands Where My Eyes Could See (feat. Jamal)",
+        "artist_name": "Busta Rhymes;Jamal",
+        "actual_region": "East",
+        "predicted_region": "West"
+      },
+      {
+        "track_name": "Ain't No Fun (If the Homies Cant Have None) (feat. Nate Dogg, Warren G & Kurupt)",
+        "artist_name": "Snoop Dogg;Kurupt;Warren G;Nate Dogg",
+        "actual_region": "West",
+        "predicted_region": "East"
+      },
+      {
+        "track_name": "The Real Slim Shady",
+        "artist_name": "Eminem",
+        "actual_region": "West",
+        "predicted_region": "East"
+      },
+      {
+        "track_name": "Nuthin' But A \"G\" Thang",
+        "artist_name": "Dr. Dre;Snoop Dogg",
+        "actual_region": "West",
+        "predicted_region": "East"
+      },
+      {
+        "track_name": "Hello",
+        "artist_name": "Ice Cube;Dr. Dre;MC Ren",
+        "actual_region": "West",
+        "predicted_region": "East"
+      }
+    ]
+  }
+}

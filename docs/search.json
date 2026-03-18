@@ -47,18 +47,6 @@
     ]
   },
   {
-    "objectID": "portfolio/chapter8.html",
-    "href": "portfolio/chapter8.html",
-    "title": "Chapter 8: Contribution",
-    "section": "",
-    "text": "Clustering songs unsupervised, and try supervised. Data enhancing, feature importance\n\n\n[1] TRUE",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 8: Contribution"
-    ]
-  },
-  {
     "objectID": "homework/assignment3.html",
     "href": "homework/assignment3.html",
     "title": "Week 11",
@@ -161,6 +149,54 @@
     "title": "Chapter 7: Clustering",
     "section": "",
     "text": "Clustering songs unsupervised, and try supervised. Data enhancing, feature importance",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 7: Clustering"
+    ]
+  },
+  {
+    "objectID": "portfolio/chapter7.html#k-means-clustering-visualization",
+    "href": "portfolio/chapter7.html#k-means-clustering-visualization",
+    "title": "Chapter 7: Clustering",
+    "section": "K-Means Clustering Visualization",
+    "text": "K-Means Clustering Visualization\n\n\n\n\n\n\n\n\n\nSilhouette Score: 0.185\nWithin-Cluster Sum of Squares: 2070.75",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 7: Clustering"
+    ]
+  },
+  {
+    "objectID": "portfolio/chapter7.html#knn-classification-results",
+    "href": "portfolio/chapter7.html#knn-classification-results",
+    "title": "Chapter 7: Clustering",
+    "section": "KNN Classification Results",
+    "text": "KNN Classification Results\n\n\n\n\n\n\n\n\n\nBest k: 9",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 7: Clustering"
+    ]
+  },
+  {
+    "objectID": "portfolio/chapter7.html#decision-tree-visualization",
+    "href": "portfolio/chapter7.html#decision-tree-visualization",
+    "title": "Chapter 7: Clustering",
+    "section": "Decision Tree Visualization",
+    "text": "Decision Tree Visualization\n\n\n\n\n\n\n\n\n\nBest Parameters: Cost Complexity = 0.1, Tree Depth = 3",
+    "crumbs": [
+      "Portfolio",
+      "Portfolio Overview",
+      "Chapter 7: Clustering"
+    ]
+  },
+  {
+    "objectID": "portfolio/chapter7.html#xgboost-model",
+    "href": "portfolio/chapter7.html#xgboost-model",
+    "title": "Chapter 7: Clustering",
+    "section": "XGBoost Model",
+    "text": "XGBoost Model\nXGBoost (eXtreme Gradient Boosting) was trained to classify tracks as East Coast or West Coast hip-hop, using Bayesian hyperparameter optimization to find the best configuration.\n\nFeature Importance\nThe following table shows the top 10 most important features for the XGBoost model’s classification decisions:\n\n\n\nTop 10 Feature Importance Scores\n\n\nFeature\nImportance\n\n\n\n\nspeechiness\n0.1174\n\n\nacousticness\n0.1111\n\n\nkey_6\n0.0538\n\n\ndanceability\n0.0533\n\n\nkey_8\n0.0478\n\n\nmood_score\n0.0462\n\n\nkey_7\n0.0461\n\n\nkey_10\n0.0446\n\n\nloudness\n0.0446\n\n\nliveness\n0.0441\n\n\n\n\n\n\n\nMisclassified Songs\nSongs that the model incorrectly classified. This can help identify edge cases or patterns the model struggles with:\n\n\n\nSongs Misclassified by XGBoost Model\n\n\nTrack Name\nArtist Name\nActual Region\nPredicted Region\n\n\n\n\nHip Hop Hooray\nNaughty By Nature\nEast\nWest\n\n\nC.R.E.A.M. (Cash Rules Everything Around Me)\nWu-Tang Clan\nEast\nWest\n\n\nWhere The Hood At\nDMX\nEast\nWest\n\n\nJuicy - 2005 Remaster\nThe Notorious B.I.G.\nEast\nWest\n\n\nDynamite!\nThe Roots;Rehani Sayed\nEast\nWest\n\n\nMade You Look (feat. Jadakiss & Ludacris) - Remix\nNas;Jadakiss;Ludacris\nEast\nWest\n\n\nPut Your Hands Where My Eyes Could See (feat. Jamal)\nBusta Rhymes;Jamal\nEast\nWest\n\n\nAin't No Fun (If the Homies Cant Have None) (feat. Nate Dogg, Warren G & Kurupt)\nSnoop Dogg;Kurupt;Warren G;Nate Dogg\nWest\nEast\n\n\nThe Real Slim Shady\nEminem\nWest\nEast\n\n\nNuthin' But A \"G\" Thang\nDr. Dre;Snoop Dogg\nWest\nEast\n\n\nHello\nIce Cube;Dr. Dre;MC Ren\nWest\nEast",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",

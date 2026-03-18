@@ -70,10 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="../site_libs/viz-1.8.2/viz.js"></script>
-<link href="../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="../site_libs/grViz-binding-1.0.11/grViz.js"></script>
 
 
 </head>
@@ -219,16 +215,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Clustering songs unsupervised, and try supervised. Data enhancing, feature importance</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="cell-output-display">
-<div id="htmlwidget-c87cf2b7e38cd2bbfcc3" style="width:100%;height:433px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c87cf2b7e38cd2bbfcc3">{"x":{"diagram":"digraph {\n    graph [ rankdir=TB ]\n\n    0 [ label=\"acousticness<-0.51962167\" ]\n    0 -> 1 [label=\"yes\" color=\"#FF0000\"]\n    0 -> 2 [label=\"no, missing\" color=\"#0000FF\"]\n\n    1 [ label=\"loudness<-0.00828796998\" ]\n    1 -> 3 [label=\"yes\" color=\"#FF0000\"]\n    1 -> 4 [label=\"no, missing\" color=\"#0000FF\"]\n\n    3 [ label=\"energy<-0.749005139\" ]\n    3 -> 7 [label=\"yes\" color=\"#FF0000\"]\n    3 -> 8 [label=\"no, missing\" color=\"#0000FF\"]\n\n    7 [ label=\"speechiness<0.130715087\" ]\n    7 -> 15 [label=\"yes\" color=\"#FF0000\"]\n    7 -> 16 [label=\"no, missing\" color=\"#0000FF\"]\n\n    15 [ label=\"leaf=0.0224000905\" ]\n\n    16 [ label=\"leaf=-0\" ]\n\n    8 [ label=\"acousticness<-0.740698099\" ]\n    8 -> 17 [label=\"yes\" color=\"#FF0000\"]\n    8 -> 18 [label=\"no, missing\" color=\"#0000FF\"]\n\n    17 [ label=\"leaf=-0.0240312479\" ]\n\n    18 [ label=\"leaf=0.000499540824\" ]\n\n    4 [ label=\"tempo<0.056690339\" ]\n    4 -> 9 [label=\"yes\" color=\"#FF0000\"]\n    4 -> 10 [label=\"no, missing\" color=\"#0000FF\"]\n\n    9 [ label=\"leaf=0.0538712405\" ]\n\n    10 [ label=\"leaf=-0\" ]\n\n    2 [ label=\"speechiness<-0.296751052\" ]\n    2 -> 5 [label=\"yes\" color=\"#FF0000\"]\n    2 -> 6 [label=\"no, missing\" color=\"#0000FF\"]\n\n    5 [ label=\"tempo<-0.364564508\" ]\n    5 -> 11 [label=\"yes\" color=\"#FF0000\"]\n    5 -> 12 [label=\"no, missing\" color=\"#0000FF\"]\n\n    11 [ label=\"leaf=0.0188737754\" ]\n\n    12 [ label=\"energy<0.519188106\" ]\n    12 -> 19 [label=\"yes\" color=\"#FF0000\"]\n    12 -> 20 [label=\"no, missing\" color=\"#0000FF\"]\n\n    19 [ label=\"leaf=-0.0107647097\" ]\n\n    20 [ label=\"leaf=0.00392883224\" ]\n\n    6 [ label=\"energy_danceability<1.05500114\" ]\n    6 -> 13 [label=\"yes\" color=\"#FF0000\"]\n    6 -> 14 [label=\"no, missing\" color=\"#0000FF\"]\n\n    13 [ label=\"valence_energy<1.36305273\" ]\n    13 -> 21 [label=\"yes\" color=\"#FF0000\"]\n    13 -> 22 [label=\"no, missing\" color=\"#0000FF\"]\n\n    21 [ label=\"leaf=-0.0534605905\" ]\n\n    22 [ label=\"leaf=-0\" ]\n\n    14 [ label=\"leaf=-0\" ]\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
 
 
 

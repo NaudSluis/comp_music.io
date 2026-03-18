@@ -4,3 +4,110 @@ order: 7
 ---
 
 Clustering songs unsupervised, and try supervised. Data enhancing, feature importance
+
+```{r setup}
+#| echo: false
+#| warning: false
+#| message: false
+library(jsonlite)
+library(knitr)
+library(kableExtra)
+
+# Load results
+results <- fromJSON(file("chapter7_results.json"))
+```
+
+## K-Means Clustering Visualization
+
+```{r kmeans-plot}
+#| echo: false
+#| message: false
+#| warning: false
+source("../k_means_knn.R")
+library(readr)
+
+data <- read_csv("../balanced_hiphop_corpus.csv")
+data <- preprocess_hiphop_data(data)
+kmeans_result <- apply_kmeans(data, k = 2)
+visualize_kmeans(kmeans_result, "K-Means Clustering of East vs West Coast Hip-Hop")
+```
+
+**Silhouette Score:** `r round(results$kmeans$silhouette, 3)`  
+**Within-Cluster Sum of Squares:** `r round(results$kmeans$wcss, 2)`
+
+## KNN Classification Results
+```{r knnresult-plot}
+#| echo: false
+#| message: false
+#| warning: false
+# Changed chunk name to knn-plot!
+knn_result <- train_knn(data)
+
+# Create the visual
+visualize_knn(
+  knn_result, 
+  original_data = data, 
+  title = "KNN Predictions: Model Guesses vs. Reality"
+)
+
+```
+**Best k:** `r results$knn$best_k$neighbors`
+
+## Decision Tree Visualization
+
+```{r tree-plot}
+#| echo: false
+#| message: false
+#| warning: false
+data <- read_csv("../balanced_hiphop_corpus.csv")
+data <- preprocess_hiphop_data(data)
+tree_result <- train_decision_tree(data)
+visualize_decision_tree(tree_result$fit, "Decision Tree for East vs West Coast Hip-Hop Classification")
+```
+
+**Best Parameters:** Cost Complexity = `r results$decision_tree$best_params$cost_complexity`, Tree Depth = `r results$decision_tree$best_params$tree_depth`
+
+## XGBoost Model
+
+XGBoost (eXtreme Gradient Boosting) was trained to classify tracks as East Coast or West Coast hip-hop, using Bayesian hyperparameter optimization to find the best configuration.
+
+### Feature Importance
+
+The following table shows the top 10 most important features for the XGBoost model's classification decisions:
+
+```{r xgb-feature-importance}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Get top 10 features
+top_features <- results$xgboost$feature_importance %>%
+  slice_head(n = 10) %>%
+  kable(
+    col.names = c("Feature", "Importance"),
+    digits = 4,
+    caption = "Top 10 Feature Importance Scores"
+  ) %>%
+  kable_styling(bootstrap_options = "striped")
+
+top_features
+```
+
+### Misclassified Songs
+
+Songs that the model incorrectly classified. This can help identify edge cases or patterns the model struggles with:
+
+```{r xgb-misclassified}
+#| echo: false
+#| message: false
+#| warning: false
+
+misclassified <- results$xgboost$misclassified_songs %>%
+  kable(
+    col.names = c("Track Name", "Artist Name", "Actual Region", "Predicted Region"),
+    caption = "Songs Misclassified by XGBoost Model"
+  ) %>%
+  kable_styling(bootstrap_options = "striped", full_width = TRUE)
+
+misclassified
+```

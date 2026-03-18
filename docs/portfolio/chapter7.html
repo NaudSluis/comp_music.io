@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,6 +73,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
@@ -190,8 +195,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#k-means-clustering-visualization" id="toc-k-means-clustering-visualization" class="nav-link active" data-scroll-target="#k-means-clustering-visualization">K-Means Clustering Visualization</a></li>
+  <li><a href="#knn-classification-results" id="toc-knn-classification-results" class="nav-link" data-scroll-target="#knn-classification-results">KNN Classification Results</a></li>
+  <li><a href="#decision-tree-visualization" id="toc-decision-tree-visualization" class="nav-link" data-scroll-target="#decision-tree-visualization">Decision Tree Visualization</a></li>
+  <li><a href="#xgboost-model" id="toc-xgboost-model" class="nav-link" data-scroll-target="#xgboost-model">XGBoost Model</a>
+  <ul class="collapse">
+  <li><a href="#feature-importance" id="toc-feature-importance" class="nav-link" data-scroll-target="#feature-importance">Feature Importance</a></li>
+  <li><a href="#misclassified-songs" id="toc-misclassified-songs" class="nav-link" data-scroll-target="#misclassified-songs">Misclassified Songs</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -216,8 +234,198 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Clustering songs unsupervised, and try supervised. Data enhancing, feature importance</p>
+<section id="k-means-clustering-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering-visualization">K-Means Clustering Visualization</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/kmeans-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter7_files/figure-html/kmeans-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Silhouette Score:</strong> 0.185<br>
+<strong>Within-Cluster Sum of Squares:</strong> 2070.75</p>
+</section>
+<section id="knn-classification-results" class="level2">
+<h2 class="anchored" data-anchor-id="knn-classification-results">KNN Classification Results</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/knnresult-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter7_files/figure-html/knnresult-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Best k:</strong> 9</p>
+</section>
+<section id="decision-tree-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="decision-tree-visualization">Decision Tree Visualization</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/tree-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter7_files/figure-html/tree-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Best Parameters:</strong> Cost Complexity = 0.1, Tree Depth = 3</p>
+</section>
+<section id="xgboost-model" class="level2">
+<h2 class="anchored" data-anchor-id="xgboost-model">XGBoost Model</h2>
+<p>XGBoost (eXtreme Gradient Boosting) was trained to classify tracks as East Coast or West Coast hip-hop, using Bayesian hyperparameter optimization to find the best configuration.</p>
+<section id="feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
+<p>The following table shows the top 10 most important features for the XGBoost model’s classification decisions:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<caption>Top 10 Feature Importance Scores</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Feature</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">speechiness</td>
+<td style="text-align: right;">0.1174</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">acousticness</td>
+<td style="text-align: right;">0.1111</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">key_6</td>
+<td style="text-align: right;">0.0538</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">danceability</td>
+<td style="text-align: right;">0.0533</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">key_8</td>
+<td style="text-align: right;">0.0478</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mood_score</td>
+<td style="text-align: right;">0.0462</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">key_7</td>
+<td style="text-align: right;">0.0461</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">key_10</td>
+<td style="text-align: right;">0.0446</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">loudness</td>
+<td style="text-align: right;">0.0446</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">liveness</td>
+<td style="text-align: right;">0.0441</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="misclassified-songs" class="level3">
+<h3 class="anchored" data-anchor-id="misclassified-songs">Misclassified Songs</h3>
+<p>Songs that the model incorrectly classified. This can help identify edge cases or patterns the model struggles with:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<caption>Songs Misclassified by XGBoost Model</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Track Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Artist Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Actual Region</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Predicted Region</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hip Hop Hooray</td>
+<td style="text-align: left;">Naughty By Nature</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C.R.E.A.M. (Cash Rules Everything Around Me)</td>
+<td style="text-align: left;">Wu-Tang Clan</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Where The Hood At</td>
+<td style="text-align: left;">DMX</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Juicy - 2005 Remaster</td>
+<td style="text-align: left;">The Notorious B.I.G.</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dynamite!</td>
+<td style="text-align: left;">The Roots;Rehani Sayed</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Made You Look (feat. Jadakiss &amp; Ludacris) - Remix</td>
+<td style="text-align: left;">Nas;Jadakiss;Ludacris</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Put Your Hands Where My Eyes Could See (feat. Jamal)</td>
+<td style="text-align: left;">Busta Rhymes;Jamal</td>
+<td style="text-align: left;">East</td>
+<td style="text-align: left;">West</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ain't No Fun (If the Homies Cant Have None) (feat. Nate Dogg, Warren G &amp; Kurupt)</td>
+<td style="text-align: left;">Snoop Dogg;Kurupt;Warren G;Nate Dogg</td>
+<td style="text-align: left;">West</td>
+<td style="text-align: left;">East</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Real Slim Shady</td>
+<td style="text-align: left;">Eminem</td>
+<td style="text-align: left;">West</td>
+<td style="text-align: left;">East</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nuthin' But A "G" Thang</td>
+<td style="text-align: left;">Dr. Dre;Snoop Dogg</td>
+<td style="text-align: left;">West</td>
+<td style="text-align: left;">East</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hello</td>
+<td style="text-align: left;">Ice Cube;Dr. Dre;MC Ren</td>
+<td style="text-align: left;">West</td>
+<td style="text-align: left;">East</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -621,6 +829,38 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

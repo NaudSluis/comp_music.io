@@ -108,6 +108,38 @@ print("Recall:", recall_score(y, y_pred))
 print("F1 Score:", f1_score(y, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y, y_pred))
 
+# Step 8: Extract Feature Importance
+feature_importance = pd.DataFrame({
+    'feature': X_scaled.columns,
+    'importance': final_model.feature_importances_
+}).sort_values('importance', ascending=False)
+try:
+    feature_importance.to_csv('feature_importance.csv', index=False)
+except Exception as e:
+    print(f"Error saving feature importance: {e}")
+
+print("\nFeature Importance:")
+print(feature_importance)
+
+# Step 9: Identify Misclassified Songs
+misclassified_mask = y_pred != y
+misclassified_indices = np.where(misclassified_mask)[0]
+
+# Load original data to get song information
+df_original = pd.read_csv('balanced_hiphop_corpus.csv')
+
+# Create misclassifications dataframe
+misclassified_df = pd.DataFrame({
+    'track_name': df_original.loc[misclassified_indices, 'Track Name'].values,
+    'artist_name': df_original.loc[misclassified_indices, 'Artist_Name'].values,
+    'actual_region': y.iloc[misclassified_indices].map({0: 'East', 1: 'West'}).values,
+    'predicted_region': pd.Series(y_pred[misclassified_indices], index=misclassified_indices).map({0: 'East', 1: 'West'}).values,
+})
+
+# Save feature importance and misclassifications
+
+misclassified_df.to_csv('misclassified_songs.csv', index=False)
+
 # Function for prediction
 def predict_region(track_features):
     """
