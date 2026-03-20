@@ -25,6 +25,26 @@ preprocess_hiphop_data <- function(data) {
   return(data)
 }
 
+preprocess_hiphop_data_wo <- function(data) {
+  # Drop identifiers
+  data <- data %>%
+    select(-c(`Track URI`, `Track Name`, `Album Name`, Artist_Name, `Release Date`, `Added By`, `Added At`, Genres, `Record Label`, `Duration (ms)`, Popularity, Explicit))
+
+  # Feature engineering
+  # data <- data %>%
+  #   mutate(
+  #     energy_danceability = Energy * Danceability,
+  #     valence_energy = Valence * Energy,
+  #     mood_score = (Valence + Energy) / 2
+  #   )
+
+  # Encode target
+  data <- data %>%
+    mutate(region = factor(region, levels = c("east", "west"), labels = c("East Coast", "West Coast")))
+
+  return(data)
+}
+
 # K-Means Clustering Function
 apply_kmeans <- function(data, k = 2) {
   # Preprocess without target for unsupervised
@@ -78,22 +98,26 @@ train_knn <- function(data) {
   set.seed(42)
   folds <- vfold_cv(data, v = 5, strata = region)
 
-  # Tune
+  # Tune (with save_pred to get out-of-fold predictions)
   tune_results <- tune_grid(
     wf,
     resamples = folds,
     grid = grid_regular(neighbors(range = c(1, 20)), levels = 10),
-    metrics = metric_set(accuracy, f_meas)
+    metrics = metric_set(accuracy, f_meas),
+    control = control_grid(save_pred = TRUE)
   )
 
   # Best
   best_k <- select_best(tune_results, metric = "f_meas")
 
-  # Final model
+  # Get out-of-fold predictions for honest evaluation
+  oof_predictions <- collect_predictions(tune_results, parameters = best_k)
+
+  # Final model (trained on all data for potential deployment)
   final_wf <- finalize_workflow(wf, best_k)
   final_fit <- fit(final_wf, data = data)
 
-  return(list(fit = final_fit, tune_results = tune_results, best_k = best_k))
+  return(list(fit = final_fit, tune_results = tune_results, best_k = best_k, oof_predictions = oof_predictions))
 }
 
 # Decision Tree Function
@@ -183,18 +207,25 @@ run_kmeans_knn <- function() {
   visualize_decision_tree(tree_result$fit)
 }
 
-visualize_knn <- function(knn_result, original_data, title = "AI Predictions: Model Guesses vs. Reality") {
+visualize_knn <- function(knn_result, original_data, oof_predictions = NULL, title = "AI Predictions: Model Guesses vs. Reality") {
   
-  # 1. Get predictions from the fitted model
-  # We use the final fitted workflow stored in knn_result$fit
-  predictions <- predict(knn_result$fit, new_data = original_data)
+  # 1. Get predictions (use out-of-fold if provided, otherwise use training predictions)
+  if (!is.null(oof_predictions)) {
+    # Use out-of-fold predictions
+    predictions_df <- oof_predictions %>%
+      select(.pred_class)
+    plot_data <- original_data
+    plot_data$Predicted <- predictions_df$.pred_class
+    plot_data$Actual <- original_data$region
+  } else {
+    # Fallback to training predictions (for backwards compatibility)
+    predictions <- predict(knn_result$fit, new_data = original_data)
+    plot_data <- original_data
+    plot_data$Predicted <- predictions$.pred_class
+    plot_data$Actual <- original_data$region
+  }
   
-  # 2. Combine with original data
-  plot_data <- original_data
-  plot_data$Predicted <- predictions$.pred_class
-  plot_data$Actual <- original_data$region
-  
-  # 3. Perform PCA to squash all numeric features into 2D (for plotting)
+  # 2. Perform PCA to squash all numeric features into 2D (for plotting)
   features <- plot_data %>% 
     select(-where(is.factor), -where(is.character), -Predicted, -Actual)
   
@@ -205,7 +236,7 @@ visualize_knn <- function(knn_result, original_data, title = "AI Predictions: Mo
   pca_data$Predicted <- plot_data$Predicted
   pca_data$Actual <- plot_data$Actual
   
-  # 4. Create the plot
+  # 3. Create the plot
   ggplot(pca_data, aes(x = PC1, y = PC2)) +
     # Add light "bubbles" to show the territory the AI associates with East vs West
     stat_ellipse(aes(fill = Predicted), geom = "polygon", alpha = 0.15, color = NA) +

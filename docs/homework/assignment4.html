@@ -117,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../homework/index.html">Homework Assignments</a></li><li class="breadcrumb-item"><a href="../homework/assignment3.html">Week 11</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../homework/index.html">Homework Assignments</a></li><li class="breadcrumb-item"><a href="../homework/assignment4.html">Week 11</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -152,13 +152,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../homework/assignment3.html" class="sidebar-item-text sidebar-link active">
+  <a href="../homework/assignment3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../homework/assignment4.html" class="sidebar-item-text sidebar-link">
+  <a href="../homework/assignment4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
@@ -174,14 +174,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#homework-week-11" id="toc-homework-week-11" class="nav-link active" data-scroll-target="#homework-week-11">Homework week 11</a></li>
+  <li><a href="#knn-classification-results-without-feature-engineering" id="toc-knn-classification-results-without-feature-engineering" class="nav-link active" data-scroll-target="#knn-classification-results-without-feature-engineering">KNN Classification Results without feature engineering</a></li>
+  <li><a href="#knn-classification-results-with-feature-engineering" id="toc-knn-classification-results-with-feature-engineering" class="nav-link" data-scroll-target="#knn-classification-results-with-feature-engineering">KNN Classification Results with feature engineering</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../homework/index.html">Homework Assignments</a></li><li class="breadcrumb-item"><a href="../homework/assignment3.html">Week 11</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../homework/index.html">Homework Assignments</a></li><li class="breadcrumb-item"><a href="../homework/assignment4.html">Week 11</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Week 11</h1>
 </div>
@@ -200,27 +201,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="homework-week-11" class="level3">
-<h3 class="anchored" data-anchor-id="homework-week-11">Homework week 11</h3>
-<p>In the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs.&nbsp;East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features) (See <a href="../portfolio/chapter1.html">here</a> for more information).</p>
-<section id="listen-to-give-me-the-loot-by-the-notorius-b.i.g." class="level4">
-<h4 class="anchored" data-anchor-id="listen-to-give-me-the-loot-by-the-notorius-b.i.g.">Listen to Give me the Loot by The Notorius B.I.G.</h4>
-<audio controls="" style="width: 100%;">
-<source src="../gmtl.m4a" type="audio/mp4">
-</audio>
+<p>For this weeks assignment, I have implemented two KNN models. One was trained on the orginal spotify features and one was trained on the Spotify features and 3 extra features. These are:</p>
+<ul>
+<li>energy_danceability = Energy * Danceability</li>
+<li>valence_energy = Valence * Energy</li>
+<li>mood_score = (Valence + Energy) / 2</li>
+</ul>
+<p>I found these extra features from a <a href="https://github.com/marcanjoul/hit-song-predictor">hit-song-predictor project</a> and they seemed like a good addition to the features. First, energy_dancebility gives and indication of a ‘party factor’, for tracks that are both energetic and danceble.Second, Valence x energy gives an indication of positive vibes and upbeatness. Last, mood score indicates something about the overall emotional tone.</p>
+<section id="knn-classification-results-without-feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="knn-classification-results-without-feature-engineering">KNN Classification Results without feature engineering</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="assignment3_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assignment3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1056"></a></p>
+<p><a href="assignment4_files/figure-html/knnresult-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assignment4_files/figure-html/knnresult-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment4_files/figure-html/knnresult-plot-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="assignment4_files/figure-html/knnresult-plot-2.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<p>In this graph, you see both the tempogram of Give Me The Loot made with Autocorrelation (ATC) and with the Discrete Fourier Transform. In both graphs, the lines are straight, indicating a steady rythm throughout the song. The tempo is around 90 BPM, which is a typical tempo for hip-hop/rap. In the ATC tempogram, the brightest line is prominent at around 45 BPM. In the DFT tempogram, the lines show at 90 BPM and multiples of that. Taking both the 45 BPM of the ATC and the 90 BPM of the DFT graph, we can conclude that the rythm of the song lies at around 90 BPM (45 BPM is half beat). Moreover, what stands out is that the tempo is prominent in the first 50 seconds, after which is fades out. If you listen closely in the song, the voice of Biggie get more prominent around the 50 second mark, resulting in less of a part of the output showing the beat, explaining this fading out phenomenon. Around the 100 seconds mark, there is a section where no tempo seems present. As you can hear in the song,the drums and samples are off around this time resulting in this gap in the tempo. In conclusion, this graph shows that this song has a steady beat with a tempo of around 90 BPM. This boom-bap-beat and tempo form the basis of the rapping, done by Biggies with his prominent voice.</p>
-
-
+<p><strong>Best k:</strong> 1</p>
+<p>Here, you see a plot of the KNN prediction constructed with PCA and a confusion matrix of the predictions. In the plot, the ground truth is indicated with the shape and the classifiction with the color. The plot shows that the model is able to capture some of the variance in the data, but there is a lot of overlap between the two classes, indicating that the model is not performing very well. The confusion matrix confirms this, showing that there are a lot of misclassifications.</p>
 </section>
+<section id="knn-classification-results-with-feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="knn-classification-results-with-feature-engineering">KNN Classification Results with feature engineering</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment4_files/figure-html/knnresult_with_plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="assignment4_files/figure-html/knnresult_with_plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment4_files/figure-html/knnresult_with_plot-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="assignment4_files/figure-html/knnresult_with_plot-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Best k:</strong> 1</p>
+<p>The model with the extra features show a non-significant improvement on the classification. That could be, because there is little difference between east and west coast, but it could also be due to the fact that the features add little extra as they are primarily focused around enery and valence. If these features are not imporant at all, adding additional features for this does not help.</p>
+
+
 </section>
 
 </main> <!-- /main -->

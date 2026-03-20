@@ -10,7 +10,7 @@ source("k_means_knn.R")
 
 # Load and preprocess data
 data <- read_csv("balanced_hiphop_corpus.csv")
-data <- preprocess_hiphop_data(data)
+data <- preprocess_hiphop_data_wo(data)
 
 # K-Means
 kmeans_result <- apply_kmeans(data, k = 2)

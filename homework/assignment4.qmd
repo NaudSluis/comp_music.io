@@ -1,0 +1,91 @@
+---
+title: "Week 11"
+order: 4
+---
+
+```{r setup}
+#| echo: false
+#| warning: false
+#| message: false
+library(jsonlite)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+#| warning: false
+source("../k_means_knn.R")
+library(readr)
+
+# Load results
+results <- fromJSON(file("../portfolio/chapter7_results.json"))
+```
+For this weeks assignment, I have implemented two KNN models. One was trained on the orginal spotify features and one was trained on the Spotify features and 3 extra features. These are: 
+
+* energy_danceability = Energy * Danceability
+* valence_energy = Valence * Energy
+* mood_score = (Valence + Energy) / 2
+
+I found these extra features from a [hit-song-predictor project](https://github.com/marcanjoul/hit-song-predictor) and they seemed like a good addition to the features. First, energy_dancebility gives and indication of a 'party factor', for tracks that are both energetic and danceble.Second, Valence x energy gives an indication of positive vibes and upbeatness. Last, mood score indicates something about the overall emotional tone.
+
+## KNN Classification Results without feature engineering
+```{r knnresult-plot}
+#| echo: false
+#| message: false
+#| warning: false
+# Changed chunk name to knn-plot!
+data <- read_csv("../balanced_hiphop_corpus.csv")
+data <- preprocess_hiphop_data_wo(data)
+knn_result <- train_knn(data)
+# Use out-of-fold predictions for honest evaluation
+oof_preds <- knn_result$oof_predictions
+# Create the visual
+visualize_knn(
+  knn_result, 
+  original_data = data, 
+  oof_predictions = oof_preds,
+  title = "KNN Predictions: Model Guesses vs. Reality"
+)
+
+library(dplyr)
+
+oof_preds |> 
+  select(.pred_class, region) |> 
+  rename(estimate = .pred_class) |> 
+  # Now call conf_mat using just the unquoted column names
+  conf_mat(truth = region, estimate = estimate) |> 
+  autoplot(type = "heatmap")
+
+```
+**Best k:** `r results$knn$best_k$neighbors`
+
+Here, you see a plot of the KNN prediction constructed with PCA and a confusion matrix of the predictions. In the plot, the ground truth is indicated with the shape and the classifiction with the color. The plot shows that the model is able to capture some of the variance in the data, but there is a lot of overlap between the two classes, indicating that the model is not performing very well. The confusion matrix confirms this, showing that there are a lot of misclassifications.
+
+## KNN Classification Results with feature engineering
+```{r knnresult_with_plot}
+#| echo: false
+#| message: false
+#| warning: false
+# Changed chunk name to knn-plot!
+data <- read_csv("../balanced_hiphop_corpus.csv")
+data <- preprocess_hiphop_data(data)
+knn_result <- train_knn(data)
+# Use out-of-fold predictions for honest evaluation
+oof_preds <- knn_result$oof_predictions
+# Create the visual
+visualize_knn(
+  knn_result, 
+  original_data = data, 
+  oof_predictions = oof_preds,
+  title = "KNN Predictions with extra features: Model Guesses vs. Reality"
+)
+library(dplyr)
+
+oof_preds |> 
+  select(.pred_class, region) |> 
+  rename(estimate = .pred_class) |> 
+  # Now call conf_mat using just the unquoted column names
+  conf_mat(truth = region, estimate = estimate) |> 
+  autoplot(type = "heatmap")
+```
+**Best k:** `r results$knn$best_k$neighbors`
+
+The model with the extra features show a non-significant improvement on the classification. That could be, because there is little difference between east and west coast, but it could also be due to the fact that the features add little extra as they are primarily focused around enery and valence. If these features are not imporant at all, adding additional features for this does not help.
