@@ -453,6 +453,35 @@ gen_tempogram <- function(method, csv, title, subtitle) {
   }
 }
 
+gen_dft_tempogram <- function(csv, title, artists) {
+  read_csv(csv) |>
+    pivot_longer(-TIME, names_to = "tempo") |> 
+    mutate(tempo = as.numeric(tempo)) |> 
+    ggplot(aes(x = TIME, y = tempo, fill = value)) +
+    geom_raster() +
+    scale_fill_viridis_c() +
+    labs(
+      x = "Time (s)", y = "Tempo (BPM)", fill = "Value",
+      title = title, subtitle = artists
+    ) +
+    theme_minimal()
+}
+
+gen_atc_tempogram <- function(csv, title, artists) {
+  read_csv(csv) |>
+    pivot_longer(-TIME, names_to = "tempo") |> 
+    mutate(tempo = as.numeric(tempo)) |> 
+    ggplot(aes(x = TIME, y = tempo, fill = value)) +
+    geom_raster() +
+    scale_y_continuous(transform = c("reciprocal", "reverse"), breaks = seq(50, 350, 100)) +
+    scale_fill_viridis_c() +
+    labs(
+      x = "Time (s)", y = "Tempo (BPM)", fill = "Value",
+      title = title, subtitle = artists
+    ) +
+    theme_minimal()
+}
+
 gen_tempogram_grid <- function(song, title) {
   atc_plot <- gen_tempogram("atc", paste0("../data_sv/tempogram_atc_", song, ".csv"), paste0("ATC Tempogram"), "")
   dft_plot <- gen_tempogram("dft", paste0("../data_sv/tempogram_dft_", song, ".csv"), paste0("DFT Tempogram"), "")
