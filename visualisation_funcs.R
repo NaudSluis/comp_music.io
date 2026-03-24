@@ -47,6 +47,20 @@ gen_chromagram <- function(csv, normalization_method, title, artists) {
     theme_minimal()
 }
 
+gen_cepstrogram <- function(csv, normalization_method, title, artists) {
+  read_csv(csv) |>
+    compmus_wrangle_timbre() |> 
+    mutate(timbre = map(timbre, compmus_normalise, normalization_method)) |>
+    compmus_gather_timbre() |>
+    ggplot(aes(x = start, y = mfcc, fill = value)) +
+    geom_tile() +
+    labs(
+      x = "Time (s)", y = NULL, fill = "Value",
+      title = title, subtitle = artists
+    ) +
+    theme_minimal()
+}
+
 gen_ssm_chroma <- function(csv, normalization_method, title, artists) {
   read_csv(csv) |>
     compmus_wrangle_chroma() |> 
@@ -93,13 +107,13 @@ gen_ssm_chroma <- function(csv, normalization_method, title, artists) {
 # These features are: "Artist.Name.s.","Release.Date","Duration..ms.","Popularity","Genres","Record.Label","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time.Signature"
 
   
-gen_density_grid <- function(csv, output_file) {
+gen_density_grid <- function(csv) {
   # 1. Read data and get total song count for the title
   data <- read_csv(csv)
   total_songs <- nrow(data)
   
   numeric_features <- c(
-    "Duration (ms)", "Popularity", "Danceability", "Energy", "Key", 
+    "Duration (ms)", "Danceability", "Energy", "Key", 
     "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", 
     "Liveness", "Valence", "Tempo", "Time Signature"
   )
@@ -121,7 +135,7 @@ gen_density_grid <- function(csv, output_file) {
     ) +
     theme_minimal() +
     labs(
-      title = paste("Distribution of Spotify Features | Total Songs Analyzed:", total_songs),
+      title = paste("Distribution of Spotify Features of East Coast and West Coast tracks"),
       x = "Feature Value", 
       y = "Density",
       fill = "Region" # Titles the legend
@@ -134,7 +148,7 @@ gen_density_grid <- function(csv, output_file) {
     )
   
   # 4. Save the plot (Height adjusted to 12 since it's only one grid now)
-  ggsave(output_file, plot = combined_plot, width = 20, height = 12)
+  return(combined_plot)
 }
 
 gen_freqpoly_grid <- function(csv, output_file) {

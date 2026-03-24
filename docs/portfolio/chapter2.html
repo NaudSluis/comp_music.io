@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -190,14 +193,8 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#some-content-here" id="toc-some-content-here" class="nav-link active" data-scroll-target="#some-content-here">Some content here…</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -221,12 +218,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="some-content-here" class="level3">
-<h3 class="anchored" data-anchor-id="some-content-here">Some content here…</h3>
-<p>Histograms of both sides on all features, conclusions from that or what to dive deeper in</p>
+<p>Before diving into songs specifically, we will look at whether there are differences on a coast level. To do this, we analyse a plot containing density-plots () of both coast overlayed with eachother. This way, we can clearly see where the coasts’ features overlap and where not.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter2_files/figure-html/histogram-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter2_files/figure-html/histogram-1.png" class="img-fluid figure-img" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Overall, the distributions are quite similiar. Both coasts’ song distributions have relativaly the same spread of duration, energy, instrumentalness, key, liveness, loudness, mode, tempo and valence. Next to that, there are three features where the distributions differ. First, acousticness show a clear seperation. W.C. songs are heavily skewed to less acoustic songs, while E.C. have a more spread acousticness distribution. Second, W.C. songs are more skewed toward a higher danceability than E.C. songs. Last, speechiness in W.C. songs is skewed to the left relative to E.C.</p>
+<p>In addition, what is interstring to see is that the instrumentallness of all songs is zero (due to the fact that it is mostly rap, hip-hop and samples), while the speechiness remains also relatively low (around 0.3). This combination indicates that the songs have a more musical beat while still revoling around vocals, describing a rythmic speech style which resonates with rap.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -630,6 +635,38 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

@@ -148,7 +148,7 @@
     "href": "portfolio/chapter5.html",
     "title": "Chapter 5: Timbre",
     "section": "",
-    "text": "Chromagrams of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total",
+    "text": "Cepstrograms of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total.\n\nListen to Give me the Loot and Bitch Please\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe cepstrograms reveal distinct differences in timbre complexity between these tracks. “Give Me The Loot” displays a diverse range of MFCC values with multiple peaks across different frequencies, reflecting the sample-rich, layered production characteristic of East Coast hip-hop. “Bitch Please” shows more concentrated spectral energy, particularly in the lower MFCC coefficients, representing a more straightforward, groove-oriented West Coast sound.\n\n\nListen to C.R.E.A.M and Without Me\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing C.R.E.A.M and Without Me, we observe that both tracks maintain relatively stable timbral characteristics throughout. C.R.E.A.M exhibits consistent MFCC distribution, reflecting Wu-Tang Clan’s cohesive sample-based production style. Without Me shows periodic variations in spectral content, corresponding to shifts in the vocal delivery and instrumental background, demonstrating Eminem’s more dynamic use of timbre as a production element.",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",
@@ -172,7 +172,7 @@
     "href": "portfolio/chapter2.html",
     "title": "Chapter 2: Exploratoring the features",
     "section": "",
-    "text": "Some content here…\nHistograms of both sides on all features, conclusions from that or what to dive deeper in",
+    "text": "Before diving into songs specifically, we will look at whether there are differences on a coast level. To do this, we analyse a plot containing density-plots () of both coast overlayed with eachother. This way, we can clearly see where the coasts’ features overlap and where not.\n\n\n\n\n\n\n\n\n\nOverall, the distributions are quite similiar. Both coasts’ song distributions have relativaly the same spread of duration, energy, instrumentalness, key, liveness, loudness, mode, tempo and valence. Next to that, there are three features where the distributions differ. First, acousticness show a clear seperation. W.C. songs are heavily skewed to less acoustic songs, while E.C. have a more spread acousticness distribution. Second, W.C. songs are more skewed toward a higher danceability than E.C. songs. Last, speechiness in W.C. songs is skewed to the left relative to E.C.\nIn addition, what is interstring to see is that the instrumentallness of all songs is zero (due to the fact that it is mostly rap, hip-hop and samples), while the speechiness remains also relatively low (around 0.3). This combination indicates that the songs have a more musical beat while still revoling around vocals, describing a rythmic speech style which resonates with rap.",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",
