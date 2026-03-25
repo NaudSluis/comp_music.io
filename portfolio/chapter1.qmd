@@ -3,35 +3,109 @@ title: "Chapter 1: The Corpus"
 order: 2
 ---
 
-### Corpus selection and preperation ook nog over samen doen en region toevoegen
+### Corpus selection and preperation
 
 The corpus for this analysis is a combination of two playlists from spotify: "West Side Classics" and "East Coast Classics". These playlists were chosen, because they were very popular on spotify, with 141.754 and 40.882 likes respectivally. As there is no golden standard for what songs are considered "West Coast" or "East Coast", this method of popularity was used, which is similair to methods used by Boros (2025) and Gilbers et al. (2019). 
 
 In the West Coast (W.C.) playlist, some popular East Coast (E.C.) artist appeard. To mitigate this problem, artist that were in both datasets were noted and placed in their corresponding Coast. The artist 'Outkast' also appeared in both datasets and was removed as Outkast originated from Atlanta (not W.C. nor E.C.). Moreover, "West Side Classics" contained 84 songs, while "East Coast Classics" contained 177 after the previous step of moving around songs. As this is a difference of more that half of the songs, the E.C. set was downsampled to the W.C. set, both now containing 84 songs.
 
+After balancing the coasts, the corpora were combined. After that, an extra column `region` was added having either the value `east` or `west` corresponding to that rows coast.
+
 ### Track selection
 
-To make analysis about track level information, two tracks per coast were selected. These songs needed to be representative for the range of music of every coast. To select these without randomly choosing two, one is the most respresentative for that coast and the other is a track distinctive for its coast, far from the other coast and not an outlier in its own coast. The latter was chosen so that the most distinctive track from a coast is not a general outlier (i.e. the most distinctive song for a coast could be a song that does not represent either coasts). First, all numerical features except "Popularity" (as this measure is changing) from the Spotify API were normalised. Second, the centroid (i.e. the mean over all features) of the data was calculated. To select the most representative song, the euclidean distance from each song to the centroid was calculated, and the song with the smallest distance was selected. To select the most distinctive song, the euclidean distance from each song to the other coast's centroid was calculated. From that, the distance to its own coast's centroid was subtracted. The song that was the furthest from the other coast's centroid, while being close to its own coast's centroid was selected. The songs that were selected are:
+To make analysis about track level information, two tracks per coast were selected. These songs needed to be representative for the range of music of every coast. To select these without randomly choosing two, one is the most respresentative for that coast and the other is a track distinctive for its coast, far from the other coast and not an outlier in its own coast. The latter was chosen so that the most distinctive track from a coast is not a general outlier (i.e. the most distinctive song for a coast could be a song that does not represent either coasts). 
 
-<table style="width:100%; border-collapse: collapse;" border="1">
-  <thead>
-    <tr>
-      <th colspan="2" style="text-align: center;">East Coast</th>
-      <th colspan="2" style="text-align: center;">West Coast</th>
-    </tr>
-    <tr>
-      <th>Representative</th>
-      <th>Distinct</th>
-      <th>Representative</th>
-      <th>Distinct</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Give me the Loot by The Notorious B.I.G.</td>
-      <td>C.R.E.A.M.(Cash Rules Everything Around Me) by Wu-Tang Clan</td>
-      <td>Bitch Please by Snoop Dogg and Xzibit</td>
-      <td>Without me by Eminem</td>
-    </tr>
-  </tbody>
-</table>
+First, all numerical features except "Popularity" (as this measure is changing) from the Spotify API were normalised. Second, the centroid (i.e. the mean over all features) of the data was calculated. To select the most representative song, the euclidean distance from each song to the centroid was calculated, and the song with the smallest distance was selected. To select the most distinctive song, the euclidean distance from each song to the other coast's centroid was calculated. From that, the distance to its own coast's centroid was subtracted. The song that was the furthest from the other coast's centroid, while being close to its own coast's centroid was selected. The songs that were selected are:
+
+<style>
+  .table-container {
+    display: flex;
+    justify-content: center;
+    background-color: #000; /* Deep black background */
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .hip-hop-table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 900px;
+    color: #fff;
+    border: 1px solid #444;
+    text-align: center;
+  }
+
+  .region-header {
+    background-color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    padding: 15px;
+    border: 1px solid #444;
+  }
+
+  .sub-header th {
+    background-color: #262626;
+    font-size: 0.85rem;
+    color: #aaa;
+    padding: 10px;
+    border: 1px solid #444;
+  }
+
+  td {
+    padding: 20px;
+    border: 1px solid #444;
+    vertical-align: top;
+  }
+
+  .song-title {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffff; /* Electric blue for pop */
+    margin-bottom: 5px;
+  }
+
+  .artist-name {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+  }
+</style>
+
+<div class="table-container">
+  <table class="hip-hop-table">
+    <thead>
+      <tr>
+        <th colspan="2" class="region-header">East Coast</th>
+        <th colspan="2" class="region-header">West Coast</th>
+      </tr>
+      <tr class="sub-header">
+        <th>Representative</th>
+        <th>Distinct</th>
+        <th>Representative</th>
+        <th>Distinct</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="song-title">Give Me The Loot</span>
+          <span class="artist-name">The Notorious B.I.G.</span>
+        </td>
+        <td>
+          <span class="song-title">C.R.E.A.M.</span>
+          <span class="artist-name">Wu-Tang Clan</span>
+        </td>
+        <td>
+          <span class="song-title">Bitch Please</span>
+          <span class="artist-name">Snoop Dogg & Xzibit</span>
+        </td>
+        <td>
+          <span class="song-title">Without Me</span>
+          <span class="artist-name">Eminem</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

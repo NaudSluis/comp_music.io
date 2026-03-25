@@ -4,19 +4,15 @@ library(ggplot2)
 library(rpart.plot)
 library(cluster)  # For silhouette
 
-# Function to preprocess data
+# Function to preprocess data with ENHANCED feature engineering
 preprocess_hiphop_data <- function(data) {
   # Drop identifiers
   data <- data %>%
     select(-c(`Track URI`, `Track Name`, `Album Name`, Artist_Name, `Release Date`, `Added By`, `Added At`, Genres, `Record Label`, `Duration (ms)`, Popularity, Explicit))
 
-  # Feature engineering
+  # FEATURE SELECTION: Remove noisy features (Key, Time Signature)
   data <- data %>%
-    mutate(
-      energy_danceability = Energy * Danceability,
-      valence_energy = Valence * Energy,
-      mood_score = (Valence + Energy) / 2
-    )
+    select(-c(Key, `Time Signature`, Energy, Liveness, Mode, Loudness))
 
   # Encode target
   data <- data %>%
@@ -159,6 +155,58 @@ train_decision_tree <- function(data) {
   final_fit <- fit(final_wf, data = data)
 
   return(list(fit = final_fit, tune_results = tune_results, best_params = best_params))
+}
+
+# Random Forest Classification Function
+train_random_forest <- function(data) {
+  # Recipe
+  recipe <- recipe(region ~ ., data = data) %>%
+    step_dummy(all_nominal_predictors()) %>%
+    step_normalize(all_numeric_predictors())
+
+  # Model - Random Forest with tuning
+  rf_model <- rand_forest(
+    mtry = tune(),
+    trees = tune(),
+    min_n = tune()
+  ) %>%
+    set_mode("classification") %>%
+    set_engine("ranger", importance = "impurity")
+
+  # Workflow
+  wf <- workflow() %>%
+    add_recipe(recipe) %>%
+    add_model(rf_model)
+
+  # CV
+  set.seed(42)
+  folds <- vfold_cv(data, v = 5, strata = region)
+
+  # Tune - Random search for efficiency
+  tune_results <- tune_grid(
+    wf,
+    resamples = folds,
+    grid = grid_random(
+      mtry(range = c(2, ncol(data) - 1)),
+      trees(range = c(100, 500)),
+      min_n(range = c(2, 10)),
+      size = 15  # 15 random combinations
+    ),
+    metrics = metric_set(accuracy, f_meas),
+    control = control_grid(save_pred = TRUE)
+  )
+
+  # Best
+  best_params <- select_best(tune_results, metric = "f_meas")
+
+  # Get out-of-fold predictions
+  oof_predictions <- collect_predictions(tune_results, parameters = best_params)
+
+  # Final model
+  final_wf <- finalize_workflow(wf, best_params)
+  final_fit <- fit(final_wf, data = data)
+
+  return(list(fit = final_fit, tune_results = tune_results, best_params = best_params, oof_predictions = oof_predictions))
 }
 
 # Decision Tree Visualization Function

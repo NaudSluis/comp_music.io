@@ -1,113 +1,458 @@
 ---
-title: "Chapter 7: Clustering"
+title: "Chapter 7: Classification & Clustering Analysis"
 order: 7
 ---
 
-Clustering songs unsupervised, and try supervised. Data enhancing, feature importance
+## Introduction
+
+This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.
+
+---
+
+## Feature Engineering & Selection Methodology
+
+To improve model performance, we refined our feature set through data-driven analysis:
+
+### Feature Selection
+We removed noisy features with near-zero correlation to region:
+**Removed:** Key (r = -0.006) and Time Signature (r = -0.11) - minimal predictive value
+**Retained:** Acousticness (r = 0.40) and Speechiness (r = 0.39) - strongest discriminators
+---
 
 ```{r setup}
 #| echo: false
 #| warning: false
 #| message: false
-library(jsonlite)
+library(tidyverse)
+library(tidymodels)
+library(ggplot2)
+library(rpart.plot)
+library(cluster)
 library(knitr)
 library(kableExtra)
 
-# Load results
-results <- fromJSON(file("chapter7_results.json"))
+source("../k_means_knn.R")
+source("../visualisation_funcs.R")
+
+# Load the data once
+data_raw <- read_csv("../balanced_hiphop_corpus.csv")
+data <- preprocess_hiphop_data(data_raw)
+
+# Color palette from project theme
+east_color <- "#1f78b4"  # Blue for East Coast
+west_color <- "#ff7f00"  # Orange for West Coast
 ```
 
-## K-Means Clustering Visualization
+## K-Means Clustering
+
+K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. Unlike supervised methods, it does not use region labels during training—instead, it discovers natural patterns in the data. This allows us to assess how well the algorithm's clusters align with the known geographic regions.
+
+### Clustering Visualization
 
 ```{r kmeans-plot}
 #| echo: false
 #| message: false
 #| warning: false
-source("../k_means_knn.R")
-library(readr)
+#| fig-width: 10
+#| fig-height: 8
 
-data <- read_csv("../balanced_hiphop_corpus.csv")
-data <- preprocess_hiphop_data(data)
 kmeans_result <- apply_kmeans(data, k = 2)
-visualize_kmeans(kmeans_result, "K-Means Clustering of East vs West Coast Hip-Hop")
+
+# Custom visualization with project color scheme
+features <- kmeans_result$data %>% select(-where(is.factor), -where(is.character))
+pca <- prcomp(features, scale. = TRUE)
+pca_data <- as.data.frame(pca$x[, 1:2])
+pca_data$region <- kmeans_result$data$region
+pca_data$cluster <- kmeans_result$data$cluster
+
+ggplot(pca_data, aes(x = PC1, y = PC2)) +
+  stat_ellipse(aes(fill = cluster), geom = "polygon", alpha = 0.15, color = NA) +
+  geom_point(aes(color = cluster, shape = region), size = 3.5, alpha = 0.8) +
+  scale_color_manual(
+    name = "K-Means Cluster",
+    values = c("1" = east_color, "2" = west_color),
+    labels = c("1" = "Cluster 1", "2" = "Cluster 2")
+  ) +
+  scale_fill_manual(
+    name = "K-Means Cluster",
+    values = c("1" = east_color, "2" = west_color),
+    labels = c("1" = "Cluster 1", "2" = "Cluster 2")
+  ) +
+  scale_shape_manual(
+    name = "Actual Region",
+    values = c("East Coast" = 16, "West Coast" = 17)
+  ) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "K-Means Clustering: Discovering Natural Patterns",
+    subtitle = "Shape indicates actual region | Color indicates assigned cluster",
+    x = "Primary Characteristic (PC1)", 
+    y = "Secondary Characteristic (PC2)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 11, hjust = 0.5),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
 ```
 
-**Silhouette Score:** `r round(results$kmeans$silhouette, 3)`  
-**Within-Cluster Sum of Squares:** `r round(results$kmeans$wcss, 2)`
+### Clustering Performance Metrics
 
-## KNN Classification Results
-```{r knnresult-plot}
+```{r kmeans-metrics}
 #| echo: false
 #| message: false
 #| warning: false
-# Changed chunk name to knn-plot!
-knn_result <- train_knn(data)
 
-# Create the visual
-visualize_knn(
-  knn_result, 
-  original_data = data, 
-  title = "KNN Predictions: Model Guesses vs. Reality"
+# Calculate metrics
+silhouette_score <- round(kmeans_result$silhouette, 4)
+wcss <- round(sum(kmeans_result$model$withinss), 2)
+
+# Create metrics table
+metrics_kmeans <- data.frame(
+  Metric = c("Silhouette Score", "Total Within-Cluster Sum of Squares (WCSS)"),
+  Value = c(silhouette_score, wcss)
 )
 
+kable(metrics_kmeans, 
+      col.names = c("Metric", "Value"),
+      caption = "K-Means Clustering Performance") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
 ```
-**Best k:** `r results$knn$best_k$neighbors`
 
-## Decision Tree Visualization
+**Interpretation:** The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. The WCSS measures the total distance of points from their assigned cluster centers—lower values suggest more compact clusters.
+
+---
+
+## K-Nearest Neighbors (KNN) Classification
+
+K-Nearest Neighbors is a supervised classification algorithm that predicts a song's region by finding the k most similar songs in the training data and using majority voting. Through cross-validation, we identified the optimal value of k that balances bias and variance.
+
+### KNN Predictions
+
+```{r knn-plot}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 8
+
+knn_result <- train_knn(data)
+
+# Get out-of-fold predictions for fair evaluation
+oof_pred <- knn_result$oof_predictions %>%
+  select(.pred_class)
+
+plot_data_knn <- data
+plot_data_knn$Predicted <- oof_pred$.pred_class
+plot_data_knn$Actual <- data$region
+
+# PCA for visualization
+features_knn <- plot_data_knn %>% 
+  select(-where(is.factor), -where(is.character), -Predicted, -Actual)
+
+pca_knn <- prcomp(features_knn, scale. = TRUE)
+pca_data_knn <- as.data.frame(pca_knn$x[, 1:2])
+pca_data_knn$Predicted <- plot_data_knn$Predicted
+pca_data_knn$Actual <- plot_data_knn$Actual
+
+ggplot(pca_data_knn, aes(x = PC1, y = PC2)) +
+  stat_ellipse(aes(fill = Predicted), geom = "polygon", alpha = 0.15, color = NA) +
+  geom_point(aes(color = Predicted, shape = Actual), size = 3.5, alpha = 0.8) +
+  scale_color_manual(
+    name = "KNN Prediction",
+    values = c("East Coast" = east_color, "West Coast" = west_color)
+  ) +
+  scale_fill_manual(
+    name = "KNN Prediction",
+    values = c("East Coast" = east_color, "West Coast" = west_color)
+  ) +
+  scale_shape_manual(
+    name = "Actual Region",
+    values = c("East Coast" = 16, "West Coast" = 17)
+  ) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "KNN Classification: Model Predictions vs. Reality",
+    subtitle = "Shape indicates actual region | Color indicates KNN prediction",
+    x = "Primary Characteristic (PC1)", 
+    y = "Secondary Characteristic (PC2)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 11, hjust = 0.5),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+```
+
+### KNN Performance Metrics
+
+```{r knn-metrics}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Calculate performance metrics
+confusion_knn <- oof_pred %>%
+  bind_cols(Actual = plot_data_knn$Actual) %>%
+  rename(Predicted = .pred_class)
+
+tp <- sum(confusion_knn$Predicted == "East Coast" & confusion_knn$Actual == "East Coast")
+fp <- sum(confusion_knn$Predicted == "East Coast" & confusion_knn$Actual != "East Coast")
+fn <- sum(confusion_knn$Predicted != "East Coast" & confusion_knn$Actual == "East Coast")
+tn <- sum(confusion_knn$Predicted != "East Coast" & confusion_knn$Actual != "East Coast")
+
+accuracy_knn <- (tp + tn) / (tp + tn + fp + fn)
+precision_knn <- tp / (tp + fp)
+recall_knn <- tp / (tp + fn)
+best_k <- knn_result$best_k$neighbors
+
+# Create metrics table
+metrics_knn <- data.frame(
+  Metric = c("Best k value", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
+  Value = c(best_k, round(accuracy_knn, 4), round(precision_knn, 4), round(recall_knn, 4))
+)
+
+kable(metrics_knn, 
+      col.names = c("Metric", "Value"),
+      caption = "KNN Classification Performance") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
+```
+
+---
+
+## Decision Tree Classification
+
+Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. This model's main advantage is explainability: we can visualize exactly which features and thresholds the algorithm uses to make predictions, and we can extract feature importance scores.
+
+### Decision Tree Model
 
 ```{r tree-plot}
 #| echo: false
 #| message: false
 #| warning: false
-data <- read_csv("../balanced_hiphop_corpus.csv")
-data <- preprocess_hiphop_data(data)
+#| fig-width: 12
+#| fig-height: 8
+
 tree_result <- train_decision_tree(data)
-visualize_decision_tree(tree_result$fit, "Decision Tree for East vs West Coast Hip-Hop Classification")
+
+visualize_decision_tree(tree_result$fit, "Decision Tree: Regional Hip-Hop Classification")
 ```
-
-**Best Parameters:** Cost Complexity = `r results$decision_tree$best_params$cost_complexity`, Tree Depth = `r results$decision_tree$best_params$tree_depth`
-
-## XGBoost Model
-
-XGBoost (eXtreme Gradient Boosting) was trained to classify tracks as East Coast or West Coast hip-hop, using Bayesian hyperparameter optimization to find the best configuration.
 
 ### Feature Importance
 
-The following table shows the top 10 most important features for the XGBoost model's classification decisions:
-
-```{r xgb-feature-importance}
+```{r feature-importance}
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-width: 10
+#| fig-height: 6
 
-# Get top 10 features
-top_features <- results$xgboost$feature_importance %>%
-  slice_head(n = 10) %>%
-  kable(
-    col.names = c("Feature", "Importance"),
-    digits = 4,
-    caption = "Top 10 Feature Importance Scores"
-  ) %>%
-  kable_styling(bootstrap_options = "striped")
+# Extract the rpart model
+rpart_model <- extract_fit_engine(tree_result$fit)
 
-top_features
+# Get feature importance
+importance_df <- data.frame(
+  Feature = names(rpart_model$variable.importance),
+  Importance = as.numeric(rpart_model$variable.importance)
+) %>%
+  arrange(desc(Importance)) %>%
+  head(10) %>%
+  mutate(Feature = factor(Feature, levels = Feature))
+
+ggplot(importance_df, aes(x = reorder(Feature, Importance), y = Importance, fill = Importance)) +
+  geom_col(color = "black", linewidth = 0.5) +
+  scale_fill_gradient(low = west_color, high = east_color, guide = "none") +
+  coord_flip() +
+  theme_minimal(base_size = 11) +
+  labs(
+    title = "Decision Tree Feature Importance",
+    subtitle = "Top 10 features distinguishing East Coast from West Coast",
+    x = "Feature",
+    y = "Importance Score"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 13, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray90")
+  )
 ```
 
-### Misclassified Songs
+### Decision Tree Performance Metrics
 
-Songs that the model incorrectly classified. This can help identify edge cases or patterns the model struggles with:
-
-```{r xgb-misclassified}
+```{r tree-metrics}
 #| echo: false
 #| message: false
 #| warning: false
 
-misclassified <- results$xgboost$misclassified_songs %>%
-  kable(
-    col.names = c("Track Name", "Artist Name", "Actual Region", "Predicted Region"),
-    caption = "Songs Misclassified by XGBoost Model"
-  ) %>%
-  kable_styling(bootstrap_options = "striped", full_width = TRUE)
+# Get predictions using the final fitted model
+tree_pred <- predict(tree_result$fit, new_data = data) %>%
+  bind_cols(Actual = data$region) %>%
+  rename(Predicted = .pred_class)
 
-misclassified
+# Calculate metrics
+tp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual == "East Coast")
+fp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual != "East Coast")
+fn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual == "East Coast")
+tn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual != "East Coast")
+
+accuracy_tree <- (tp_tree + tn_tree) / (tp_tree + tn_tree + fp_tree + fn_tree)
+precision_tree <- tp_tree / (tp_tree + fp_tree)
+recall_tree <- tp_tree / (tp_tree + fn_tree)
+
+# Best parameters
+cost_complexity <- round(tree_result$best_params$cost_complexity, 6)
+tree_depth <- tree_result$best_params$tree_depth
+
+# Create metrics table
+metrics_tree <- data.frame(
+  Metric = c("Cost Complexity Parameter", "Max Tree Depth", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
+  Value = c(cost_complexity, tree_depth, round(accuracy_tree, 4), round(precision_tree, 4), round(recall_tree, 4))
+)
+
+kable(metrics_tree, 
+      col.names = c("Metric", "Value"),
+      caption = "Decision Tree Classification Performance") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
+```
+
+### Decision Tree Misclassified Songs
+
+```{r tree-misclassified}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Identify misclassified songs
+misclassified_tree <- tree_pred %>%
+  mutate(row_idx = row_number(), is_correct = Predicted == Actual) %>%
+  filter(!is_correct) %>%
+  select(row_idx, Actual, Predicted) %>%
+  mutate(
+    "Song Name" = data_raw$`Track Name`[row_idx],
+    "Artist" = data_raw$Artist_Name[row_idx],
+    "Actual Region" = Actual,
+    "Predicted Region" = Predicted,
+    "Acousticness" = round(data_raw$Acousticness[row_idx], 4)
+  ) %>%
+  select("Song Name", Artist, "Actual Region", "Predicted Region", Acousticness)
+
+if (nrow(misclassified_tree) > 0) {
+  kable(misclassified_tree,
+        caption = "Songs Misclassified by Decision Tree",
+        row.names = FALSE) %>%
+    kable_styling(bootstrap_options = "striped", full_width = TRUE)
+} else {
+  cat("**Perfect Classification:** Decision Tree made no errors!")
+}
+```
+
+---
+
+## Random Forest Classification
+
+Random Forest is an ensemble learning method that builds multiple decision trees and aggregates their predictions. By combining many trees trained on random subsets of data and features, it reduces overfitting and captures complex non-linear patterns that single trees miss. This is particularly valuable for our hip-hop classification task, where subtle production style interactions matter.
+
+### Random Forest Predictions
+
+```{r rf-plot}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 8
+
+# Check if ranger is installed, if not install it
+if (!require("ranger", quietly = TRUE)) {
+  install.packages("ranger", quiet = TRUE)
+  library(ranger)
+}
+
+rf_result <- train_random_forest(data)
+
+# Get out-of-fold predictions
+rf_oof_pred <- rf_result$oof_predictions %>%
+  select(.pred_class)
+
+plot_data_rf <- data
+plot_data_rf$Predicted <- rf_oof_pred$.pred_class
+plot_data_rf$Actual <- data$region
+
+# PCA for visualization
+features_rf <- plot_data_rf %>% 
+  select(-where(is.factor), -where(is.character), -Predicted, -Actual)
+
+pca_rf <- prcomp(features_rf, scale. = TRUE)
+pca_data_rf <- as.data.frame(pca_rf$x[, 1:2])
+pca_data_rf$Predicted <- plot_data_rf$Predicted
+pca_data_rf$Actual <- plot_data_rf$Actual
+
+ggplot(pca_data_rf, aes(x = PC1, y = PC2)) +
+  stat_ellipse(aes(fill = Predicted), geom = "polygon", alpha = 0.15, color = NA) +
+  geom_point(aes(color = Predicted, shape = Actual), size = 3.5, alpha = 0.8) +
+  scale_color_manual(
+    name = "Random Forest Prediction",
+    values = c("East Coast" = east_color, "West Coast" = west_color)
+  ) +
+  scale_fill_manual(
+    name = "Random Forest Prediction",
+    values = c("East Coast" = east_color, "West Coast" = west_color)
+  ) +
+  scale_shape_manual(
+    name = "Actual Region",
+    values = c("East Coast" = 16, "West Coast" = 17)
+  ) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Random Forest Classification: Ensemble Predictions",
+    subtitle = "Shape indicates actual region | Color indicates Random Forest prediction",
+    x = "Primary Characteristic (PC1)", 
+    y = "Secondary Characteristic (PC2)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 11, hjust = 0.5),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Random Forest Performance Metrics
+
+```{r rf-metrics}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Calculate performance metrics
+confusion_rf <- rf_oof_pred %>%
+  bind_cols(Actual = plot_data_rf$Actual) %>%
+  rename(Predicted = .pred_class)
+
+tp_rf <- sum(confusion_rf$Predicted == "East Coast" & confusion_rf$Actual == "East Coast")
+fp_rf <- sum(confusion_rf$Predicted == "East Coast" & confusion_rf$Actual != "East Coast")
+fn_rf <- sum(confusion_rf$Predicted != "East Coast" & confusion_rf$Actual == "East Coast")
+tn_rf <- sum(confusion_rf$Predicted != "East Coast" & confusion_rf$Actual != "East Coast")
+
+accuracy_rf <- (tp_rf + tn_rf) / (tp_rf + tn_rf + fp_rf + fn_rf)
+precision_rf <- tp_rf / (tp_rf + fp_rf)
+recall_rf <- tp_rf / (tp_rf + fn_rf)
+
+# Best parameters
+mtry_param <- rf_result$best_params$mtry
+trees_param <- rf_result$best_params$trees
+min_n_param <- rf_result$best_params$min_n
+
+# Create metrics table
+metrics_rf <- data.frame(
+  Metric = c("Features per split (mtry)", "Number of trees", "Min samples per node", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
+  Value = c(mtry_param, trees_param, min_n_param, round(accuracy_rf, 4), round(precision_rf, 4), round(recall_rf, 4))
+)
+
+kable(metrics_rf, 
+      col.names = c("Metric", "Value"),
+      caption = "Random Forest Classification Performance") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
 ```

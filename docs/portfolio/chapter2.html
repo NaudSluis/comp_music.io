@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-640dd312b7610509fdf9c751dea76e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cd3e8f1db2276dbed011a7d6a924d4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../portfolio/chapter7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chapter 7: Clustering</span></a>
+ <span class="menu-text">Chapter 7: Classification &amp; Clustering Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Before diving into songs specifically, we will look at whether there are differences on a coast level. To do this, we analyse a plot containing density-plots () of both coast overlayed with eachother. This way, we can clearly see where the coasts’ features overlap and where not.</p>
+<p>Before diving into songs specifically, we will look at whether there are differences on a coast level. To do this, we analyse a plot containing density-plots of both coast overlayed with eachother. This way, we can clearly see where the coasts’ features overlap and where not.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -228,8 +228,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>Overall, the distributions are quite similiar. Both coasts’ song distributions have relativaly the same spread of duration, energy, instrumentalness, key, liveness, loudness, mode, tempo and valence. Next to that, there are three features where the distributions differ. First, acousticness show a clear seperation. W.C. songs are heavily skewed to less acoustic songs, while E.C. have a more spread acousticness distribution. Second, W.C. songs are more skewed toward a higher danceability than E.C. songs. Last, speechiness in W.C. songs is skewed to the left relative to E.C.</p>
+<p>Overall, the distributions are quite similiar. Both coasts’ song distributions have relativaly the same spread of duration, energy, instrumentalness, key, liveness, loudness, mode, tempo and valence. Especially with a feature like tempo, it is striking to see how similair the two coasts are.</p>
+<p>Next to that, there are three features where the distributions differ. First, acousticness show a clear seperation. W.C. songs are heavily skewed to less acoustic songs, while E.C. have a more spread acousticness distribution. Second, W.C. songs are more skewed toward a higher danceability than E.C. songs. Last, speechiness in W.C. songs is skewed to the left relative to E.C.</p>
 <p>In addition, what is interstring to see is that the instrumentallness of all songs is zero (due to the fact that it is mostly rap, hip-hop and samples), while the speechiness remains also relatively low (around 0.3). This combination indicates that the songs have a more musical beat while still revoling around vocals, describing a rythmic speech style which resonates with rap.</p>
+<p>Now that we have seen coast-level features, let’s dive into the four songs</p>
 
 
 

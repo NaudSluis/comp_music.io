@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Chapter 7: Clustering – Naud Sluis</title>
+<title>Chapter 7: Classification &amp; Clustering Analysis – Naud Sluis</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-640dd312b7610509fdf9c751dea76e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cd3e8f1db2276dbed011a7d6a924d4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../portfolio/index.html">Portfolio Overview</a></li><li class="breadcrumb-item"><a href="../portfolio/chapter7.html">Chapter 7: Clustering</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../portfolio/index.html">Portfolio Overview</a></li><li class="breadcrumb-item"><a href="../portfolio/chapter7.html">Chapter 7: Classification &amp; Clustering Analysis</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -179,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../portfolio/chapter7.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Chapter 7: Clustering</span></a>
+ <span class="menu-text">Chapter 7: Classification &amp; Clustering Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -200,13 +200,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#k-means-clustering-visualization" id="toc-k-means-clustering-visualization" class="nav-link active" data-scroll-target="#k-means-clustering-visualization">K-Means Clustering Visualization</a></li>
-  <li><a href="#knn-classification-results" id="toc-knn-classification-results" class="nav-link" data-scroll-target="#knn-classification-results">KNN Classification Results</a></li>
-  <li><a href="#decision-tree-visualization" id="toc-decision-tree-visualization" class="nav-link" data-scroll-target="#decision-tree-visualization">Decision Tree Visualization</a></li>
-  <li><a href="#xgboost-model" id="toc-xgboost-model" class="nav-link" data-scroll-target="#xgboost-model">XGBoost Model</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#feature-engineering-selection-methodology" id="toc-feature-engineering-selection-methodology" class="nav-link" data-scroll-target="#feature-engineering-selection-methodology">Feature Engineering &amp; Selection Methodology</a>
   <ul class="collapse">
+  <li><a href="#feature-selection" id="toc-feature-selection" class="nav-link" data-scroll-target="#feature-selection">Feature Selection</a></li>
+  </ul></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-Means Clustering</a>
+  <ul class="collapse">
+  <li><a href="#clustering-visualization" id="toc-clustering-visualization" class="nav-link" data-scroll-target="#clustering-visualization">Clustering Visualization</a></li>
+  <li><a href="#clustering-performance-metrics" id="toc-clustering-performance-metrics" class="nav-link" data-scroll-target="#clustering-performance-metrics">Clustering Performance Metrics</a></li>
+  </ul></li>
+  <li><a href="#k-nearest-neighbors-knn-classification" id="toc-k-nearest-neighbors-knn-classification" class="nav-link" data-scroll-target="#k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</a>
+  <ul class="collapse">
+  <li><a href="#knn-predictions" id="toc-knn-predictions" class="nav-link" data-scroll-target="#knn-predictions">KNN Predictions</a></li>
+  <li><a href="#knn-performance-metrics" id="toc-knn-performance-metrics" class="nav-link" data-scroll-target="#knn-performance-metrics">KNN Performance Metrics</a></li>
+  </ul></li>
+  <li><a href="#decision-tree-classification" id="toc-decision-tree-classification" class="nav-link" data-scroll-target="#decision-tree-classification">Decision Tree Classification</a>
+  <ul class="collapse">
+  <li><a href="#decision-tree-model" id="toc-decision-tree-model" class="nav-link" data-scroll-target="#decision-tree-model">Decision Tree Model</a></li>
   <li><a href="#feature-importance" id="toc-feature-importance" class="nav-link" data-scroll-target="#feature-importance">Feature Importance</a></li>
-  <li><a href="#misclassified-songs" id="toc-misclassified-songs" class="nav-link" data-scroll-target="#misclassified-songs">Misclassified Songs</a></li>
+  <li><a href="#decision-tree-performance-metrics" id="toc-decision-tree-performance-metrics" class="nav-link" data-scroll-target="#decision-tree-performance-metrics">Decision Tree Performance Metrics</a></li>
+  <li><a href="#decision-tree-misclassified-songs" id="toc-decision-tree-misclassified-songs" class="nav-link" data-scroll-target="#decision-tree-misclassified-songs">Decision Tree Misclassified Songs</a></li>
+  </ul></li>
+  <li><a href="#random-forest-classification" id="toc-random-forest-classification" class="nav-link" data-scroll-target="#random-forest-classification">Random Forest Classification</a>
+  <ul class="collapse">
+  <li><a href="#random-forest-predictions" id="toc-random-forest-predictions" class="nav-link" data-scroll-target="#random-forest-predictions">Random Forest Predictions</a></li>
+  <li><a href="#random-forest-performance-metrics" id="toc-random-forest-performance-metrics" class="nav-link" data-scroll-target="#random-forest-performance-metrics">Random Forest Performance Metrics</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -214,9 +233,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../portfolio/index.html">Portfolio Overview</a></li><li class="breadcrumb-item"><a href="../portfolio/chapter7.html">Chapter 7: Clustering</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../portfolio/index.html">Portfolio Overview</a></li><li class="breadcrumb-item"><a href="../portfolio/chapter7.html">Chapter 7: Classification &amp; Clustering Analysis</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Chapter 7: Clustering</h1>
+<h1 class="title">Chapter 7: Classification &amp; Clustering Analysis</h1>
 </div>
 
 
@@ -233,190 +252,512 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Clustering songs unsupervised, and try supervised. Data enhancing, feature importance</p>
-<section id="k-means-clustering-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="k-means-clustering-visualization">K-Means Clustering Visualization</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.</p>
+<hr>
+</section>
+<section id="feature-engineering-selection-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering-selection-methodology">Feature Engineering &amp; Selection Methodology</h2>
+<p>To improve model performance, we refined our feature set through data-driven analysis:</p>
+<section id="feature-selection" class="level3">
+<h3 class="anchored" data-anchor-id="feature-selection">Feature Selection</h3>
+<p>We removed noisy features with near-zero correlation to region: <strong>Removed:</strong> Key (r = -0.006) and Time Signature (r = -0.11) - minimal predictive value <strong>Retained:</strong> Acousticness (r = 0.40) and Speechiness (r = 0.39) - strongest discriminators —</p>
+</section>
+</section>
+<section id="k-means-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering">K-Means Clustering</h2>
+<p>K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. Unlike supervised methods, it does not use region labels during training—instead, it discovers natural patterns in the data. This allows us to assess how well the algorithm’s clusters align with the known geographic regions.</p>
+<section id="clustering-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-visualization">Clustering Visualization</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="chapter7_files/figure-html/kmeans-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter7_files/figure-html/kmeans-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="chapter7_files/figure-html/kmeans-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter7_files/figure-html/kmeans-plot-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>Silhouette Score:</strong> 0.211<br>
-<strong>Within-Cluster Sum of Squares:</strong> 1773.44</p>
 </section>
-<section id="knn-classification-results" class="level2">
-<h2 class="anchored" data-anchor-id="knn-classification-results">KNN Classification Results</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="chapter7_files/figure-html/knnresult-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter7_files/figure-html/knnresult-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Best k:</strong> 1</p>
-</section>
-<section id="decision-tree-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="decision-tree-visualization">Decision Tree Visualization</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="chapter7_files/figure-html/tree-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter7_files/figure-html/tree-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Best Parameters:</strong> Cost Complexity = 10^{-10}, Tree Depth = 3</p>
-</section>
-<section id="xgboost-model" class="level2">
-<h2 class="anchored" data-anchor-id="xgboost-model">XGBoost Model</h2>
-<p>XGBoost (eXtreme Gradient Boosting) was trained to classify tracks as East Coast or West Coast hip-hop, using Bayesian hyperparameter optimization to find the best configuration.</p>
-<section id="feature-importance" class="level3">
-<h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
-<p>The following table shows the top 10 most important features for the XGBoost model’s classification decisions:</p>
+<section id="clustering-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-performance-metrics">Clustering Performance Metrics</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-striped caption-top table-sm small">
-<caption>Top 10 Feature Importance Scores</caption>
+<caption>K-Means Clustering Performance</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Feature</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Importance</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">speechiness</td>
-<td style="text-align: right;">0.1174</td>
+<td style="text-align: left;">Silhouette Score</td>
+<td style="text-align: right;">0.3402</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">acousticness</td>
-<td style="text-align: right;">0.1111</td>
+<td style="text-align: left;">Total Within-Cluster Sum of Squares (WCSS)</td>
+<td style="text-align: right;">784.8900</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Interpretation:</strong> The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. The WCSS measures the total distance of points from their assigned cluster centers—lower values suggest more compact clusters.</p>
+<hr>
+</section>
+</section>
+<section id="k-nearest-neighbors-knn-classification" class="level2">
+<h2 class="anchored" data-anchor-id="k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</h2>
+<p>K-Nearest Neighbors is a supervised classification algorithm that predicts a song’s region by finding the k most similar songs in the training data and using majority voting. Through cross-validation, we identified the optimal value of k that balances bias and variance.</p>
+<section id="knn-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="knn-predictions">KNN Predictions</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/knn-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter7_files/figure-html/knn-plot-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="knn-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="knn-performance-metrics">KNN Performance Metrics</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<caption>KNN Classification Performance</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Best k value</td>
+<td style="text-align: right;">5.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: right;">0.5417</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">key_6</td>
-<td style="text-align: right;">0.0538</td>
+<td style="text-align: left;">Precision (East Coast)</td>
+<td style="text-align: right;">0.5443</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">danceability</td>
-<td style="text-align: right;">0.0533</td>
+<td style="text-align: left;">Recall (East Coast)</td>
+<td style="text-align: right;">0.5119</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="decision-tree-classification" class="level2">
+<h2 class="anchored" data-anchor-id="decision-tree-classification">Decision Tree Classification</h2>
+<p>Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. This model’s main advantage is explainability: we can visualize exactly which features and thresholds the algorithm uses to make predictions, and we can extract feature importance scores.</p>
+<section id="decision-tree-model" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-model">Decision Tree Model</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/tree-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter7_files/figure-html/tree-plot-1.png" class="img-fluid figure-img" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/feature-importance-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter7_files/figure-html/feature-importance-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="decision-tree-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-performance-metrics">Decision Tree Performance Metrics</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<caption>Decision Tree Classification Performance</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cost Complexity Parameter</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Max Tree Depth</td>
+<td style="text-align: right;">3.0000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">key_8</td>
-<td style="text-align: right;">0.0478</td>
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: right;">0.7798</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">mood_score</td>
-<td style="text-align: right;">0.0462</td>
+<td style="text-align: left;">Precision (East Coast)</td>
+<td style="text-align: right;">0.8052</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">key_7</td>
-<td style="text-align: right;">0.0461</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">key_10</td>
-<td style="text-align: right;">0.0446</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">loudness</td>
-<td style="text-align: right;">0.0446</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">liveness</td>
-<td style="text-align: right;">0.0441</td>
+<td style="text-align: left;">Recall (East Coast)</td>
+<td style="text-align: right;">0.7381</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="misclassified-songs" class="level3">
-<h3 class="anchored" data-anchor-id="misclassified-songs">Misclassified Songs</h3>
-<p>Songs that the model incorrectly classified. This can help identify edge cases or patterns the model struggles with:</p>
+<section id="decision-tree-misclassified-songs" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-misclassified-songs">Decision Tree Misclassified Songs</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-striped caption-top table-sm small">
-<caption>Songs Misclassified by XGBoost Model</caption>
+<caption>Songs Misclassified by Decision Tree</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Track Name</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Artist Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Song Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Artist</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Actual Region</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Predicted Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Acousticness</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Hip Hop Hooray</td>
-<td style="text-align: left;">Naughty By Nature</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">C.R.E.A.M. (Cash Rules Everything Around Me)</td>
-<td style="text-align: left;">Wu-Tang Clan</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Where The Hood At</td>
+<td style="text-align: left;">X Gon' Give It To Ya</td>
 <td style="text-align: left;">DMX</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0325</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Juicy - 2005 Remaster</td>
-<td style="text-align: left;">The Notorious B.I.G.</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
+<td style="text-align: left;">One</td>
+<td style="text-align: left;">Ghostface Killah</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0254</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Dynamite!</td>
-<td style="text-align: left;">The Roots;Rehani Sayed</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
+<td style="text-align: left;">Release Yo' Delf</td>
+<td style="text-align: left;">Method Man</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0093</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Made You Look (feat. Jadakiss &amp; Ludacris) - Remix</td>
-<td style="text-align: left;">Nas;Jadakiss;Ludacris</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
+<td style="text-align: left;">Guess Who's Back</td>
+<td style="text-align: left;">Rakim</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Waiting For The World To End</td>
+<td style="text-align: left;">Rakim</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0735</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lifes On The Line</td>
+<td style="text-align: left;">50 Cent</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0081</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Self Conscience - Dirty Version</td>
+<td style="text-align: left;">Prodigy;Nas</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4,3,2,1</td>
+<td style="text-align: left;">LL COOL J;Method Man;Redman;DMX;Cannibus</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0870</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mama Said Knock You Out</td>
+<td style="text-align: left;">LL COOL J</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0314</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crazy</td>
+<td style="text-align: left;">50 Cent;DJ Whoo Kid</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0179</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Roses</td>
+<td style="text-align: left;">Outkast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0482</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stop Being Greedy</td>
+<td style="text-align: left;">DMX</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0098</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Got Ur Self A Gun</td>
+<td style="text-align: left;">Nas</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0118</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Going Back to Cali - 2014 Remaster</td>
+<td style="text-align: left;">The Notorious B.I.G.</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.2070</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No Endz, No Skinz</td>
+<td style="text-align: left;">Big L</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0589</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MVP</td>
+<td style="text-align: left;">Big L</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0649</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">How To Rob</td>
+<td style="text-align: left;">50 Cent;The Madd Rapper</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0575</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Part II</td>
+<td style="text-align: left;">Method Man;Redman</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0383</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Put Your Hands Where My Eyes Could See (feat. Jamal)</td>
 <td style="text-align: left;">Busta Rhymes;Jamal</td>
-<td style="text-align: left;">East</td>
-<td style="text-align: left;">West</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0086</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Ain't No Fun (If the Homies Cant Have None) (feat. Nate Dogg, Warren G &amp; Kurupt)</td>
-<td style="text-align: left;">Snoop Dogg;Kurupt;Warren G;Nate Dogg</td>
-<td style="text-align: left;">West</td>
-<td style="text-align: left;">East</td>
+<td style="text-align: left;">Keep It Thoro</td>
+<td style="text-align: left;">Prodigy</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0414</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">The Real Slim Shady</td>
-<td style="text-align: left;">Eminem</td>
-<td style="text-align: left;">West</td>
-<td style="text-align: left;">East</td>
+<td style="text-align: left;">We Trying to Stay Alive (feat. John Forté &amp; Pras)</td>
+<td style="text-align: left;">Wyclef Jean;John Forte;Pras</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0056</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Nuthin' But A "G" Thang</td>
+<td style="text-align: left;">Ten Crack Commandments - 2014 Remaster</td>
+<td style="text-align: left;">The Notorious B.I.G.</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">0.0393</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">It Was A Good Day</td>
+<td style="text-align: left;">Ice Cube</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.3300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Just a Friend</td>
+<td style="text-align: left;">Biz Markie</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ms. Jackson</td>
+<td style="text-align: left;">Outkast</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1430</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Keep Ya Head Up</td>
+<td style="text-align: left;">2Pac</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1440</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gold Digger</td>
+<td style="text-align: left;">Kanye West;Jamie Foxx</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.0195</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">What's The Difference</td>
+<td style="text-align: left;">Dr. Dre;Eminem;Xzibit</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.2520</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Still D.R.E.</td>
 <td style="text-align: left;">Dr. Dre;Snoop Dogg</td>
-<td style="text-align: left;">West</td>
-<td style="text-align: left;">East</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1750</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No Vaseline</td>
+<td style="text-align: left;">Ice Cube</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1790</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">21 Questions</td>
+<td style="text-align: left;">50 Cent;Nate Dogg</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.3560</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">What You Wanna Do?</td>
+<td style="text-align: left;">Kausion;Gonzoe</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I Get Around</td>
+<td style="text-align: left;">2Pac;Digital Underground</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1560</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Why We Thugs</td>
+<td style="text-align: left;">Ice Cube</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.3260</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gangsta Bitch</td>
+<td style="text-align: left;">Apache</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1410</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Hello</td>
 <td style="text-align: left;">Ice Cube;Dr. Dre;MC Ren</td>
-<td style="text-align: left;">West</td>
-<td style="text-align: left;">East</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.1550</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fuck You</td>
+<td style="text-align: left;">Dr. Dre;Devin The Dude;Snoop Dogg</td>
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">0.2940</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="random-forest-classification" class="level2">
+<h2 class="anchored" data-anchor-id="random-forest-classification">Random Forest Classification</h2>
+<p>Random Forest is an ensemble learning method that builds multiple decision trees and aggregates their predictions. By combining many trees trained on random subsets of data and features, it reduces overfitting and captures complex non-linear patterns that single trees miss. This is particularly valuable for our hip-hop classification task, where subtle production style interactions matter.</p>
+<section id="random-forest-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-predictions">Random Forest Predictions</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/rf-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="chapter7_files/figure-html/rf-plot-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="random-forest-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-performance-metrics">Random Forest Performance Metrics</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<caption>Random Forest Classification Performance</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Features per split (mtry)</td>
+<td style="text-align: right;">5.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of trees</td>
+<td style="text-align: right;">258.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Min samples per node</td>
+<td style="text-align: right;">8.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: right;">0.5298</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Precision (East Coast)</td>
+<td style="text-align: right;">0.5287</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Recall (East Coast)</td>
+<td style="text-align: right;">0.5476</td>
 </tr>
 </tbody>
 </table>

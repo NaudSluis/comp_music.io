@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-640dd312b7610509fdf9c751dea76e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce4d84db04495a5d12d2d2a0f2c226df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cd3e8f1db2276dbed011a7d6a924d4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../portfolio/chapter7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chapter 7: Clustering</span></a>
+ <span class="menu-text">Chapter 7: Classification &amp; Clustering Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -193,8 +193,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -218,15 +224,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Here, we dive into the tempo of our four songs. To make these tempograms, we have used both the autocorrelation (ATC) method, which is better at detecting lower BPM’s as the Direct Fourier Transform (DFT), which is better at higher tempo’s. The most typical songs are both slower, while the distinc songs are both faster.</p>
-<section id="listen-to-give-me-the-loot-and-bitch-please" class="level4">
-<h4 class="anchored" data-anchor-id="listen-to-give-me-the-loot-and-bitch-please">Listen to Give me the Loot and Bitch Please</h4>
-<audio controls="" style="width: 100%;">
-<source src="../gmtl.m4a" type="audio/mp4">
-</audio>
-<audio controls="" style="width: 100%;">
-<source src="../bp.m4a" type="audio/mp4">
-</audio>
+<p>Here, we dive into the tempo of the four songs. To make these tempograms, we have used both the autocorrelation (ATC) method, which is better at detecting lower BPM’s as the Direct Fourier Transform (DFT), which is better at higher tempo’s. The most typical songs are both slower, while the distinc songs are both faster.</p>
+<div class="analyzer-track">
+<p><span class="track-label">Give Me The Loot - The Notorious B.I.G.</span> <audio controls=""> <source src="../gmtl.m4a" type="audio/mp4"> </audio></p>
+</div>
+<div class="analyzer-track">
+<p><span class="track-label">Bitch Please - Snoop Dogg &amp; Xzibit</span> <audio controls=""> <source src="../bp.m4a" type="audio/mp4"> </audio></p>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -238,15 +242,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>In this tempogram, you can see both the tempogram of Give Me The Loot and Bitch Please. In the tempogram of GMTL, you see the most clear line at 45 BPM and a darker line at around 90 BPM. The latter is a more realistic tempo for the song. In addition, the lines are bright at the start, but quickly become much darker. This is explainable by more samples coming into the song</p>
 <p>The tempograph of Bitch Please picking up on more tempos, all quite as prominent as the other. When listening to the song, the tempo seems quite the same as in GMTL. When you look at the graphs side by side, you can see that the lines of GMTL and BP line up. BP also has a tempo of 95 BPM.</p>
-</section>
-<section id="listen-to-c.r.e.a.m-and-without-me" class="level4">
-<h4 class="anchored" data-anchor-id="listen-to-c.r.e.a.m-and-without-me">Listen to C.R.E.A.M and Without Me</h4>
-<audio controls="" style="width: 100%;">
-<source src="../cream.m4a" type="audio/mp4">
-</audio>
-<audio controls="" style="width: 100%;">
-<source src="../wm.m4a" type="audio/mp4">
-</audio>
+<div class="analyzer-track">
+<p><span class="track-label">C.R.E.A.M. - Wu-Tang Clan</span> <audio controls=""> <source src="../cream.m4a" type="audio/mp4"> </audio></p>
+</div>
+<div class="analyzer-track">
+<p><span class="track-label">Without Me - Eminem</span> <audio controls=""> <source src="../wm.m4a" type="audio/mp4"> </audio></p>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -258,6 +259,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>In this tempogram, you can see both the tempogram of C.R.E.A.M. and Without Me. CREAM picks up on a spread of beats. The most prominent is at around 180 BPM. However, when listening, half time of 90 BPM feels more natural.</p>
 <p>The tempogram of without me is very clear. There are two lines, one at 220 BPM and one at 440 BPM. However, the actual BPM is at 120 BPM. The reason that the tempogram picks up on 220 BPM is probably due to the hi-hat, that hits on double speed.</p>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>To summerize, the both most typical track from each coast has a BPM below 100. Both distinctive tracks have a BPM higher than 100. Therefore, we can say that it is probable than a higher BPM is rap and hip-hop songs is generally more seen at the outliers of the genre and not at core. Here, the coasts seem to match.</p>
 
 
 </section>
