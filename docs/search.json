@@ -1,214 +1,10 @@
 [
   {
-    "objectID": "portfolio/chapter1.html",
-    "href": "portfolio/chapter1.html",
-    "title": "Chapter 1: The Corpus",
-    "section": "",
-    "text": "Corpus selection and preperation\nThe corpus for this analysis is a combination of two playlists from spotify: “West Side Classics” and “East Coast Classics”. These playlists were chosen, because they were very popular on spotify, with 141.754 and 40.882 likes respectivally. As there is no golden standard for what songs are considered “West Coast” or “East Coast”, this method of popularity was used, which is similair to methods used by Boros (2025) and Gilbers et al. (2019).\nIn the West Coast (W.C.) playlist, some popular East Coast (E.C.) artist appeard. To mitigate this problem, artist that were in both datasets were noted and placed in their corresponding Coast. The artist ‘Outkast’ also appeared in both datasets and was removed as Outkast originated from Atlanta (not W.C. nor E.C.). Moreover, “West Side Classics” contained 84 songs, while “East Coast Classics” contained 177 after the previous step of moving around songs. As this is a difference of more that half of the songs, the E.C. set was downsampled to the W.C. set, both now containing 84 songs.\nAfter balancing the coasts, the corpora were combined. After that, an extra column region was added having either the value east or west corresponding to that rows coast.\n\n\nTrack selection\nTo make analysis about track level information, two tracks per coast were selected. These songs needed to be representative for the range of music of every coast. To select these without randomly choosing two, one is the most respresentative for that coast and the other is a track distinctive for its coast, far from the other coast and not an outlier in its own coast. The latter was chosen so that the most distinctive track from a coast is not a general outlier (i.e. the most distinctive song for a coast could be a song that does not represent either coasts).\nFirst, all numerical features except “Popularity” (as this measure is changing) from the Spotify API were normalised. Second, the centroid (i.e. the mean over all features) of the data was calculated. To select the most representative song, the euclidean distance from each song to the centroid was calculated, and the song with the smallest distance was selected. To select the most distinctive song, the euclidean distance from each song to the other coast’s centroid was calculated. From that, the distance to its own coast’s centroid was subtracted. The song that was the furthest from the other coast’s centroid, while being close to its own coast’s centroid was selected. The songs that were selected are:\n\n\n\n\n\n\nEast Coast\n\n\nWest Coast\n\n\n\n\nRepresentative\n\n\nDistinct\n\n\nRepresentative\n\n\nDistinct\n\n\n\n\n\n\nGive Me The Loot The Notorious B.I.G.\n\n\nC.R.E.A.M. Wu-Tang Clan\n\n\nBitch Please Snoop Dogg & Xzibit\n\n\nWithout Me Eminem",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 1: The Corpus"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter4.html",
-    "href": "portfolio/chapter4.html",
-    "title": "Chapter 4: Loudness",
-    "section": "",
-    "text": "Loudness of all four songs, structured in per song, per side, total. So first a song and analyses, then of the other from that side, then comparing those. Then the other side and concluding what we see in total",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 4: Loudness"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter3.html",
-    "href": "portfolio/chapter3.html",
-    "title": "Chapter 3: Chroma features",
-    "section": "",
-    "text": "We first start out with chromafeatures. Take a look at the side by side chromagrams of the most typical songs of each coast.\n\nGive Me The Loot - The Notorious B.I.G.   \n\n\nBitch Please - Snoop Dogg & Xzibit   \n\n\n\n\n\n\n\n\n\n\nThe difference between these two songs is quite big. “Give Me The Loot” is packed with sounds happening all over the place, while “Bitch Please” is much more straightforward and stable.\nListen to both songs in the windown 2:00-2:10. In GMTL, you hear a beat, a two voices, three or four samples and record scratches, all in 10 seconds! Eventhough this is an extreme window in the track, it illustrates the richness of the sound of this song. When listening to other parts of the song, you can hear a stable sample and Biggies voice. The sample form the basis of the song, hence the quite stable line at B-flat. Moreover, throughout the song, there are a lot of yellow spikes seen btween C-sharp and F-sharp. This is explainable by Biggies voice. It quite deep from itself (hence the lower notes) and has some spikes to higher notes, being the highest at the 150-180 seconds mark.\nOn the other hand, in BP, the song is more melodically stable. There is a beat and a sample that stays stable throughout the whole song. In the 2:00-2:10 window, you can hear two more samples that both fade in and out throughout the song, a long sliding synth and a synthesized triangle sound. These samples follow the same melodical pattern. The stair-like pattern you hear from these samples, cannot be seen in the chromagram. What you can see, is that were the sliding synth is prominent (120-140 seconds and from 180 untill the end of the song), the B and F-sharp pitches are more yellow, while the rest of the pitches get darker.\n\n\n\n\n\n\n\n\n\nWhen comparing the Self-Similarity matrices, both songs show similar base patterns of beats and samples, but with different intensities. GMTL displays more bright yellow lines indicating greater pitch variation, while BP shows less intense patterns, reflecting its more stable melodic structure.\n\nC.R.E.A.M. - Wu-Tang Clan   \n\n\nWithout Me - Eminem   \n\n\n\n\n\n\n\n\n\n\nThe difference between C.R.E.A.M (CREAM) and Without Me (WM) is a lot less aparent. The Pitches in CREAM remain very stable, being most prominent in F-sharp, A, and C-sharp. The melody throughout the whole track is essentially the same except for the 25 second intro. Impurities in the pitch classes can be explained by many different voices, as Wu-Tang Clan is a big rap group.\nWM is also quite a rich songs, but stays more stable in pitch class than GMTL we saw earlier. It’s most intense in G and D, and also periodically in F. There is a melodical riff in the background (a oboe like sound) and goes down in steps periodically. This can not really be seen in the chromagram, which can be explained due to the fact that it is quite a background sample. Eminems voice, for example, is much more prominent.\n\n\n\n\n\n\n\n\n\nThe difference in the SSM’s is more clear. The SSM of CREAM has quite some repeating blocks, alternated with bright lines. This is, again, only explainable by the different voices heard.\nThe SSM of WM quite bright allover. You can see some blocks, but they are all quite small. Eminem has a very prominent, acticulated voice, explaining the scale of differences.\n\nConclusion\nTo conclude this chapter, we can see that W.C. songs are more stable in adhering to their pitch classes. E.C. songs differ: the chromagram of GMTL does not have a prominent stable pitch class, while CREAM does. So, maybe, E.C. songs are more free in their pitch use that W.C. songs.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 3: Chroma features"
-    ]
-  },
-  {
-    "objectID": "portfolio/index.html",
-    "href": "portfolio/index.html",
-    "title": "Portfolio Overview",
-    "section": "",
-    "text": "During the early to mid-1990s, the American hip-hop landscape was defined by an intense and highly publicized rivalry between the East Coast and the West Coast. Rooted in regional pride and fueled by competing record labels, the feud grew from a musical competition into a severe cultural conflict. The central figures of this divide were The Notorious B.I.G. (representing the East Coast) and Tupac Shakur (representing the West Coast).\nWhat began as lyrical jabs and media provocation eventually escalated into real-world violence. This era of hip-hop was marked by an underlying tension that tragically culminated in the drive-by shootings and unsolved murders of Shakur in September 1996 and The Notorious B.I.G. just six months later in March 1997.\nWhile the history, the media coverage, and the cultural tragedy of this era are heavily documented, this portfolio tries to answers the question whether this east-west feud was not only prevalent in culture, but also whether there was a real difference in the music itself.\nFirst, we take a look at the corpus and the main spread of it’s features. Then, we dive deeper into four songs from the corpus, by looking at Chroma, Timbre, Tempo and loudness. After that, we will try to cluster and classify the songs, looking at whether machine learning models can seperate the coasts.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview"
-    ]
-  },
-  {
-    "objectID": "homework/assignment4.html",
-    "href": "homework/assignment4.html",
-    "title": "Week 11",
-    "section": "",
-    "text": "For this weeks assignment, I have implemented two KNN models. One was trained on the orginal spotify features and one was trained on the Spotify features and 3 extra features. These are:\nI found these extra features from a hit-song-predictor project and they seemed like a good addition to the features. First, energy_dancebility gives and indication of a ‘party factor’, for tracks that are both energetic and danceble.Second, Valence x energy gives an indication of positive vibes and upbeatness. Last, mood score indicates something about the overall emotional tone.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 11"
-    ]
-  },
-  {
-    "objectID": "homework/assignment4.html#knn-classification-results-without-feature-engineering",
-    "href": "homework/assignment4.html#knn-classification-results-without-feature-engineering",
-    "title": "Week 11",
-    "section": "KNN Classification Results without feature engineering",
-    "text": "KNN Classification Results without feature engineering\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBest k: 1\nHere, you see a plot of the KNN prediction constructed with PCA and a confusion matrix of the predictions. In the plot, the ground truth is indicated with the shape and the classifiction with the color. The plot shows that the model is able to capture some of the variance in the data, but there is a lot of overlap between the two classes, indicating that the model is not performing very well. The confusion matrix confirms this, showing that there are a lot of misclassifications.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 11"
-    ]
-  },
-  {
-    "objectID": "homework/assignment4.html#knn-classification-results-with-feature-engineering",
-    "href": "homework/assignment4.html#knn-classification-results-with-feature-engineering",
-    "title": "Week 11",
-    "section": "KNN Classification Results with feature engineering",
-    "text": "KNN Classification Results with feature engineering\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBest k: 1\nThe model with the extra features show a non-significant improvement on the classification. That could be, because there is little difference between east and west coast, but it could also be due to the fact that the features add little extra as they are primarily focused around enery and valence. If these features are not imporant at all, adding additional features for this does not help.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 11"
-    ]
-  },
-  {
-    "objectID": "homework/assignment1.html",
-    "href": "homework/assignment1.html",
-    "title": "Week 9",
-    "section": "",
-    "text": "Homework week 9\n\nIntroduction\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made visualisations for the song ‘Bitch please’ by Snoop Dogg and Xzibit. I chose this song as it is statistically the most west-coast, meaning its audio profile sits closest to the overall average of all West Coast tracks (Only considering spotifies features).\n\n\nChromagram\n\n\n\nBitch Please chromagram\n\n\nIn this chromagram, you can see that the song is mostly in the keys B and F#, with G being high in the beginning of the song, but becoming less prominant later. This repetitiveness of pitches (i.e. the B and F#) can be explained by the fact that most rap songs have a looped sample, which repeat throughout the whole song\n\n\nSelfSM timbre features\n\n\n\nBitch Please SSM\n\n\nIn this self-similarity matrix, you can see that the song features a highly dense, checkerboard-like pattern across the entire track, with consistent horizontal and vertical stripes indicating regular, repeating intervals of high similarity. This intense repetitiveness in the song’s timbre can be explained by the fact that most rap songs, particularly from this era of West Coast hip-hop, are built on a continuous, looped instrumental beat, meaning the underlying drum textures, basslines, and instrumentation repeat almost entirely unchanged throughout the whole song.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 9"
-    ]
-  },
-  {
-    "objectID": "track_level.html",
-    "href": "track_level.html",
-    "title": "Naud Sluis",
-    "section": "",
-    "text": "Some content"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Naud Sluis",
-    "section": "",
-    "text": "Welcome to my site!\nIn the navigation bar at the top, you can find my portfolio and the weekly homework assignments. Have fun!"
-  },
-  {
-    "objectID": "homework/index.html",
-    "href": "homework/index.html",
-    "title": "Homework Assignments",
-    "section": "",
-    "text": "This section contains all my weekly coursework and assignments.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments"
-    ]
-  },
-  {
-    "objectID": "homework/assignment3.html",
-    "href": "homework/assignment3.html",
-    "title": "Week 11",
-    "section": "",
-    "text": "Homework week 11\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features) (See here for more information).\n\nListen to Give me the Loot by The Notorius B.I.G.\n\n\n\n\n\n\n\n\n\n\n\n\nIn this graph, you see both the tempogram of Give Me The Loot made with Autocorrelation (ATC) and with the Discrete Fourier Transform. In both graphs, the lines are straight, indicating a steady rythm throughout the song. The tempo is around 90 BPM, which is a typical tempo for hip-hop/rap. In the ATC tempogram, the brightest line is prominent at around 45 BPM. In the DFT tempogram, the lines show at 90 BPM and multiples of that. Taking both the 45 BPM of the ATC and the 90 BPM of the DFT graph, we can conclude that the rythm of the song lies at around 90 BPM (45 BPM is half beat). Moreover, what stands out is that the tempo is prominent in the first 50 seconds, after which is fades out. If you listen closely in the song, the voice of Biggie get more prominent around the 50 second mark, resulting in less of a part of the output showing the beat, explaining this fading out phenomenon. Around the 100 seconds mark, there is a section where no tempo seems present. As you can hear in the song,the drums and samples are off around this time resulting in this gap in the tempo. In conclusion, this graph shows that this song has a steady beat with a tempo of around 90 BPM. This boom-bap-beat and tempo form the basis of the rapping, done by Biggies with his prominent voice.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 11"
-    ]
-  },
-  {
-    "objectID": "homework/assignment2.html",
-    "href": "homework/assignment2.html",
-    "title": "Week 10",
-    "section": "",
-    "text": "Homework week 10\nIn the late 1990s and early 2000s, American hip-hop was marked by a West Coast vs. East Coast feud, with fans strongly aligned to one side. The rivalry ultimately led to the deaths of Tupac and Biggie. For this week, I made a chordagram for the song ‘Give me the Loot’ by The Notorius B.I.G. I chose this song as it is statistically the most east-coast, meaning its audio profile sits closest to the overall average of all East Coast tracks (Only considering spotify’s features). #### Listen to the song   \n\n\n\n\n\n\n\n\n\nThis is a chordagram of Give me the Loot by The Notorius B.I.G. In the chrodagram, you can see that the overall color is greenish, and that there are a lot of soft horizontal blue lines. The fact that the overall color is greenish and, for example, not bright yellow in most parts, tells us that the sound of this song is very rich. When listening to the song, there is a soft background sample overlayed with harder drums and ofcourse Biggies prominent voice. Together with that, there are a lot of sounds going in and out of the song: alarm like souds, record scratches and other voices. In the graph, you can also see a lot of vertical lines. Oftentimes in the song, you hear the samples and drums stop, only keeping Biggies voice. These stops correspond to the vertical lines, as there is a sudden stop of a lot of chords.",
-    "crumbs": [
-      "Homework",
-      "Homework Assignments",
-      "Week 10"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter5.html",
-    "href": "portfolio/chapter5.html",
-    "title": "Chapter 5: Timbre",
-    "section": "",
-    "text": "In this chapter, we take a loot at the timbre features of the four songs.\n\nGive Me The Loot - The Notorious B.I.G.   \n\n\nBitch Please - Snoop Dogg & Xzibit   \n\n\n\n\n\n\n\n\n\n\nIn this figure, you see the cepstrograms of GMTL and BP. GMTL has a distinctive pattern. mfcc02 is bright yellow, just as mfcc04, while mfcc03 is very dark. This means the audio strongly aligns with the second and fourth coefficients but completely lacks the third. Because these horizontal bands barely fluctuate over time, the visual data tell us that the song relies on a highly consistent, looped sample. However, when listening to the song, it sounds less consistent, due to the many samples fading in and out. In the end of the songs, you hear gunshots. These are visible in the cepstrogram by the vertical stripe at the end.\nOn the other hand, BP has a more diverse timbre. Although the voices are quite steady, there are samples going in and out often. Interestingly, in the last 50 seconds of the track, the pattern stabilizes and a single instrumental loop becomes highly prominent, which explains why mfcc_03 suddenly becomes much darker and more consistent during that final frame.\n\nC.R.E.A.M. - Wu-Tang Clan   \n\n\nWithout Me - Eminem   \n\n\n\n\n\n\n\n\n\n\nIn this figure, you see the cepstrograms of C.R.E.A.M. and Without Me. C.R.E.A.M. has a distinctive pattern. mfcc_02 is solid bright yellow, and mfcc_04 is also relatively bright, while mfcc_03 is dark. This means the audio strongly aligns with the second and fourth coefficients but largely lacks the third, just like in GMTL. Because these horizontal bands barely fluctuate over time, the visual data confirms that the song relies on a highly consistent, looped sample, giving it that steady, unchanging sonic tone. Which is obviously heard in this songs, in contrast to GMTL.\nOn the other hand, Without Me has a more diverse timbre. The continuous vertical striping across the lower coefficients shows a constantly shifting texture, meaning there are different instruments and rhythmic elements going in and out often. Interestingly, the rapidly alternating yellow and dark patterns in mfcc_02 and mfcc_03 throughout the entire track highlight a highly dynamic, bouncy production style, which explains why the visual data looks so much more fragmented and active compared to a single, static instrumental loop. This cepstrogram has similarities with BP, in the sense that there is a diverse timbre in both.\n\nConclusion\nTo summarize, both GMTL and CREAM have a steady timbre, which is apperantly distinctive for the E.C. BP and WM have a more diverse timbre, which seems to be distictive for the W.C.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 5: Timbre"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter6.html",
-    "href": "portfolio/chapter6.html",
-    "title": "Chapter 6: Temporal features",
-    "section": "",
-    "text": "Here, we dive into the tempo of the four songs. To make these tempograms, we have used both the autocorrelation (ATC) method, which is better at detecting lower BPM’s as the Direct Fourier Transform (DFT), which is better at higher tempo’s. The most typical songs are both slower, while the distinc songs are both faster.\n\nGive Me The Loot - The Notorious B.I.G.   \n\n\nBitch Please - Snoop Dogg & Xzibit   \n\n\n\n\n\n\n\n\n\n\nIn this tempogram, you can see both the tempogram of Give Me The Loot and Bitch Please. In the tempogram of GMTL, you see the most clear line at 45 BPM and a darker line at around 90 BPM. The latter is a more realistic tempo for the song. In addition, the lines are bright at the start, but quickly become much darker. This is explainable by more samples coming into the song\nThe tempograph of Bitch Please picking up on more tempos, all quite as prominent as the other. When listening to the song, the tempo seems quite the same as in GMTL. When you look at the graphs side by side, you can see that the lines of GMTL and BP line up. BP also has a tempo of 95 BPM.\n\nC.R.E.A.M. - Wu-Tang Clan   \n\n\nWithout Me - Eminem   \n\n\n\n\n\n\n\n\n\n\nIn this tempogram, you can see both the tempogram of C.R.E.A.M. and Without Me. CREAM picks up on a spread of beats. The most prominent is at around 180 BPM. However, when listening, half time of 90 BPM feels more natural.\nThe tempogram of without me is very clear. There are two lines, one at 220 BPM and one at 440 BPM. However, the actual BPM is at 120 BPM. The reason that the tempogram picks up on 220 BPM is probably due to the hi-hat, that hits on double speed.\n\nConclusion\nTo summerize, the both most typical track from each coast has a BPM below 100. Both distinctive tracks have a BPM higher than 100. Therefore, we can say that it is probable than a higher BPM is rap and hip-hop songs is generally more seen at the outliers of the genre and not at core. Here, the coasts seem to match.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 6: Temporal features"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter2.html",
-    "href": "portfolio/chapter2.html",
-    "title": "Chapter 2: Exploratoring the features",
-    "section": "",
-    "text": "Before diving into songs specifically, we will look at whether there are differences on a coast level. To do this, we analyse a plot containing density-plots of both coast overlayed with eachother. This way, we can clearly see where the coasts’ features overlap and where not.\n\n\n\n\n\n\n\n\n\nOverall, the distributions are quite similiar. Both coasts’ song distributions have relativaly the same spread of duration, energy, instrumentalness, key, liveness, loudness, mode, tempo and valence. Especially with a feature like tempo, it is striking to see how similair the two coasts are.\nNext to that, there are three features where the distributions differ. First, acousticness show a clear seperation. W.C. songs are heavily skewed to less acoustic songs, while E.C. have a more spread acousticness distribution. Second, W.C. songs are more skewed toward a higher danceability than E.C. songs. Last, speechiness in W.C. songs is skewed to the left relative to E.C.\nIn addition, what is interstring to see is that the instrumentallness of all songs is zero (due to the fact that it is mostly rap, hip-hop and samples), while the speechiness remains also relatively low (around 0.3). This combination indicates that the songs have a more musical beat while still revoling around vocals, describing a rythmic speech style which resonates with rap.\nNow that we have seen coast-level features, let’s dive into the four songs",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 2: Exploratoring the features"
-    ]
-  },
-  {
     "objectID": "portfolio/chapter7.html",
     "href": "portfolio/chapter7.html",
     "title": "Chapter 7: Classification & Clustering Analysis",
     "section": "",
-    "text": "This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 7: Classification & Clustering Analysis"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter7.html#introduction",
-    "href": "portfolio/chapter7.html#introduction",
-    "title": "Chapter 7: Classification & Clustering Analysis",
-    "section": "",
-    "text": "This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.",
-    "crumbs": [
-      "Portfolio",
-      "Portfolio Overview",
-      "Chapter 7: Classification & Clustering Analysis"
-    ]
-  },
-  {
-    "objectID": "portfolio/chapter7.html#feature-engineering-selection-methodology",
-    "href": "portfolio/chapter7.html#feature-engineering-selection-methodology",
-    "title": "Chapter 7: Classification & Clustering Analysis",
-    "section": "Feature Engineering & Selection Methodology",
-    "text": "Feature Engineering & Selection Methodology\nTo improve model performance, we refined our feature set through data-driven analysis:\n\nFeature Selection\nWe removed noisy features with near-zero correlation to region: Removed: Key (r = -0.006) and Time Signature (r = -0.11) - minimal predictive value Retained: Acousticness (r = 0.40) and Speechiness (r = 0.39) - strongest discriminators —",
+    "text": "In this chapter, we will look at clustering and multiple classification algoritms. Instead of identifying a coast by hand, it will be interesting to see whether there can be algorithmicly determined to which coast a song belongs. First, we will start with a small feature selection section. Then, we try K-Means clustering. After that, we try KNN, A single descision tree and Random Forrest.",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",
@@ -220,7 +16,7 @@
     "href": "portfolio/chapter7.html#k-means-clustering",
     "title": "Chapter 7: Classification & Clustering Analysis",
     "section": "K-Means Clustering",
-    "text": "K-Means Clustering\nK-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. Unlike supervised methods, it does not use region labels during training—instead, it discovers natural patterns in the data. This allows us to assess how well the algorithm’s clusters align with the known geographic regions.\n\nClustering Visualization\n\n\n\n\n\n\n\n\n\n\n\nClustering Performance Metrics\n\n\n\nK-Means Clustering Performance\n\n\nMetric\nValue\n\n\n\n\nSilhouette Score\n0.3402\n\n\nTotal Within-Cluster Sum of Squares (WCSS)\n784.8900\n\n\n\n\n\nInterpretation: The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. The WCSS measures the total distance of points from their assigned cluster centers—lower values suggest more compact clusters.",
+    "text": "K-Means Clustering\nK-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. As we are trying to find out whether K-Means can distinguish the two coasts, we set the K to 2.\n\nClustering Visualization\n\n\n\n\n\n\n\n\n\nThis is the with PCA visualised result of K-Means clustering for E.C. and W.C. Before looking at metrics, you can see that the clustering did not do well on disecting east and west. The blue cluster is quite small in relation to the orange cluster and shapes differ throughout. Also in the orange cluster is a lot of differentiation.\n\nClustering Performance Metrics\n\n\n\nK-Means Clustering Performance\n\n\nMetric\nValue\n\n\n\n\nSilhouette Score\n0.3402\n\n\n\n\n\nThe Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. Thus, the silhoutte score achieved indicates weak structure. Or, in other words, there is some structure in the data, but not a lot.",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",
@@ -232,7 +28,7 @@
     "href": "portfolio/chapter7.html#k-nearest-neighbors-knn-classification",
     "title": "Chapter 7: Classification & Clustering Analysis",
     "section": "K-Nearest Neighbors (KNN) Classification",
-    "text": "K-Nearest Neighbors (KNN) Classification\nK-Nearest Neighbors is a supervised classification algorithm that predicts a song’s region by finding the k most similar songs in the training data and using majority voting. Through cross-validation, we identified the optimal value of k that balances bias and variance.\n\nKNN Predictions\n\n\n\n\n\n\n\n\n\n\n\nKNN Performance Metrics\n\n\n\nKNN Classification Performance\n\n\nMetric\nValue\n\n\n\n\nBest k value\n5.0000\n\n\nAccuracy\n0.5417\n\n\nPrecision (East Coast)\n0.5443\n\n\nRecall (East Coast)\n0.5119",
+    "text": "K-Nearest Neighbors (KNN) Classification\nK-Nearest Neighbors is a supervised classification algorithm that predicts a song’s region by finding the k most similar songs in the training data and using majority voting. Through 5 fold cross-validation, we identified the optimal value of k that balances bias and variance.\n\nKNN Predictions\n\n\n\n\n\n\n\n\n\n\n\nKNN Performance Metrics\n\n\n\nKNN Confusion Matrix\n\n\n\n\n\n\n\n\n\nPredicted\n\n\n\n\nEast Coast\nWest Coast\n\n\n\n\nEast Coast\n43\n41\n\n\nWest Coast\n36\n48\n\n\n\n\n\n\nKNN Classification Performance\n\n\nMetric\nValue\n\n\n\n\nAccuracy\n0.5417\n\n\nPrecision\n0.5443\n\n\nRecall\n0.5119",
     "crumbs": [
       "Portfolio",
       "Portfolio Overview",

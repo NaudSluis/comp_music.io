@@ -3,21 +3,13 @@ title: "Chapter 7: Classification & Clustering Analysis"
 order: 7
 ---
 
-## Introduction
-
-This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.
+In this chapter, we will look at clustering and multiple classification algoritms. Instead of identifying a coast by hand, it will be interesting to see whether there can be algorithmicly determined to which coast a song belongs. First, we will start with a small feature selection section. Then, we try K-Means clustering. After that, we try KNN, A single descision tree and Random Forrest. 
 
 ---
 
-## Feature Engineering & Selection Methodology
+#### Feature Selection
+In chapter two we saw that a lot of the distributions of features were the same for both coasts. So, to remove nois for both clustering and classification, we removed `Key`, `Time Signature`, `Energy`, `Liveness`, `Mode`, `Loudness` and `Duration`.
 
-To improve model performance, we refined our feature set through data-driven analysis:
-
-### Feature Selection
-We removed noisy features with near-zero correlation to region:
-**Removed:** Key (r = -0.006) and Time Signature (r = -0.11) - minimal predictive value
-**Retained:** Acousticness (r = 0.40) and Speechiness (r = 0.39) - strongest discriminators
----
 
 ```{r setup}
 #| echo: false
@@ -45,7 +37,7 @@ west_color <- "#ff7f00"  # Orange for West Coast
 
 ## K-Means Clustering
 
-K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. Unlike supervised methods, it does not use region labels during training—instead, it discovers natural patterns in the data. This allows us to assess how well the algorithm's clusters align with the known geographic regions.
+K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. As we are trying to find out whether K-Means can distinguish the two coasts, we set the K to 2.
 
 ### Clustering Visualization
 
@@ -84,8 +76,8 @@ ggplot(pca_data, aes(x = PC1, y = PC2)) +
   ) +
   theme_minimal(base_size = 12) +
   labs(
-    title = "K-Means Clustering: Discovering Natural Patterns",
-    subtitle = "Shape indicates actual region | Color indicates assigned cluster",
+    title = "K-Means Clustering East Coast and West Coast",
+    subtitle = "Shape indicates actual region,  Color indicates assigned cluster",
     x = "Primary Characteristic (PC1)", 
     y = "Secondary Characteristic (PC2)"
   ) +
@@ -97,7 +89,9 @@ ggplot(pca_data, aes(x = PC1, y = PC2)) +
   )
 ```
 
-### Clustering Performance Metrics
+This is the with PCA visualised result of K-Means clustering for E.C. and W.C. Before looking at metrics, you can see that the clustering did not do well on disecting east and west. The blue cluster is quite small in relation to the orange cluster and shapes differ throughout. Also in the orange cluster is a lot of differentiation.
+
+#### Clustering Performance Metrics
 
 ```{r kmeans-metrics}
 #| echo: false
@@ -110,8 +104,8 @@ wcss <- round(sum(kmeans_result$model$withinss), 2)
 
 # Create metrics table
 metrics_kmeans <- data.frame(
-  Metric = c("Silhouette Score", "Total Within-Cluster Sum of Squares (WCSS)"),
-  Value = c(silhouette_score, wcss)
+  Metric = c("Silhouette Score"),
+  Value = c(silhouette_score)
 )
 
 kable(metrics_kmeans, 
@@ -119,16 +113,13 @@ kable(metrics_kmeans,
       caption = "K-Means Clustering Performance") %>%
   kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
 ```
-
-**Interpretation:** The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. The WCSS measures the total distance of points from their assigned cluster centers—lower values suggest more compact clusters.
-
----
+The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. Thus, the silhoutte score achieved indicates weak structure. Or, in other words, there is some structure in the data, but not a lot.
 
 ## K-Nearest Neighbors (KNN) Classification
 
-K-Nearest Neighbors is a supervised classification algorithm that predicts a song's region by finding the k most similar songs in the training data and using majority voting. Through cross-validation, we identified the optimal value of k that balances bias and variance.
+K-Nearest Neighbors is a supervised classification algorithm that predicts a song's region by finding the k most similar songs in the training data and using majority voting. Through 5 fold cross-validation, we identified the optimal value of k that balances bias and variance.
 
-### KNN Predictions
+#### KNN Predictions
 
 ```{r knn-plot}
 #| echo: false
@@ -186,18 +177,36 @@ ggplot(pca_data_knn, aes(x = PC1, y = PC2)) +
   )
 ```
 
-### KNN Performance Metrics
+
+
+#### KNN Performance Metrics
 
 ```{r knn-metrics}
 #| echo: false
 #| message: false
 #| warning: false
 
-# Calculate performance metrics
+library(knitr)
+library(kableExtra)
+
+# 1. Combine predictions and actuals
 confusion_knn <- oof_pred %>%
   bind_cols(Actual = plot_data_knn$Actual) %>%
   rename(Predicted = .pred_class)
 
+# 2. Generate the Confusion Matrix table
+conf_matrix <- table(Actual = confusion_knn$Actual, Predicted = confusion_knn$Predicted)
+
+# Convert to a data frame so kable formats it cleanly as a 2x2 grid
+conf_matrix_df <- as.data.frame.matrix(conf_matrix)
+
+# Print the Confusion Matrix
+kable(conf_matrix_df, 
+      caption = "KNN Confusion Matrix") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "Predicted" = ncol(conf_matrix_df)))
+
+# 3. Calculate performance metrics (Manual calculation)
 tp <- sum(confusion_knn$Predicted == "East Coast" & confusion_knn$Actual == "East Coast")
 fp <- sum(confusion_knn$Predicted == "East Coast" & confusion_knn$Actual != "East Coast")
 fn <- sum(confusion_knn$Predicted != "East Coast" & confusion_knn$Actual == "East Coast")
@@ -206,22 +215,20 @@ tn <- sum(confusion_knn$Predicted != "East Coast" & confusion_knn$Actual != "Eas
 accuracy_knn <- (tp + tn) / (tp + tn + fp + fn)
 precision_knn <- tp / (tp + fp)
 recall_knn <- tp / (tp + fn)
-best_k <- knn_result$best_k$neighbors
 
-# Create metrics table
+# 4. Create metrics table (excluding 'K')
 metrics_knn <- data.frame(
-  Metric = c("Best k value", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
-  Value = c(best_k, round(accuracy_knn, 4), round(precision_knn, 4), round(recall_knn, 4))
+  Metric = c("Accuracy", "Precision", "Recall"),
+  Value = c(round(accuracy_knn, 4), round(precision_knn, 4), round(recall_knn, 4))
 )
 
+# Print the Metrics Table
 kable(metrics_knn, 
       col.names = c("Metric", "Value"),
       caption = "KNN Classification Performance") %>%
-  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+
 ```
-
----
-
 ## Decision Tree Classification
 
 Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. This model's main advantage is explainability: we can visualize exactly which features and thresholds the algorithm uses to make predictions, and we can extract feature importance scores.

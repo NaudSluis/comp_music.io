@@ -200,21 +200,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#feature-engineering-selection-methodology" id="toc-feature-engineering-selection-methodology" class="nav-link" data-scroll-target="#feature-engineering-selection-methodology">Feature Engineering &amp; Selection Methodology</a>
-  <ul class="collapse">
-  <li><a href="#feature-selection" id="toc-feature-selection" class="nav-link" data-scroll-target="#feature-selection">Feature Selection</a></li>
-  </ul></li>
-  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-Means Clustering</a>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering">K-Means Clustering</a>
   <ul class="collapse">
   <li><a href="#clustering-visualization" id="toc-clustering-visualization" class="nav-link" data-scroll-target="#clustering-visualization">Clustering Visualization</a></li>
-  <li><a href="#clustering-performance-metrics" id="toc-clustering-performance-metrics" class="nav-link" data-scroll-target="#clustering-performance-metrics">Clustering Performance Metrics</a></li>
   </ul></li>
-  <li><a href="#k-nearest-neighbors-knn-classification" id="toc-k-nearest-neighbors-knn-classification" class="nav-link" data-scroll-target="#k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</a>
-  <ul class="collapse">
-  <li><a href="#knn-predictions" id="toc-knn-predictions" class="nav-link" data-scroll-target="#knn-predictions">KNN Predictions</a></li>
-  <li><a href="#knn-performance-metrics" id="toc-knn-performance-metrics" class="nav-link" data-scroll-target="#knn-performance-metrics">KNN Performance Metrics</a></li>
-  </ul></li>
+  <li><a href="#k-nearest-neighbors-knn-classification" id="toc-k-nearest-neighbors-knn-classification" class="nav-link" data-scroll-target="#k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</a></li>
   <li><a href="#decision-tree-classification" id="toc-decision-tree-classification" class="nav-link" data-scroll-target="#decision-tree-classification">Decision Tree Classification</a>
   <ul class="collapse">
   <li><a href="#decision-tree-model" id="toc-decision-tree-model" class="nav-link" data-scroll-target="#decision-tree-model">Decision Tree Model</a></li>
@@ -252,22 +242,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This chapter presents a comprehensive machine learning analysis of East Coast and West Coast hip-hop tracks using multiple classification and clustering techniques. We begin with unsupervised K-Means clustering to discover natural groupings in the data, followed by supervised K-Nearest Neighbors (KNN) classification to build a predictive model. Finally, we employ both Decision Tree** and Random Forest classifiers to identify the key features that distinguish between regional musical styles. This multi-model approach provides both exploratory insights and actionable feature importance metrics.</p>
+<p>In this chapter, we will look at clustering and multiple classification algoritms. Instead of identifying a coast by hand, it will be interesting to see whether there can be algorithmicly determined to which coast a song belongs. First, we will start with a small feature selection section. Then, we try K-Means clustering. After that, we try KNN, A single descision tree and Random Forrest.</p>
 <hr>
-</section>
-<section id="feature-engineering-selection-methodology" class="level2">
-<h2 class="anchored" data-anchor-id="feature-engineering-selection-methodology">Feature Engineering &amp; Selection Methodology</h2>
-<p>To improve model performance, we refined our feature set through data-driven analysis:</p>
-<section id="feature-selection" class="level3">
-<h3 class="anchored" data-anchor-id="feature-selection">Feature Selection</h3>
-<p>We removed noisy features with near-zero correlation to region: <strong>Removed:</strong> Key (r = -0.006) and Time Signature (r = -0.11) - minimal predictive value <strong>Retained:</strong> Acousticness (r = 0.40) and Speechiness (r = 0.39) - strongest discriminators —</p>
-</section>
+<section id="feature-selection" class="level4">
+<h4 class="anchored" data-anchor-id="feature-selection">Feature Selection</h4>
+<p>In chapter two we saw that a lot of the distributions of features were the same for both coasts. So, to remove nois for both clustering and classification, we removed <code>Key</code>, <code>Time Signature</code>, <code>Energy</code>, <code>Liveness</code>, <code>Mode</code>, <code>Loudness</code> and <code>Duration</code>.</p>
 </section>
 <section id="k-means-clustering" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-clustering">K-Means Clustering</h2>
-<p>K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. Unlike supervised methods, it does not use region labels during training—instead, it discovers natural patterns in the data. This allows us to assess how well the algorithm’s clusters align with the known geographic regions.</p>
+<p>K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. As we are trying to find out whether K-Means can distinguish the two coasts, we set the K to 2.</p>
 <section id="clustering-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="clustering-visualization">Clustering Visualization</h3>
 <div class="cell">
@@ -279,9 +262,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-</section>
-<section id="clustering-performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="clustering-performance-metrics">Clustering Performance Metrics</h3>
+<p>This is the with PCA visualised result of K-Means clustering for E.C. and W.C. Before looking at metrics, you can see that the clustering did not do well on disecting east and west. The blue cluster is quite small in relation to the orange cluster and shapes differ throughout. Also in the orange cluster is a lot of differentiation.</p>
+<section id="clustering-performance-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="clustering-performance-metrics">Clustering Performance Metrics</h4>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-striped caption-top table-sm small">
@@ -297,23 +280,19 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">Silhouette Score</td>
 <td style="text-align: right;">0.3402</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Total Within-Cluster Sum of Squares (WCSS)</td>
-<td style="text-align: right;">784.8900</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<p><strong>Interpretation:</strong> The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. The WCSS measures the total distance of points from their assigned cluster centers—lower values suggest more compact clusters.</p>
-<hr>
+<p>The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. Thus, the silhoutte score achieved indicates weak structure. Or, in other words, there is some structure in the data, but not a lot.</p>
+</section>
 </section>
 </section>
 <section id="k-nearest-neighbors-knn-classification" class="level2">
 <h2 class="anchored" data-anchor-id="k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</h2>
-<p>K-Nearest Neighbors is a supervised classification algorithm that predicts a song’s region by finding the k most similar songs in the training data and using majority voting. Through cross-validation, we identified the optimal value of k that balances bias and variance.</p>
-<section id="knn-predictions" class="level3">
-<h3 class="anchored" data-anchor-id="knn-predictions">KNN Predictions</h3>
+<p>K-Nearest Neighbors is a supervised classification algorithm that predicts a song’s region by finding the k most similar songs in the training data and using majority voting. Through 5 fold cross-validation, we identified the optimal value of k that balances bias and variance.</p>
+<section id="knn-predictions" class="level4">
+<h4 class="anchored" data-anchor-id="knn-predictions">KNN Predictions</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -324,11 +303,46 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="knn-performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="knn-performance-metrics">KNN Performance Metrics</h3>
+<section id="knn-performance-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="knn-performance-metrics">KNN Performance Metrics</h4>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-striped caption-top table-sm small">
+<table class="table table-striped table-hover caption-top table-sm small">
+<caption>KNN Confusion Matrix</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Predicted
+</div></th>
+</tr>
+<tr class="even">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">East Coast</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">West Coast</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">East Coast</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">West Coast</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">48</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small">
 <caption>KNN Classification Performance</caption>
 <thead>
 <tr class="header">
@@ -338,26 +352,21 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Best k value</td>
-<td style="text-align: right;">5.0000</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Accuracy</td>
 <td style="text-align: right;">0.5417</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Precision (East Coast)</td>
+<tr class="even">
+<td style="text-align: left;">Precision</td>
 <td style="text-align: right;">0.5443</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Recall (East Coast)</td>
+<tr class="odd">
+<td style="text-align: left;">Recall</td>
 <td style="text-align: right;">0.5119</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<hr>
 </section>
 </section>
 <section id="decision-tree-classification" class="level2">
