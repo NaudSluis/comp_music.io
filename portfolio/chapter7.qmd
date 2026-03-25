@@ -39,7 +39,7 @@ west_color <- "#ff7f00"  # Orange for West Coast
 
 K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. As we are trying to find out whether K-Means can distinguish the two coasts, we set the K to 2.
 
-### Clustering Visualization
+#### Clustering Visualization
 
 ```{r kmeans-plot}
 #| echo: false
@@ -177,8 +177,6 @@ ggplot(pca_data_knn, aes(x = PC1, y = PC2)) +
   )
 ```
 
-
-
 #### KNN Performance Metrics
 
 ```{r knn-metrics}
@@ -229,11 +227,13 @@ kable(metrics_knn,
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 
 ```
+As you can see in the visualisation of the KNN-classifier, the model did not classify the data well. As be seen in the performance metric, the model only reached a precision, recall and accuracy of around 0.5. This also matches the confusion matrix, where you can see it classfies about half to the right coast and half to the other.
+
 ## Decision Tree Classification
 
-Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. This model's main advantage is explainability: we can visualize exactly which features and thresholds the algorithm uses to make predictions, and we can extract feature importance scores.
+Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. The main advantage of this model is, is that it is very easy to interpret. In addition, this model is quite simple. As our KNN classifier did not have much succes, maybe a simpler model is a better fit.
 
-### Decision Tree Model
+#### Decision Tree Model
 
 ```{r tree-plot}
 #| echo: false
@@ -247,7 +247,49 @@ tree_result <- train_decision_tree(data)
 visualize_decision_tree(tree_result$fit, "Decision Tree: Regional Hip-Hop Classification")
 ```
 
-### Feature Importance
+
+#### Decision Tree Performance Metrics
+
+```{r tree-metrics}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Get predictions using the final fitted model
+tree_pred <- predict(tree_result$fit, new_data = data) %>%
+  bind_cols(Actual = data$region) %>%
+  rename(Predicted = .pred_class)
+
+# Calculate metrics
+tp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual == "East Coast")
+fp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual != "East Coast")
+fn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual == "East Coast")
+tn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual != "East Coast")
+
+accuracy_tree <- (tp_tree + tn_tree) / (tp_tree + tn_tree + fp_tree + fn_tree)
+precision_tree <- tp_tree / (tp_tree + fp_tree)
+recall_tree <- tp_tree / (tp_tree + fn_tree)
+
+# Best parameters
+cost_complexity <- round(tree_result$best_params$cost_complexity, 6)
+tree_depth <- tree_result$best_params$tree_depth
+
+# Create metrics table
+metrics_tree <- data.frame(
+  Metric = c("Cost Complexity Parameter", "Max Tree Depth", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
+  Value = c(cost_complexity, tree_depth, round(accuracy_tree, 4), round(precision_tree, 4), round(recall_tree, 4))
+)
+
+kable(metrics_tree, 
+      col.names = c("Metric", "Value"),
+      caption = "Decision Tree Classification Performance") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
+```
+
+This graph visualizes the decision tree of the classifier. In the metric, you can see the tree scores an accuracy of 78%, which is quite high compared to the KNN classifier. In the graph, we can easily spot that the most important factor is `Accousticness`, which was already the most distictive feature we saw in [chapter two](chapter2.qmd). `Valence` and `Speechiness` were also identified. These results also match with the feature importance graph below. `Dancebility`, `Tempo` and `Instumentalness` were also to some importance, but apperantly not for the best tree.
+
+
+#### Feature Importance
 
 ```{r feature-importance}
 #| echo: false
@@ -287,43 +329,6 @@ ggplot(importance_df, aes(x = reorder(Feature, Importance), y = Importance, fill
   )
 ```
 
-### Decision Tree Performance Metrics
-
-```{r tree-metrics}
-#| echo: false
-#| message: false
-#| warning: false
-
-# Get predictions using the final fitted model
-tree_pred <- predict(tree_result$fit, new_data = data) %>%
-  bind_cols(Actual = data$region) %>%
-  rename(Predicted = .pred_class)
-
-# Calculate metrics
-tp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual == "East Coast")
-fp_tree <- sum(tree_pred$Predicted == "East Coast" & tree_pred$Actual != "East Coast")
-fn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual == "East Coast")
-tn_tree <- sum(tree_pred$Predicted != "East Coast" & tree_pred$Actual != "East Coast")
-
-accuracy_tree <- (tp_tree + tn_tree) / (tp_tree + tn_tree + fp_tree + fn_tree)
-precision_tree <- tp_tree / (tp_tree + fp_tree)
-recall_tree <- tp_tree / (tp_tree + fn_tree)
-
-# Best parameters
-cost_complexity <- round(tree_result$best_params$cost_complexity, 6)
-tree_depth <- tree_result$best_params$tree_depth
-
-# Create metrics table
-metrics_tree <- data.frame(
-  Metric = c("Cost Complexity Parameter", "Max Tree Depth", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
-  Value = c(cost_complexity, tree_depth, round(accuracy_tree, 4), round(precision_tree, 4), round(recall_tree, 4))
-)
-
-kable(metrics_tree, 
-      col.names = c("Metric", "Value"),
-      caption = "Decision Tree Classification Performance") %>%
-  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
-```
 
 ### Decision Tree Misclassified Songs
 
@@ -356,110 +361,6 @@ if (nrow(misclassified_tree) > 0) {
 }
 ```
 
----
+As this decision tree worked well, a Random Forrest model was also trained. However, results were not shared as the accuracy was below the accuracy of the KNN.
 
-## Random Forest Classification
-
-Random Forest is an ensemble learning method that builds multiple decision trees and aggregates their predictions. By combining many trees trained on random subsets of data and features, it reduces overfitting and captures complex non-linear patterns that single trees miss. This is particularly valuable for our hip-hop classification task, where subtle production style interactions matter.
-
-### Random Forest Predictions
-
-```{r rf-plot}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 10
-#| fig-height: 8
-
-# Check if ranger is installed, if not install it
-if (!require("ranger", quietly = TRUE)) {
-  install.packages("ranger", quiet = TRUE)
-  library(ranger)
-}
-
-rf_result <- train_random_forest(data)
-
-# Get out-of-fold predictions
-rf_oof_pred <- rf_result$oof_predictions %>%
-  select(.pred_class)
-
-plot_data_rf <- data
-plot_data_rf$Predicted <- rf_oof_pred$.pred_class
-plot_data_rf$Actual <- data$region
-
-# PCA for visualization
-features_rf <- plot_data_rf %>% 
-  select(-where(is.factor), -where(is.character), -Predicted, -Actual)
-
-pca_rf <- prcomp(features_rf, scale. = TRUE)
-pca_data_rf <- as.data.frame(pca_rf$x[, 1:2])
-pca_data_rf$Predicted <- plot_data_rf$Predicted
-pca_data_rf$Actual <- plot_data_rf$Actual
-
-ggplot(pca_data_rf, aes(x = PC1, y = PC2)) +
-  stat_ellipse(aes(fill = Predicted), geom = "polygon", alpha = 0.15, color = NA) +
-  geom_point(aes(color = Predicted, shape = Actual), size = 3.5, alpha = 0.8) +
-  scale_color_manual(
-    name = "Random Forest Prediction",
-    values = c("East Coast" = east_color, "West Coast" = west_color)
-  ) +
-  scale_fill_manual(
-    name = "Random Forest Prediction",
-    values = c("East Coast" = east_color, "West Coast" = west_color)
-  ) +
-  scale_shape_manual(
-    name = "Actual Region",
-    values = c("East Coast" = 16, "West Coast" = 17)
-  ) +
-  theme_minimal(base_size = 12) +
-  labs(
-    title = "Random Forest Classification: Ensemble Predictions",
-    subtitle = "Shape indicates actual region | Color indicates Random Forest prediction",
-    x = "Primary Characteristic (PC1)", 
-    y = "Secondary Characteristic (PC2)"
-  ) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
-    plot.subtitle = element_text(size = 11, hjust = 0.5),
-    legend.position = "bottom",
-    panel.grid.minor = element_blank()
-  )
-```
-
-### Random Forest Performance Metrics
-
-```{r rf-metrics}
-#| echo: false
-#| message: false
-#| warning: false
-
-# Calculate performance metrics
-confusion_rf <- rf_oof_pred %>%
-  bind_cols(Actual = plot_data_rf$Actual) %>%
-  rename(Predicted = .pred_class)
-
-tp_rf <- sum(confusion_rf$Predicted == "East Coast" & confusion_rf$Actual == "East Coast")
-fp_rf <- sum(confusion_rf$Predicted == "East Coast" & confusion_rf$Actual != "East Coast")
-fn_rf <- sum(confusion_rf$Predicted != "East Coast" & confusion_rf$Actual == "East Coast")
-tn_rf <- sum(confusion_rf$Predicted != "East Coast" & confusion_rf$Actual != "East Coast")
-
-accuracy_rf <- (tp_rf + tn_rf) / (tp_rf + tn_rf + fp_rf + fn_rf)
-precision_rf <- tp_rf / (tp_rf + fp_rf)
-recall_rf <- tp_rf / (tp_rf + fn_rf)
-
-# Best parameters
-mtry_param <- rf_result$best_params$mtry
-trees_param <- rf_result$best_params$trees
-min_n_param <- rf_result$best_params$min_n
-
-# Create metrics table
-metrics_rf <- data.frame(
-  Metric = c("Features per split (mtry)", "Number of trees", "Min samples per node", "Accuracy", "Precision (East Coast)", "Recall (East Coast)"),
-  Value = c(mtry_param, trees_param, min_n_param, round(accuracy_rf, 4), round(precision_rf, 4), round(recall_rf, 4))
-)
-
-kable(metrics_rf, 
-      col.names = c("Metric", "Value"),
-      caption = "Random Forest Classification Performance") %>%
-  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "left")
-```
+### Conclusion

@@ -200,22 +200,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering">K-Means Clustering</a>
-  <ul class="collapse">
-  <li><a href="#clustering-visualization" id="toc-clustering-visualization" class="nav-link" data-scroll-target="#clustering-visualization">Clustering Visualization</a></li>
-  </ul></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering">K-Means Clustering</a></li>
   <li><a href="#k-nearest-neighbors-knn-classification" id="toc-k-nearest-neighbors-knn-classification" class="nav-link" data-scroll-target="#k-nearest-neighbors-knn-classification">K-Nearest Neighbors (KNN) Classification</a></li>
   <li><a href="#decision-tree-classification" id="toc-decision-tree-classification" class="nav-link" data-scroll-target="#decision-tree-classification">Decision Tree Classification</a>
   <ul class="collapse">
-  <li><a href="#decision-tree-model" id="toc-decision-tree-model" class="nav-link" data-scroll-target="#decision-tree-model">Decision Tree Model</a></li>
-  <li><a href="#feature-importance" id="toc-feature-importance" class="nav-link" data-scroll-target="#feature-importance">Feature Importance</a></li>
-  <li><a href="#decision-tree-performance-metrics" id="toc-decision-tree-performance-metrics" class="nav-link" data-scroll-target="#decision-tree-performance-metrics">Decision Tree Performance Metrics</a></li>
   <li><a href="#decision-tree-misclassified-songs" id="toc-decision-tree-misclassified-songs" class="nav-link" data-scroll-target="#decision-tree-misclassified-songs">Decision Tree Misclassified Songs</a></li>
-  </ul></li>
-  <li><a href="#random-forest-classification" id="toc-random-forest-classification" class="nav-link" data-scroll-target="#random-forest-classification">Random Forest Classification</a>
-  <ul class="collapse">
-  <li><a href="#random-forest-predictions" id="toc-random-forest-predictions" class="nav-link" data-scroll-target="#random-forest-predictions">Random Forest Predictions</a></li>
-  <li><a href="#random-forest-performance-metrics" id="toc-random-forest-performance-metrics" class="nav-link" data-scroll-target="#random-forest-performance-metrics">Random Forest Performance Metrics</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -251,8 +241,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="k-means-clustering" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-clustering">K-Means Clustering</h2>
 <p>K-Means clustering is an unsupervised learning technique that partitions the data into k distinct groups based on feature similarity. As we are trying to find out whether K-Means can distinguish the two coasts, we set the K to 2.</p>
-<section id="clustering-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="clustering-visualization">Clustering Visualization</h3>
+<section id="clustering-visualization" class="level4">
+<h4 class="anchored" data-anchor-id="clustering-visualization">Clustering Visualization</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -263,6 +253,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>This is the with PCA visualised result of K-Means clustering for E.C. and W.C. Before looking at metrics, you can see that the clustering did not do well on disecting east and west. The blue cluster is quite small in relation to the orange cluster and shapes differ throughout. Also in the orange cluster is a lot of differentiation.</p>
+</section>
 <section id="clustering-performance-metrics" class="level4">
 <h4 class="anchored" data-anchor-id="clustering-performance-metrics">Clustering Performance Metrics</h4>
 <div class="cell">
@@ -285,7 +276,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>The Silhouette Score ranges from -1 to 1, where higher values indicate better-separated clusters. Thus, the silhoutte score achieved indicates weak structure. Or, in other words, there is some structure in the data, but not a lot.</p>
-</section>
 </section>
 </section>
 <section id="k-nearest-neighbors-knn-classification" class="level2">
@@ -367,13 +357,14 @@ Predicted
 </table>
 </div>
 </div>
+<p>As you can see in the visualisation of the KNN-classifier, the model did not classify the data well. As be seen in the performance metric, the model only reached a precision, recall and accuracy of around 0.5. This also matches the confusion matrix, where you can see it classfies about half to the right coast and half to the other.</p>
 </section>
 </section>
 <section id="decision-tree-classification" class="level2">
 <h2 class="anchored" data-anchor-id="decision-tree-classification">Decision Tree Classification</h2>
-<p>Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. This model’s main advantage is explainability: we can visualize exactly which features and thresholds the algorithm uses to make predictions, and we can extract feature importance scores.</p>
-<section id="decision-tree-model" class="level3">
-<h3 class="anchored" data-anchor-id="decision-tree-model">Decision Tree Model</h3>
+<p>Decision Trees provide an interpretable classification model by recursively partitioning the feature space based on feature values. The main advantage of this model is, is that it is very easy to interpret. In addition, this model is quite simple. As our KNN classifier did not have much succes, maybe a simpler model is a better fit.</p>
+<section id="decision-tree-model" class="level4">
+<h4 class="anchored" data-anchor-id="decision-tree-model">Decision Tree Model</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -384,20 +375,8 @@ Predicted
 </div>
 </div>
 </section>
-<section id="feature-importance" class="level3">
-<h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="chapter7_files/figure-html/feature-importance-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter7_files/figure-html/feature-importance-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="decision-tree-performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="decision-tree-performance-metrics">Decision Tree Performance Metrics</h3>
+<section id="decision-tree-performance-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="decision-tree-performance-metrics">Decision Tree Performance Metrics</h4>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-striped caption-top table-sm small">
@@ -431,6 +410,19 @@ Predicted
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<p>This graph visualizes the decision tree of the classifier. In the metric, you can see the tree scores an accuracy of 78%, which is quite high compared to the KNN classifier. In the graph, we can easily spot that the most important factor is <code>Accousticness</code>, which was already the most distictive feature we saw in <a href="../portfolio/chapter2.html">chapter two</a>. <code>Valence</code> and <code>Speechiness</code> were also identified. These results also match with the feature importance graph below. <code>Dancebility</code>, <code>Tempo</code> and <code>Instumentalness</code> were also to some importance, but apperantly not for the best tree.</p>
+</section>
+<section id="feature-importance" class="level4">
+<h4 class="anchored" data-anchor-id="feature-importance">Feature Importance</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="chapter7_files/figure-html/feature-importance-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter7_files/figure-html/feature-importance-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -713,65 +705,10 @@ Predicted
 </table>
 </div>
 </div>
-<hr>
+<p>As this decision tree worked well, a Random Forrest model was also trained. However, results were not shared as the accuracy was below the accuracy of the KNN.</p>
 </section>
-</section>
-<section id="random-forest-classification" class="level2">
-<h2 class="anchored" data-anchor-id="random-forest-classification">Random Forest Classification</h2>
-<p>Random Forest is an ensemble learning method that builds multiple decision trees and aggregates their predictions. By combining many trees trained on random subsets of data and features, it reduces overfitting and captures complex non-linear patterns that single trees miss. This is particularly valuable for our hip-hop classification task, where subtle production style interactions matter.</p>
-<section id="random-forest-predictions" class="level3">
-<h3 class="anchored" data-anchor-id="random-forest-predictions">Random Forest Predictions</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="chapter7_files/figure-html/rf-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="chapter7_files/figure-html/rf-plot-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="random-forest-performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="random-forest-performance-metrics">Random Forest Performance Metrics</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-striped caption-top table-sm small">
-<caption>Random Forest Classification Performance</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Features per split (mtry)</td>
-<td style="text-align: right;">5.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Number of trees</td>
-<td style="text-align: right;">258.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Min samples per node</td>
-<td style="text-align: right;">8.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Accuracy</td>
-<td style="text-align: right;">0.5298</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Precision (East Coast)</td>
-<td style="text-align: right;">0.5287</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Recall (East Coast)</td>
-<td style="text-align: right;">0.5476</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
 
 
 </section>
