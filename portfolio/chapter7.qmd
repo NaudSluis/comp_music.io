@@ -329,38 +329,6 @@ ggplot(importance_df, aes(x = reorder(Feature, Importance), y = Importance, fill
   )
 ```
 
-
-### Decision Tree Misclassified Songs
-
-```{r tree-misclassified}
-#| echo: false
-#| message: false
-#| warning: false
-
-# Identify misclassified songs
-misclassified_tree <- tree_pred %>%
-  mutate(row_idx = row_number(), is_correct = Predicted == Actual) %>%
-  filter(!is_correct) %>%
-  select(row_idx, Actual, Predicted) %>%
-  mutate(
-    "Song Name" = data_raw$`Track Name`[row_idx],
-    "Artist" = data_raw$Artist_Name[row_idx],
-    "Actual Region" = Actual,
-    "Predicted Region" = Predicted,
-    "Acousticness" = round(data_raw$Acousticness[row_idx], 4)
-  ) %>%
-  select("Song Name", Artist, "Actual Region", "Predicted Region", Acousticness)
-
-if (nrow(misclassified_tree) > 0) {
-  kable(misclassified_tree,
-        caption = "Songs Misclassified by Decision Tree",
-        row.names = FALSE) %>%
-    kable_styling(bootstrap_options = "striped", full_width = TRUE)
-} else {
-  cat("**Perfect Classification:** Decision Tree made no errors!")
-}
-```
-
 As this decision tree worked well, a Random Forrest model was also trained. However, results were not shared as the accuracy was below the accuracy of the KNN.
 
 ### Conclusion
