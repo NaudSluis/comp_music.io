@@ -3,3 +3,20 @@ title: "Chapter 8: Contribution"
 order: 8
 ---
 
+### Conclusion
+
+In this portfolio, we compared West- and East-side rap to find out whether their feud was not only rooted in culture, but also in the music itself. To answer this, we first looked at the distributions of Spotify's features. We found that the coasts are similair on a lot of features, like loudness, liveness and key. Furthermore, we saw differences in three features: West-Coast music was more accoustic, more danceable and less speechy compared to East-Coast music.
+
+After looking at the distributions, we looked at both the most typical and most distinctive song from each coast. From the chroma features, we concluded that E.C. tracks where more free in the use of pitch, compared to W.C. Moreover, when looking at the timbre features, we saw that E.C. tracks where steady in their timbre throughout the song, while W.C. tracks had a more diverese timbre. The temporal features showed similarity in both coasts, typical songs have a BPM less then 100, while the distinctive songs had a high BPM.
+
+At last, we looked at whether clustering and classification model were able to classify East- and West-Coast songs. K-means clustering seemed unable to form meaningfull clusters (in relation to an East- and West-Coast classification). In addition, KNN-classification classified only about half of the songs correct on both coast. In the contrary, descision-tree classification yielded an accuracy of 78%, with its most decisive factors being Accousticness, Speechiness and Valence.
+
+What we can conclude from this is that there are minor differences between the coasts on corpus level, with the biggest difference in Accousticness. On a tracklevel, there seemed to be more differences, which we especially saw in the steady E.C. timbre and fluctuating W.C. timbre. 
+
+So, the feud between the coasts was justified up to a certain level. However, there were also many similairities between the regions, maybe more than differences. To end this portfolio, maybe hardcore fans of one coast should be more open to the music of the other, as they might be surprised by the similairities between them.
+
+#### Bibliography
+
+Boros, Abel. Lyrics and Audio Analysis of US Westcoast and Eastcoast Hip-Hop Music Computer Science. 2025.
+
+Gilbers, Steven, et al. “Regional Variation in West and East Coast African-American English Prosody and Rap Flows.” Language and Speech, vol. 63, no. 4, 4 Nov. 2019, pp. 713–745, journals.sagepub.com/doi/full/10.1177/0023830919881479#fn4-0023830919881479, https://doi.org/10.1177/0023830919881479. Accessed 9 Mar. 2026.
